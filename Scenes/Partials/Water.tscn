@@ -1,0 +1,126 @@
+[gd_scene load_steps=13 format=1]
+
+[ext_resource path="res://addons/khairul169.2dwater/2d_water.tres" type="Shader" id=1]
+[ext_resource path="res://sprites/waterdisplacement.png" type="Texture" id=2]
+[ext_resource path="res://sprites/water.png" type="Texture" id=3]
+[ext_resource path="res://addons/khairul169.2dwater/2d_water.gd" type="Script" id=4]
+[ext_resource path="res://addons/khairul169.2dwater/icon.png" type="Texture" id=5]
+[ext_resource path="res://Graphics/Shaders/WaterWobbleShader.tres" type="Shader" id=6]
+[ext_resource path="res://Graphics/Environment/Water/bubble.png" type="Texture" id=7]
+[ext_resource path="res://Graphics/Shaders/WaterMatirial.tres" type="CanvasItemMaterial" id=8]
+[ext_resource path="res://Graphics/Environment/Water/water.jpg" type="Texture" id=9]
+
+[sub_resource type="CanvasItemMaterial" id=4]
+
+shader/shader = ExtResource( 1 )
+shader/shading_mode = 0
+shader_param/displacement_map = ExtResource( 2 )
+shader_param/amplitudo = 0.007
+shader_param/speed = 1.733
+shader_param/scaling = Vector2( 1, 1 )
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+shader/shader = ExtResource( 6 )
+shader/shading_mode = 0
+shader_param/Wabble = 0.0
+shader_param/Speed = 0.0
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="Water" type="Sprite"]
+
+material/material = SubResource( 4 )
+transform/pos = Vector2( 859.547, 413.962 )
+transform/rot = 0.207346
+texture = ExtResource( 3 )
+modulate = Color( 0.188235, 0.188235, 0.858824, 1 )
+script/script = ExtResource( 4 )
+__meta__ = {
+"_editor_icon": ExtResource( 5 )
+}
+displacement_map = ExtResource( 2 )
+amplitudo = 0.007
+speed = 1.733
+uv_size = Vector2( 1, 1 )
+bubbles_frequency = 0.75
+bubbles_randomness = 0.25
+
+[node name="AffectedArea" type="Area2D" parent="."]
+
+visibility/visible = false
+material/material = SubResource( 2 )
+transform/pos = Vector2( -3.30811, 11.9956 )
+transform/scale = Vector2( 8.07315, 2.14735 )
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 3.1428, 0, 0, 3.04009, -0.0219811, 0.0412436 )
+shapes/0/trigger = true
+space_override = 1
+gravity_distance_scale = 1.0
+gravity_vec = Vector2( 0, -0.1 )
+gravity = 98.0
+linear_damp = 3.0
+angular_damp = 1.0
+priority = 1.0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AffectedArea"]
+
+transform/pos = Vector2( -0.0219811, 0.0412436 )
+transform/scale = Vector2( 3.1428, 3.04009 )
+shape = SubResource( 3 )
+trigger = true
+_update_shape_index = 0
+
+[node name="bubbles" type="Particles2D" parent="."]
+
+visibility/behind_parent = true
+visibility/blend_mode = 1
+material/use_parent = true
+transform/pos = Vector2( 185.25, 53.0214 )
+transform/scale = Vector2( 0.5, 0.5 )
+z/z = -1
+config/amount = 15
+config/lifetime = 9.3
+config/emitting = false
+config/process_mode = 1
+config/texture = ExtResource( 7 )
+params/direction = 180.0
+params/spread = 170.14
+params/linear_velocity = 1.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 180.0
+params/gravity_strength = 3.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.1
+params/initial_angle = 0.0
+params/initial_size = 0.0
+params/final_size = 0.005
+params/hue_variation = 0.0
+params/anim_speed_scale = 0.0
+params/anim_initial_pos = 0.0
+randomness/direction = 1.0
+randomness/spread = 1.0
+randomness/linear_velocity = 0.5
+randomness/gravity_strength = 0.3
+randomness/damping = 0.5
+randomness/initial_size = 0.5
+color/color = Color( 0.25098, 0.243137, 0.282353, 1 )
+
+[node name="WobbleSprite" type="Sprite" parent="."]
+
+visibility/opacity = 0.65
+visibility/behind_parent = true
+material/material = ExtResource( 8 )
+transform/pos = Vector2( 1.32555, 13.6483 )
+transform/scale = Vector2( 1.85011, 0.703838 )
+texture = ExtResource( 9 )
+
+
