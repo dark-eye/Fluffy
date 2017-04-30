@@ -4,6 +4,7 @@ export(NodePath) var levelControllerPath = null
 export(NodePath) var playerControllerPath = null
 
 var endGameTimer = Timer.new();
+var physicsBorders = StaticBody2D.new();
 
 #================================================
 func _ready():
@@ -17,7 +18,7 @@ func _ready():
 
 func next_level():
 	var lvlctrl = get_level_controller();
-	if(lvlctrl.levels.size() < lvlctrl.currentLevel+1):
+	if(lvlctrl.levels.size() > lvlctrl.currentLevel+1):
 		lvlctrl.currentLevel += 1;
 	else:
 		lvlctrl.currentLevel = 0;
@@ -40,6 +41,7 @@ func player_at_end_gate():
 		endGameTimer.set_active( true );
 
 func level_loaded(idx,levelScene):
+	self.remove_child(physicsBorders);
 	var camera = get_player_controller().getCamera();
 	var bounds = get_level_controller().getBoundsNode();
 	if(bounds):
@@ -48,6 +50,23 @@ func level_loaded(idx,levelScene):
 		camera.set_limit(MARGIN_TOP, boundsRect.pos.y);
 		camera.set_limit(MARGIN_RIGHT, boundsRect.size.width+boundsRect.pos.x);
 		camera.set_limit(MARGIN_BOTTOM, boundsRect.size.height+boundsRect.pos.y);
+		var s1 = SegmentShape2D.new();
+		s1.set_a(Vector2(boundsRect.pos.x,boundsRect.pos.y));s1.set_b(Vector2(boundsRect.size.width+boundsRect.pos.x,boundsRect.pos.y));
+		var s2 = SegmentShape2D.new();
+		s2.set_a(Vector2(boundsRect.pos.x,boundsRect.pos.y));s2.set_b(Vector2(boundsRect.pos.x,boundsRect.size.height+boundsRect.pos.y));
+		var s3 = SegmentShape2D.new();
+		s3.set_a(Vector2(boundsRect.pos.x,boundsRect.size.height+boundsRect.pos.y));s3.set_b(Vector2(boundsRect.size.width+boundsRect.pos.x,boundsRect.size.height+boundsRect.pos.y));
+		var s4 = SegmentShape2D.new();
+		s4.set_a(Vector2(boundsRect.size.width+boundsRect.pos.x,boundsRect.pos.y));s4.set_b(Vector2(boundsRect.size.width+boundsRect.pos.x,boundsRect.size.height+boundsRect.pos.y));
+		
+		physicsBorders = StaticBody2D.new();
+	
+		physicsBorders.add_shape(s1);
+		physicsBorders.add_shape(s2);
+		physicsBorders.add_shape(s3);
+		physicsBorders.add_shape(s4);
+		
+		self.add_child(physicsBorders);
 
 #--------------------------------------
 
