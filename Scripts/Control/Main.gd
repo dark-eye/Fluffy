@@ -41,7 +41,7 @@ func player_at_end_gate():
 		endGameTimer.set_active( true );
 
 func level_loaded(idx,levelScene):
-	self.remove_child(physicsBorders);
+	
 	var camera = get_player_controller().getCamera();
 	var bounds = get_level_controller().getBoundsNode();
 	if(bounds):
@@ -50,23 +50,27 @@ func level_loaded(idx,levelScene):
 		camera.set_limit(MARGIN_TOP, boundsRect.pos.y);
 		camera.set_limit(MARGIN_RIGHT, boundsRect.size.width+boundsRect.pos.x);
 		camera.set_limit(MARGIN_BOTTOM, boundsRect.size.height+boundsRect.pos.y);
-		var s1 = SegmentShape2D.new();
-		s1.set_a(Vector2(boundsRect.pos.x,boundsRect.pos.y));s1.set_b(Vector2(boundsRect.size.width+boundsRect.pos.x,boundsRect.pos.y));
-		var s2 = SegmentShape2D.new();
-		s2.set_a(Vector2(boundsRect.pos.x,boundsRect.pos.y));s2.set_b(Vector2(boundsRect.pos.x,boundsRect.size.height+boundsRect.pos.y));
-		var s3 = SegmentShape2D.new();
-		s3.set_a(Vector2(boundsRect.pos.x,boundsRect.size.height+boundsRect.pos.y));s3.set_b(Vector2(boundsRect.size.width+boundsRect.pos.x,boundsRect.size.height+boundsRect.pos.y));
-		var s4 = SegmentShape2D.new();
-		s4.set_a(Vector2(boundsRect.size.width+boundsRect.pos.x,boundsRect.pos.y));s4.set_b(Vector2(boundsRect.size.width+boundsRect.pos.x,boundsRect.size.height+boundsRect.pos.y));
 		
-		physicsBorders = StaticBody2D.new();
-	
-		physicsBorders.add_shape(s1);
-		physicsBorders.add_shape(s2);
-		physicsBorders.add_shape(s3);
-		physicsBorders.add_shape(s4);
-		
-		self.add_child(physicsBorders);
+		self.set_borders(boundsRect);
+
+
+#--------------------------------------
+#TODO move to an external utils
+func add_segment_to_body(body,v1,v2):
+	var shape = SegmentShape2D.new();
+	shape.set_a(Vector2(v1.x,v1.y));
+	shape.set_b(Vector2(v2.x,v2.y));
+	body.add_shape(shape);
+	return body;
+
+func set_borders(bounds):
+	self.remove_child(physicsBorders);
+	physicsBorders = StaticBody2D.new();
+	self.add_segment_to_body(physicsBorders, Vector2(bounds.pos.x,bounds.pos.y), Vector2(bounds.size.width+bounds.pos.x,bounds.pos.y));
+	self.add_segment_to_body(physicsBorders, Vector2(bounds.pos.x,bounds.pos.y), Vector2(bounds.pos.x,bounds.size.height+bounds.pos.y));
+	self.add_segment_to_body(physicsBorders, Vector2(bounds.pos.x,bounds.size.height+bounds.pos.y), Vector2(bounds.size.width+bounds.pos.x,bounds.size.height+bounds.pos.y));
+	self.add_segment_to_body(physicsBorders, Vector2(bounds.size.width+bounds.pos.x,bounds.pos.y), Vector2(bounds.size.width+bounds.pos.x,bounds.size.height+bounds.pos.y));
+	self.add_child(physicsBorders);
 
 #--------------------------------------
 
