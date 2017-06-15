@@ -41,7 +41,7 @@ func add_bubbles(bubbles_instance):
 		if(i < mysize.x - padding):
 			var new_bubs = bubbles.duplicate();
 			self.add_child(new_bubs);
-			new_bubs.set_pos( Vector2(-width/2+i*width,height));
+			new_bubs.set_pos( Vector2(-width+i*width,height));
 			new_bubs.set_emitting(true);
 
 func _set_dispmap(new):

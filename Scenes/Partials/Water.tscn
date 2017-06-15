@@ -10,7 +10,7 @@
 [ext_resource path="res://Graphics/Shaders/WaterMatirial.tres" type="CanvasItemMaterial" id=8]
 [ext_resource path="res://Graphics/Environment/Water/water.jpg" type="Texture" id=9]
 
-[sub_resource type="CanvasItemMaterial" id=4]
+[sub_resource type="CanvasItemMaterial" id=1]
 
 shader/shader = ExtResource( 1 )
 shader/shading_mode = 0
@@ -33,7 +33,7 @@ extents = Vector2( 10, 10 )
 
 [node name="Water" type="Sprite"]
 
-material/material = SubResource( 4 )
+material/material = SubResource( 1 )
 transform/pos = Vector2( 859.547, 413.962 )
 transform/rot = 0.207346
 texture = ExtResource( 3 )
