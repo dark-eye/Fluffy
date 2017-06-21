@@ -31,7 +31,8 @@ func reset():
 	var spawnPoint = get_level_controller().getSpawnPoint();
 	get_player_controller().setSpawnPoint(spawnPoint);
 	get_player_controller().spawn();
-	get_player_controller().getCamera().find_node('CameraAnimation').play('start_level');
+	getCamera().find_node('CameraAnimation').play('start_level');
+	self.find_node("Clock",true).reset()
 
 #-------------- Signals --------------
 
@@ -41,11 +42,12 @@ func player_at_end_gate():
 		endGameTimer.start()
 		endGameTimer.set_active( true );
 		get_player_controller().getPlayer().find_node('AnimationPlayer').play('going_away');
-		get_player_controller().getCamera().find_node('CameraAnimation').play('end_level');
+		getCamera().find_node('CameraAnimation').play('end_level');
+		self.find_node("Clock",true).pause();
 
 func level_loaded(idx,levelScene):
 	
-	var camera = get_player_controller().getCamera();
+	var camera = getCamera();
 	var bounds = get_level_controller().getBoundsNode();
 	if(bounds):
 		var boundsRect = bounds.get_item_rect();
@@ -82,3 +84,6 @@ func get_level_controller():
 
 func get_player_controller():
 	return get_node(playerControllerPath);
+	
+func getCamera():
+	return self.find_node('Camera2D');

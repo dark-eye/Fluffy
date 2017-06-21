@@ -21,9 +21,6 @@ func setSpawnPoint(newSpawnPoint):
 func getPlayer():
 	return get_node(chatacterPath);
 
-func getCamera():
-	return getPlayer().find_node('Camera2D');
-
 func _input(event):
 	var state = self.getPlayer().get_state();
 	if(event.type == InputEvent.KEY ):
