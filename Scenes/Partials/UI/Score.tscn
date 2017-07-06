@@ -4,44 +4,25 @@
 
 script/source = "extends Panel
 
-# class member variables go here, for example:
-# var a = 2
-# var b = \"textvar\"
-export(int) var timePassed = 0;
-var isRunning = true;
-var clock = null;
+export(int) var score = 0;
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	clock = self.find_node('ClockDisplay')
-	self.set_process(true)
+	clock = self.find_node('ScoreDisplay')
 
-func _process(delta):
-	if(isRunning):
-		timePassed += delta;
-		if(int(timePassed)*10 == int(timePassed*10)):
-			self.update()
-
-func _draw():
-	var intTimePassed = int( timePassed );
-	var text = str(\"\" if (intTimePassed/60 >= 10) else \"0\" ) + str(int(intTimePassed/60)) +  \":\" + str(\"\" if (intTimePassed % 60 >= 10) else \"0\"  ) + str(intTimePassed%60);
-	clock.set_text( text );
+func _draw():	
+	clock.set_text( str(score) );
 
 #----------------------------------------------
 
-func pause():
-	isRunning = false
+func add(value):
+	score += value
+	self.update()
 	
-func resume():
-	isRunning = true
+"
 
-func reset():
-	timePassed = 0;
-	isRunning = true;
-	self.update()"
-
-[node name="Clock" type="Panel"]
+[node name="Score" type="Panel"]
 
 visibility/opacity = 0.75
 focus/ignore_mouse = false
@@ -53,9 +34,9 @@ margin/top = 0.0
 margin/right = 64.0
 margin/bottom = 32.0
 script/script = SubResource( 1 )
-timePassed = 0
+score = 0
 
-[node name="ClockDisplay" type="Label" parent="."]
+[node name="ScoreDisplay" type="Label" parent="."]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -67,7 +48,7 @@ margin/right = 64.0
 margin/bottom = 32.0
 custom_colors/font_color = Color( 0.752449, 0.785156, 0.187088, 1 )
 custom_colors/font_color_shadow = Color( 0.09375, 0.0629883, 0.0629883, 1 )
-text = "00:00"
+text = "0"
 align = 1
 valign = 1
 percent_visible = 1.0

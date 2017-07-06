@@ -53,7 +53,7 @@ tracks/1/keys = {
 "values": [ 0.0, 0.0 ]
 }
 
-[sub_resource type="OccluderPolygon2D" id=6]
+[sub_resource type="OccluderPolygon2D" id=4]
 
 closed = true
 cull_mode = 1
@@ -142,7 +142,7 @@ visibility/opacity = 0.5
 visibility/self_opacity = 0.0
 transform/pos = Vector2( -6.34595, -57.3992 )
 transform/scale = Vector2( 398.294, 311.141 )
-occluder = SubResource( 6 )
+occluder = SubResource( 4 )
 light_mask = 1
 
 

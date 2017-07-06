@@ -1,5 +1,5 @@
 tool
-extends "platform_base.gd"
+extends "res://addons/platform2d/platform_base.gd"
 
 export(Curve2D)               var Curve = null setget set_curve
 export(float)                 var BakeInterval = 50 setget set_bake_interval
@@ -13,7 +13,7 @@ export(float, 0.0, 1.0, 0.01) var Position = 0.5 setget set_position
 
 func _ready():
 	if Curve == null:
-		Curve = load("addons/platform2d/thin_platform_default.tres")
+		Curve = load("res://addons/platform2d/thin_platform_default.tres")
 		Curve = Curve.duplicate()
 	Curve.connect("changed", self, "update")
 
