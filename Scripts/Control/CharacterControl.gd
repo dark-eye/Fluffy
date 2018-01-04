@@ -18,12 +18,14 @@ func _input(event):
 			self.floatUp(event.is_pressed());
 
 func spawn():
+	self.getPlayer().set_sleeping( true );
 	if(null != spawnPoint):
 		self.getPlayer().resetTo(spawnPoint.x,spawnPoint.y);
 	else:
 		self.getPlayer().resetTo(0,0);
 		
 	self.getPlayer().find_node('AnimationPlayer').play('coming_back');
+	self.getPlayer().set_sleeping( false );
 	
 func setSpawnPoint(newSpawnPoint):
 	spawnPoint = newSpawnPoint

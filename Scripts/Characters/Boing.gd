@@ -2,16 +2,23 @@
 extends RigidBody2D
 
 export(NodePath) var spriteContainerPath = './Boing'; 
+export(NodePath) var soundPlayer = './SamplePlayer2D'; 
 
 var state = Dictionary() setget get_state,set_state; 
 var acceleration = 2;
 var maxSpeed=20;
 var heavyScale = 9.8;
 var floatScale = -3.5;
+var lastContact = null;
+var lastContactCountAvg = 0.0;
 
 func _ready():
 	self.set_process(true);
-	self.set_fixed_process(true)
+	self.set_fixed_process(true);
+	self.set_contact_monitor(true);
+	self.connect("body_enter",self,'on_contact');
+	self.connect("body_exit",self,'on_body_exit');
+	
 	
 func _process(delta):
 	if(state.has('left') && state.left):
@@ -32,11 +39,18 @@ func _process(delta):
 	
 
 func _fixed_process(delta):
-	pass;
+	lastContactCountAvg = lastContactCountAvg + (float(self.get_colliding_bodies().size())/2) - (lastContactCountAvg / 35)
+	if( int(lastContactCountAvg) == 0 && lastContact != null ):
+		lastContact = null;
 
-func body_enter(body):
-	pass;
+func on_contact(body):
+	if(body != lastContact): 
+		self.get_node(soundPlayer).play('boing');
+		lastContact = body;
 
+
+func on_body_exit(body):
+	pass
 
 
 #########################################

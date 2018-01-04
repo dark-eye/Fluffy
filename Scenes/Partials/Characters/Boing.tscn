@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=11 format=1]
 
 [ext_resource path="res://Scripts/Characters/Boing.gd" type="Script" id=1]
-[ext_resource path="res://Graphics/Charcters/hairy_ball.tex" type="Texture" id=2]
-[ext_resource path="res://Graphics/Charcters/hairy_ball_righteye.tex" type="Texture" id=3]
-[ext_resource path="res://Scripts/Characters/BoingEye.gd" type="Script" id=4]
+[ext_resource path="res://Resources/Sounds/boing.wav" type="Sample" id=2]
+[ext_resource path="res://Graphics/Charcters/hairy_ball.tex" type="Texture" id=3]
+[ext_resource path="res://Graphics/Charcters/hairy_ball_righteye.tex" type="Texture" id=4]
+[ext_resource path="res://Scripts/Characters/BoingEye.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -53,7 +54,16 @@ tracks/1/keys = {
 "values": [ 0.0, 0.0 ]
 }
 
-[sub_resource type="OccluderPolygon2D" id=4]
+[sub_resource type="SampleLibrary" id=4]
+
+samples/boing = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 2 )
+}
+
+[sub_resource type="OccluderPolygon2D" id=5]
 
 closed = true
 cull_mode = 1
@@ -75,8 +85,8 @@ friction = 1.0
 bounce = 0.25
 gravity_scale = 9.8
 custom_integrator = false
-continuous_cd = 0
-contacts_reported = 0
+continuous_cd = 2
+contacts_reported = 5
 contact_monitor = true
 sleeping = false
 can_sleep = false
@@ -86,6 +96,7 @@ damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
 spriteContainerPath = NodePath("./Boing")
+soundPlayer = NodePath("SamplePlayer2D")
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -114,27 +125,38 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
+[node name="SamplePlayer2D" type="SamplePlayer2D" parent="."]
+
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 2048.0
+params/attenuation/distance_exp = 1.0
+config/polyphony = 1
+config/samples = SubResource( 4 )
+config/pitch_random = 0.0
+
 [node name="Boing" type="Node2D" parent="."]
 
 [node name="body" type="Sprite" parent="Boing"]
 
 transform/pos = Vector2( 0.902466, 0 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 64, 65 )
 
 [node name="eye right" type="Sprite" parent="Boing"]
 
 transform/pos = Vector2( 8.70303, -7.90561 )
 transform/rot = -0.0920938
-texture = ExtResource( 3 )
-script/script = ExtResource( 4 )
+texture = ExtResource( 4 )
+script/script = ExtResource( 5 )
 
 [node name="eye left" type="Sprite" parent="Boing"]
 
 transform/pos = Vector2( -11.297, -7.90561 )
 transform/rot = -0.0920938
-texture = ExtResource( 3 )
-script/script = ExtResource( 4 )
+texture = ExtResource( 4 )
+script/script = ExtResource( 5 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Boing"]
 
@@ -142,7 +164,7 @@ visibility/opacity = 0.5
 visibility/self_opacity = 0.0
 transform/pos = Vector2( -6.34595, -57.3992 )
 transform/scale = Vector2( 398.294, 311.141 )
-occluder = SubResource( 4 )
+occluder = SubResource( 5 )
 light_mask = 1
 
 

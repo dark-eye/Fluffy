@@ -1,8 +1,37 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://Graphics/GameObjects/Cannon/Berral.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/GameObjects/Cannon/Ball.png" type="Texture" id=2]
-[ext_resource path="res://Graphics/GameObjects/Cannon/Base.png" type="Texture" id=3]
+[ext_resource path="res://Graphics/GameObjects/Cannon/smoke.png" type="Texture" id=3]
+[ext_resource path="res://Graphics/GameObjects/Cannon/Base.png" type="Texture" id=4]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends StaticBody2D
+
+# class member variables go here, for example:
+export(bool) var shooting setget _set_shooting, _get_shooting; 
+export(float) var angle setget _set_angle, _get_angle; 
+
+func _set_shooting(value):
+	var ballSource = self.find_node(\"BallSource\",true);
+	if(ballSource): 
+		ballSource.set_emitting( value );
+	shooting = value;
+
+func _get_shooting():
+	return shooting;
+
+func _set_angle(value):
+	var berral = self.find_node(\"Berral\",true);
+	if(berral):
+		berral.set_rot( deg2rad(value) );
+	angle = value;
+	
+func _get_angle():
+	return angle;
+
+"
 
 [node name="Cannon" type="StaticBody2D"]
 
@@ -14,24 +43,35 @@ constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
+script/script = SubResource( 1 )
+shooting = true
+angle = null
 
 [node name="Berral" type="Sprite" parent="."]
 
 transform/pos = Vector2( -0.756653, 57.2858 )
-transform/rot = -50.9795
 texture = ExtResource( 1 )
 offset = Vector2( 0.610647, -59.2874 )
+__meta__ = {
+"_edit_bone_": true
+}
 
-[node name="Particles2D" type="Particles2D" parent="Berral"]
+[node name="BallSource" type="Particles2D" parent="Berral"]
 
 transform/pos = Vector2( 6.32418, -223.613 )
-transform/rot = -177.947
+transform/rot = 180.0
 config/amount = 1
 config/lifetime = 5.0
+config/preprocess = 10.0
+config/emit_timeout = 10.0
+config/emitting = false
 config/process_mode = 1
+config/offset = Vector2( 0, 50 )
+config/local_space = false
+config/explosiveness = 0.0
 config/texture = ExtResource( 2 )
 params/direction = 0.0
-params/spread = 5.0
+params/spread = 1.0
 params/linear_velocity = 500.0
 params/spin_velocity = 0.0
 params/orbit_velocity = 0.0
@@ -41,15 +81,52 @@ params/radial_accel = 0.0
 params/tangential_accel = 0.0
 params/damping = 0.0
 params/initial_angle = 0.0
-params/initial_size = 1.0
-params/final_size = 1.0
+params/initial_size = 0.75
+params/final_size = 0.75
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
 
+[node name="Explosion" type="Particles2D" parent="Berral"]
+
+transform/pos = Vector2( 6.32418, -223.613 )
+transform/rot = -177.947
+config/amount = 3
+config/lifetime = 5.0
+config/preprocess = 10.0
+config/emit_timeout = 10.0
+config/emitting = false
+config/process_mode = 1
+config/offset = Vector2( 0, 20 )
+config/local_space = false
+config/explosiveness = 0.0
+config/texture = ExtResource( 3 )
+params/direction = 0.0
+params/spread = 5.0
+params/linear_velocity = 20.0
+params/spin_velocity = 0.05
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 1.0
+params/initial_angle = 0.0
+params/initial_size = 0.0
+params/final_size = 0.4
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/spread = 1.0
+randomness/linear_velocity = 0.5
+randomness/spin_velocity = -0.98
+randomness/radial_accel = 2.0
+randomness/initial_angle = 0.46
+randomness/final_size = 0.5
+
 [node name="base" type="Sprite" parent="."]
 
 transform/pos = Vector2( 0.735077, -2.94037 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 
