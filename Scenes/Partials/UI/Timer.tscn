@@ -12,9 +12,7 @@ var isRunning = true;
 var clock = null;
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	clock = self.find_node('ClockDisplay')
+	clock = self.get_node(\"ClockDisplay\")
 	self.set_process(true)
 
 func _process(delta):
@@ -24,9 +22,11 @@ func _process(delta):
 			self.update()
 
 func _draw():
+	
 	var intTimePassed = int( timePassed );
-	var text = str(\"\" if (intTimePassed/60 >= 10) else \"0\" ) + str(int(intTimePassed/60)) +  \":\" + str(\"\" if (intTimePassed % 60 >= 10) else \"0\"  ) + str(intTimePassed%60);
-	clock.set_text( text );
+	if(clock):
+		var text = str(\"\" if (intTimePassed/60 >= 10) else \"0\" ) + str(int(intTimePassed/60)) +  \":\" + str(\"\" if (intTimePassed % 60 >= 10) else \"0\"  ) + str(intTimePassed%60);
+		clock.set_text( text );
 
 #----------------------------------------------
 

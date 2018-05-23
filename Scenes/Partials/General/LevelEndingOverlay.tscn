@@ -33,18 +33,22 @@ margin/bottom = -559.0
 
 [node name="Score" parent="Container" instance=ExtResource( 2 )]
 
+anchor/left = 2
+anchor/bottom = 2
 rect/scale = Vector2( 3, 3 )
-margin/left = 597.0
+margin/left = 0.582439
 margin/top = 157.0
 margin/right = 661.0
-margin/bottom = 189.0
+margin/bottom = 0.315526
 
 [node name="Clock" parent="Container" instance=ExtResource( 3 )]
 
+anchor/right = 2
+anchor/bottom = 2
 rect/scale = Vector2( 3, 3 )
 margin/left = 238.0
 margin/top = 157.0
-margin/right = 302.0
-margin/bottom = 189.0
+margin/right = 0.294634
+margin/bottom = 0.315526
 
 

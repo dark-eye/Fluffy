@@ -13,6 +13,7 @@ signal  switch_on
 signal  switch_off
 
 export var state = false 
+export var isSticky = false 
 
 var switchArea
 var trigger
@@ -27,7 +28,10 @@ func _process(delta):
 	var isOn = self.isOn(); 
 	if(self.state != isOn):
 		if(isOn):
-			self.emit_signal('switch_on')
+			self.emit_signal('switch_on');
+			if(self.isSticky):
+				self.switchArea.set_sleeping(true)
+				self.switchArea.set_contact_monitor(false)
 		else:
 			self.emit_signal('switch_off');
 		
@@ -60,6 +64,7 @@ friction = 1.0
 bounce = 0.0
 script/script = SubResource( 1 )
 state = false
+isSticky = false
 
 [node name="GrooveJoint2D" type="GrooveJoint2D" parent="."]
 

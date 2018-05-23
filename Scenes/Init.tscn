@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Scenes/loader.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Container
+
+# class member variables go here, for example:
+# var a = 2
+var thread = Thread.new();
+export(StringArray) var scenes = [];
+export(String) var startScenePath = \"\";
+var startScene = null;
+var progressBar = null;
+
+func _ready():
+	
+	get_node(\"LoadingScreen\").connect(\"faded_out\",self,\"switchToStartScene\");
+	progressBar = get_node(\"LoadingScreen/CenterContainer/ProgressBar\");
+	thread.start(self,\"load_scenes\")
+
+func load_scenes(value):
+	var progressStep = 1/scenes.size()*100;
+	
+	for scenePath in scenes:
+		var scene = self.load_scene(scenePath);
+		if( scenePath ==  startScenePath):
+			startScene = scene;
+		progressBar.set_value( progressBar.get_value() + progressStep );
+	
+	get_node(\"LoadingScreen\")._faded_out();
+
+func load_scene(scenePath):
+	print(scenePath)
+	var scene = ResourceLoader.load(scenePath);
+	return scene.instance();
+
+func switchToStartScene():
+	get_node(\"LoadingScreen\").hide();
+	if(self.startScene):
+		 get_tree().get_root().add_child(self.startScene);
+	else:
+		print(\"No start scene found\");
+"
+
+[node name="Init" type="Container"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 1.0
+script/script = SubResource( 1 )
+scenes = StringArray( "res://Scenes/Main.tscn" )
+startScenePath = "res://Scenes/Main.tscn"
+
+[node name="LoadingScreen" parent="." instance=ExtResource( 1 )]
+
+margin/bottom = -1.0
+
+

@@ -1,56 +1,40 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=2 format=1]
 
-[ext_resource path="res://addons/platform2d/rock.gd" type="Script" id=1]
-[ext_resource path="res://addons/platform2d/thick_platform_icon.png" type="Texture" id=2]
-
-[sub_resource type="Curve2D" id=1]
-
-bake_interval = 50.0
-_data = {
-"points": Vector2Array(  )
-}
+[ext_resource path="res://Scripts/GameObjects/rock.gd" type="Script" id=1]
 
 [node name="Rock" type="Node2D"]
 
-[node name="ThickPlatform" type="StaticBody2D" parent="."]
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
 
-material/material = {
-"BakeInterval": 50
-}
 input/pickable = false
 collision/layers = 1
 collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
+mode = 0
+mass = 1.0
 friction = 1.0
 bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+velocity/linear = Vector2( 0, 0 )
+velocity/angular = 0.0
+damp_override/linear = -1.0
+damp_override/angular = -1.0
 script/script = ExtResource( 1 )
-__meta__ = {
-"_editor_icon": ExtResource( 2 )
-}
-MovingPlatform = false
-Curve = SubResource( 1 )
-BakeInterval = 50
-FillTexture = null
-FillSize = 1.0
-TopLeftTexture = null
-TopTexture = null
-TopRightTexture = null
-TopThickness = 100
-TopPosition = 0.5
-TopLeftOverflow = 0.0
-TopRightOverflow = 0.0
-SideTexture = null
-SideThickness = 10
-SidePosition = 0.5
-Angle = 0.5
+texture = null
+roughness = null
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ThickPlatform"]
+[node name="Sprite" type="Sprite" parent="RigidBody2D"]
 
-visibility/visible = false
+[node name="Collision" type="CollisionPolygon2D" parent="RigidBody2D"]
+
 build_mode = 0
 polygon = Vector2Array(  )
-shape_range = Vector2( 0, 2 )
+shape_range = Vector2( -1, -1 )
 trigger = false
 
 

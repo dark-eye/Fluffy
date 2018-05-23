@@ -5,14 +5,15 @@
 script/source = "extends Panel
 
 export(int) var score = 0;
+var scoreUI = null;
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	clock = self.find_node('ScoreDisplay')
+	scoreUI = self.find_node('ScoreDisplay')
 
 func _draw():	
-	clock.set_text( str(score) );
+	scoreUI.set_text( str(score) );
 
 #----------------------------------------------
 

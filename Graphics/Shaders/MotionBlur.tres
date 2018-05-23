@@ -1,0 +1,26 @@
+[gd_resource type="CanvasItemShaderGraph" format=1]
+
+[resource]
+
+_code = {
+"fragment": "vec3 nd1sl3=vec3(SCREEN_UV,0);
+vec3 nd1sl0=SRC_COLOR.rgb;
+vec3 nd6sl0=vec3(1,1,0);
+uniform float Affect=0.01;
+float nd7sl0=Affect;
+vec3 nd4sl0=mix(nd1sl3,nd6sl0,nd7sl0);
+vec3 nd12sl0=texscreen(nd4sl0.xy);
+vec3 nd3sl0=abs(nd1sl0-nd12sl0);
+vec3 nd2sl0=nd1sl0*nd12sl0;
+COLOR.rgb=nd2sl0;
+",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+_data = {
+"shaders": [ [ 0, 33, Vector2( 1109, 88 ), null, null, [  ], 1, 0, Vector2( 465.992, 90.28 ), null, null, [  ] ], [ 0, 33, Vector2( 620, -109 ), null, null, [ 0, 2, 0 ], 1, 0, Vector2( -311, -305 ), null, null, [  ], 2, 8, Vector2( 462.484, -129.35 ), 2, null, [ 0, 1, 0, 1, 12, 0, 2147483647, 0, null, 2147483647, 1, null ], 3, 10, Vector2( 459.25, -258.269 ), 1, null, [ 0, 1, 0, 1, 12, 0, 2147483647, 0, null, 2147483647, 1, null ], 4, 23, Vector2( 173, -112 ), null, null, [ 0, 1, 3, 1, 6, 0, 2, 7, 0, 2147483647, 0, null, 2147483647, 1, null, 2147483647, 2, 0.01 ], 6, 2, Vector2( -113.474, -112 ), Vector3( 1, 1, 0 ), null, [  ], 7, 26, Vector2( -119.474, 9 ), "Affect", 0.01, [  ], 12, 6, Vector2( 308, -119 ), null, [ 0, 0 ], [ 0, 4, 0, 2147483647, 0, null ] ], [ 0, 33, Vector2( 350, 40 ), null, null, [  ], 1, 0, Vector2( 50, 40 ), null, null, [  ] ] ]
+}
+

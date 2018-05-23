@@ -1,28 +1,25 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=7 format=1]
 
-[ext_resource path="res://Graphics/Environment/rope.jpg" type="Texture" id=1]
-[ext_resource path="res://Graphics/Environment/donut.png" type="Texture" id=2]
-[ext_resource path="res://addons/Rope/rope.gd" type="Script" id=3]
-[ext_resource path="res://addons/Rope/icon.png" type="Texture" id=4]
+[ext_resource path="res://addons/Rope/rope.gd" type="Script" id=1]
+[ext_resource path="res://addons/Rope/icon.png" type="Texture" id=2]
+[ext_resource path="res://Graphics/Environment/rope.jpg" type="Texture" id=3]
+[ext_resource path="res://Graphics/Environment/donut.png" type="Texture" id=4]
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[sub_resource type="Curve2D" id=3]
 
-shader/shading_mode = 0
+bake_interval = 5.0
+_data = {
+"points": Vector2Array( 0, 0, 0, 3, -0.949158, -4.79891, -0.224842, -10.9336, 0.224842, 10.9336, -0.426476, 19.1393, -0.204055, -10.1906, 0, 0, -0.545837, 47.5964 )
+}
 
 [sub_resource type="CircleShape2D" id=2]
 
 custom_solver_bias = 0.0
 radius = 33.6919
 
-[sub_resource type="Curve2D" id=3]
-
-bake_interval = 5.0
-_data = {
-"points": Vector2Array( 0, 0, 0, 6, -0.949158, -4.79891, 0.583984, -13.4314, 0, 0, -0.341782, 48.6511 )
-}
-
 [node name="GlowHung" type="StaticBody2D"]
 
+transform/pos = Vector2( 79.8395, 76.6618 )
 input/pickable = false
 collision/layers = 1
 collision/mask = 1
@@ -31,23 +28,39 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="Spring" type="DampedSpringJoint2D" parent="."]
+[node name="Rope" type="Node2D" parent="."]
 
-material/material = SubResource( 1 )
-material/use_parent = true
-transform/pos = Vector2( -0.468994, -4.85794 )
-node_a = NodePath("..")
-node_b = NodePath("Light")
+transform/pos = Vector2( 0.291977, 2.3359 )
+script/script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+Curve = SubResource( 3 )
+Bake_Interval = 5
+Use_Texture = true
+Rope_Texture = ExtResource( 3 )
+Rope_Color = Color( 1, 1, 1, 1 )
+Width = 2.3
+Softness = 1
+Mass = 0.1
+Bounce = 1
+Can_sleep = true
+Linear_dumping = -1
+Angular_dumping = -1
+pined_points = [ 0 ]
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+
+transform/pos = Vector2( -0.999947, 51.0001 )
+node_a = NodePath("../Rope")
+node_b = NodePath("../Light")
 bias/bias = 0.0
 collision/exclude_nodes = true
-length = 10.0
-rest_length = 0.0
-stiffness = 5.0
-damping = 0.5
+softness = 0.0
 
-[node name="Light" type="RigidBody2D" parent="Spring"]
+[node name="Light" type="RigidBody2D" parent="."]
 
-transform/pos = Vector2( -0.530954, 55.858 )
+transform/pos = Vector2( -0.999947, 51.0001 )
 input/pickable = false
 shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 0.426325, 0, 0, 0.363706, 0.902029, 0.814346 )
@@ -70,7 +83,7 @@ velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Spring/Light"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light"]
 
 transform/pos = Vector2( 0.902029, 0.814346 )
 transform/scale = Vector2( 0.426325, 0.363706 )
@@ -78,14 +91,14 @@ shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
 
-[node name="Light2D" type="Light2D" parent="Spring/Light"]
+[node name="Light2D" type="Light2D" parent="Light"]
 
 visibility/behind_parent = true
 transform/pos = Vector2( -0.995888, 4.68334 )
 transform/scale = Vector2( 0.465439, 0.386941 )
 enabled = true
 editor_only = false
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 offset = Vector2( 0, 0 )
 scale = 44.6592
 color = Color( 0.114141, 0.0976562, 0.625, 1 )
@@ -103,31 +116,10 @@ shadow/buffer_size = 2048
 shadow/esm_multiplier = 1.0
 shadow/item_mask = 1
 
-[node name="Sprite" type="Sprite" parent="Spring/Light"]
+[node name="Sprite" type="Sprite" parent="Light"]
 
 transform/pos = Vector2( 0.970612, 0.970612 )
 transform/scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
-
-[node name="Rope" type="Node2D" parent="."]
-
-transform/pos = Vector2( 0.291977, 2.3359 )
-script/script = ExtResource( 3 )
-__meta__ = {
-"_editor_icon": ExtResource( 4 )
-}
-Curve = SubResource( 3 )
-Bake_Interval = 5
-Use_Texture = true
-Rope_Texture = ExtResource( 1 )
-Rope_Color = Color( 1, 1, 1, 1 )
-Width = 2.3
-Softness = 1
-Mass = 0.1
-Bounce = 1
-Can_sleep = true
-Linear_dumping = -1
-Angular_dumping = -1
-pined_points = [ 0, 0 ]
+texture = ExtResource( 4 )
 
 
