@@ -499,7 +499,7 @@ margin/bottom = 846.0
 
 [node name="EndGate" parent="Environment" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 5099.85, 523.694 )
+transform/pos = Vector2( 5058.11, 360.518 )
 transform/scale = Vector2( 1, 1 )
 isopen = true
 
@@ -892,7 +892,7 @@ material/material = {
 "RightTexture": "res://addons/platform2d/textures/simple_grass_thinright.png",
 "Thickness": 80.0
 }
-transform/pos = Vector2( 4453.28, 801.703 )
+transform/pos = Vector2( 4411.54, 638.527 )
 input/pickable = false
 shapes/0/shape = SubResource( 76 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
