@@ -15,7 +15,7 @@ var startScene = null;
 var progressBar = null;
 
 func _ready():
-	
+	Physics2DServer.set_active(false);	
 	get_node(\"LoadingScreen\").connect(\"faded_out\",self,\"switchToStartScene\");
 	progressBar = get_node(\"LoadingScreen/CenterContainer/ProgressBar\");
 	thread.start(self,\"load_scenes\")
@@ -40,6 +40,7 @@ func switchToStartScene():
 	get_node(\"LoadingScreen\").hide();
 	if(self.startScene):
 		 get_tree().get_root().add_child(self.startScene);
+		 Physics2DServer.set_active(true);
 	else:
 		print(\"No start scene found\");
 "

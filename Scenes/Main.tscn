@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://Scripts/Control/Main.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Control/LevelController.gd" type="Script" id=2]
@@ -7,7 +7,9 @@
 [ext_resource path="res://Scenes/Partials/General/Camera2D.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Partials/UI/Timer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/Control/InputControls.gd" type="Script" id=7]
-[ext_resource path="res://icon.png" type="Texture" id=8]
+[ext_resource path="res://Graphics/Temporary/UI/up.png" type="Texture" id=8]
+[ext_resource path="res://Graphics/Temporary/UI/rotate_left.png" type="Texture" id=9]
+[ext_resource path="res://Graphics/Temporary/UI/rotate_right.png" type="Texture" id=10]
 
 [sub_resource type="Environment" id=1]
 
@@ -85,9 +87,9 @@ margin/bottom = 40.0
 
 [node name="LevelController" type="Node2D" parent="Enviroment"]
 
-transform/pos = Vector2( 4.54413, -4.54419 )
+transform/pos = Vector2( 6.54413, -4.54419 )
 script/script = ExtResource( 2 )
-levels = StringArray( "res://Scenes/Levels/level1.scn", "res://Scenes/Levels/level2.scn", "res://Scenes/Levels/level3.scn", "res://Scenes/Levels/test_level.scn", "res://Scenes/Levels/level4.tscn", "res://Scenes/Levels/level5.tscn", "res://Scenes/Levels/level6.tscn" )
+levels = StringArray( "res://Scenes/Levels/level1.scn", "res://Scenes/Levels/level2.scn", "res://Scenes/Levels/level3.scn", "res://Scenes/Levels/test_level.scn", "res://Scenes/Levels/level4.tscn", "res://Scenes/Levels/level5.tscn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level7.tscn" )
 currentLevel = 3
 
 [node name="BundingBox" type="Area2D" parent="Enviroment"]
@@ -184,7 +186,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 textures/normal = ExtResource( 8 )
-params/resize_mode = 0
+params/resize_mode = 1
 params/stretch_mode = 0
 
 [node name="RollLeft" type="TextureButton" parent="UI/Container/InputControls"]
@@ -198,14 +200,14 @@ focus/stop_mouse = true
 size_flags/horizontal = 0
 size_flags/vertical = 0
 margin/left = 218.0
-margin/top = 32.0
+margin/top = 33.0
 margin/right = 154.0
-margin/bottom = -32.0
+margin/bottom = -31.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 8 )
-params/resize_mode = 0
+textures/normal = ExtResource( 9 )
+params/resize_mode = 1
 params/stretch_mode = 0
 
 [node name="RollRight" type="TextureButton" parent="UI/Container/InputControls"]
@@ -225,8 +227,8 @@ margin/bottom = -32.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 8 )
-params/resize_mode = 0
+textures/normal = ExtResource( 10 )
+params/resize_mode = 1
 params/stretch_mode = 0
 
 
