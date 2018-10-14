@@ -28,8 +28,6 @@ func load_scenes(value):
 		if( scenePath ==  startScenePath):
 			startScene = scene;
 		progressBar.set_value( progressBar.get_value() + progressStep );
-	
-	get_node(\"LoadingScreen\")._faded_out();
 
 func load_scene(scenePath):
 	print(scenePath)
