@@ -7,9 +7,9 @@ export(NodePath) var leftPath = null;
 export(NodePath) var rightPath = null;
 export(NodePath) var characterControllerPath = null
 
-var jump = TextureButton;
-var left = TextureButton;
-var right = TextureButton;
+var jump = TouchScreenButton;
+var left = TouchScreenButton;
+var right = TouchScreenButton;
 var characterController = Control;
 
 func _ready():
@@ -26,9 +26,9 @@ func _ready():
 		printerr("InputControl : not all variables can be found.");
 		return;
 
-	self.left.connect("button_down", self.characterController,"rollLeft", [true]);
-	self.right.connect("button_down", self.characterController,"rollRight", [true]);
-	self.jump.connect("button_down", self.characterController,"floatUp", [true]);
-	self.left.connect("button_up", self.characterController,"rollLeft", [false]);
-	self.right.connect("button_up", self.characterController,"rollRight", [false]);
-	self.jump.connect("button_up", self.characterController,"floatUp", [false]);
+	self.left.connect("pressed", self.characterController,"rollLeft", [true]);
+	self.right.connect("pressed", self.characterController,"rollRight", [true]);
+	self.jump.connect("pressed", self.characterController,"floatUp", [true]);
+	self.left.connect("released", self.characterController,"rollLeft", [false]);
+	self.right.connect("released", self.characterController,"rollRight", [false]);
+	self.jump.connect("released", self.characterController,"floatUp", [false]);

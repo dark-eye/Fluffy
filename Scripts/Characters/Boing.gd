@@ -47,7 +47,11 @@ func on_contact(body):
 	if(body != lastContact): 
 		self.get_node(soundPlayer).play('boing');
 		lastContact = body;
-
+		
+#TODO should this be reomved? hit volume base on current speed
+func _integrate_forces(state):
+	if(lastContact && self.get_node(soundPlayer).is_voice_active(0)):
+		self.get_node(soundPlayer).voice_set_volume_scale_db(0,state.get_linear_velocity().length());
 
 func on_body_exit(body):
 	pass
