@@ -20,7 +20,7 @@ func _ready():
 		object_type = "thick_platform"
 	var file = File.new()
 	if file.open("res://addons/platform2d/materials.json", File.READ) == 0:
-		materials.parse_json(file.get_line())
+		materials = parse_json(file.get_line())
 		file.close()
 	update_material_list()
 

@@ -43,8 +43,8 @@ const COLOR_2 = Color(0.5, 0.5, 1, 1)
 const COLOR_3 = Color(1, 0, 0, 1)
 
 func _enter_tree():
-	var godot_version = OS.get_engine_version()
-	is_godot21 = godot_version.major == "2" && godot_version.minor == "1"
+	var godot_version = Engine.get_version_info()
+	is_godot21 = godot_version.major == 2 && godot_version.minor == 1
 	add_custom_type("ThinPlatform",  "StaticBody2D", thin_platform_script,  preload("res://addons/platform2d/thin_platform_icon.png"))
 	add_custom_type("ThickPlatform", "StaticBody2D", thick_platform_script, preload("res://addons/platform2d/thick_platform_icon.png"))
 	handle_tex.set_flags(0)
@@ -57,7 +57,7 @@ func _exit_tree():
 	remove_custom_type("SmartSurface")
 
 func handles(o):
-	if o.is_type("VisibilityNotifier2D"):
+	if o.is_class("VisibilityNotifier2D"):
 		return true
 	elif o.get_script() == thick_platform_script || o.get_script() == thin_platform_script:
 		return true
@@ -66,7 +66,7 @@ func handles(o):
 
 func edit(o):
 	edited_object = o
-	if o.is_type("VisibilityNotifier2D"):
+	if o.is_class("VisibilityNotifier2D"):
 		edited_type = EDIT_VISIBILITY_NOTIFIER
 	else:
 		edited_type = EDIT_PLATFORM
@@ -74,13 +74,13 @@ func edit(o):
 
 func make_visible(b):
 	if b:
-		if is_godot21:
-			if editor == null:
-				var viewport = edited_object.get_viewport()
-				editor = curve_editor_script.new()
-				editor.plugin = self
-				viewport.add_child(editor)
-				viewport.connect("size_changed", editor, "update")
+		#if is_godot21:
+		if editor == null:
+			var viewport = edited_object.get_viewport()
+			editor = curve_editor_script.new()
+			editor.plugin = self
+			viewport.add_child(editor)
+			viewport.connect("size_changed", editor, "update")
 		update()
 		if edited_type == EDIT_PLATFORM && toolbar == null:
 			toolbar = preload("res://addons/platform2d/toolbar.tscn").instance()
@@ -96,10 +96,10 @@ func make_visible(b):
 			toolbar = null
 
 func update():
-	if is_godot21:
-		editor.update()
-	else:
-		update_canvas()
+	#if is_godot21:
+	editor.update()
+	#else:
+	#	update_canvas()
 
 func int_coord(p):
 	return Vector2(round(p.x), round(p.y))

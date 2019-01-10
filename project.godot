@@ -24,7 +24,7 @@ driver="GLES2"
 
 [editor_plugins]
 
-enabled=[ "Rope", "khairul169.2dwater", "platform2d" ]
+enabled=PoolStringArray( "khairul169.2dwater", "platform2d" )
 
 [importer_defaults]
 

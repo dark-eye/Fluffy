@@ -15,7 +15,8 @@ func set_moving_platform(b):
 
 func _physics_process(delta):
 	var position = get_global_position()
-	set_constant_linear_velocity((position - last_position) / delta)
+	if (last_position) :
+		set_constant_linear_velocity((position - last_position) / delta)
 	last_position = position
 
 func aligned(p1, p2, p3):

@@ -1,85 +1,62 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Graphics/Environment/fire.jpeg" type="Texture" id=1]
-[ext_resource path="res://Graphics/Environment/Water/water.jpg" type="Texture" id=2]
-[ext_resource path="res://sprites/water.png" type="Texture" id=3]
-[ext_resource path="res://addons/khairul169.2dwater/2d_water.gd" type="Script" id=4]
-[ext_resource path="res://addons/khairul169.2dwater/icon.png" type="Texture" id=5]
-[ext_resource path="res://Graphics/Environment/Water/bubble.png" type="Texture" id=6]
-
-[sub_resource type="Shader" id=55]
-
-code = "shader_type canvas_item;
-render_mode blend_mix;
-
-uniform vec4 albedo : hint_color = vec4(1,1,1,1);
-uniform sampler2D displacement;
-uniform sampler2D backgroundDisplacement;
-uniform float displacementEffect = 0.1;
-uniform float amplitude = 0.1;
-uniform float speed = 0.2;
-
-void fragment() {
-	float speedTimed = TIME*speed;
-    float actualAmplitude = amplitude/10.0;
-	//do the wave
-    float addPos = ((texture(displacement,UV+TIME*speed/50.0).b * displacementEffect - (displacementEffect/2.0)) + (sin(UV.x*60.0+speedTimed) * actualAmplitude)) - actualAmplitude ;
-    vec4 waterEffect = texture(TEXTURE,vec2(UV.x,UV.y + addPos));
-	//calculate overlapping displacment
-	vec4 backgroundDispMix = mix(texture(backgroundDisplacement,UV-speedTimed/60.0) , texture(backgroundDisplacement,UV+speedTimed/60.0),0.5);
-	// calculate main deep water displacment
-    vec4 displacmentMix = mix(mix(texture(displacement,UV-speedTimed/60.0) , texture(displacement,UV+speedTimed/60.0),0.5) , backgroundDispMix ,0.5) ;
-    COLOR = texture(SCREEN_TEXTURE,fract(mix(SCREEN_UV, displacmentMix.xy, displacementEffect * waterEffect.a))) * waterEffect + (albedo * waterEffect.a);
-	NORMAL = backgroundDispMix.rgb * waterEffect.a;
-}"
-
-[sub_resource type="ShaderMaterial" id=8]
-
-render_priority = 0
-shader = SubResource( 55 )
-shader_param/albedo = Color( 0.327759, 0.507685, 0.699219, 0 )
-shader_param/displacementEffect = 0.08
-shader_param/amplitude = 0.3
-shader_param/speed = 2.472
-shader_param/displacement = ExtResource( 2 )
-shader_param/backgroundDisplacement = ExtResource( 1 )
+[ext_resource path="res://addons/khairul169.2dwater/2d_water.tres" type="Shader" id=1]
+[ext_resource path="res://Graphics/Environment/fire.jpeg" type="Texture" id=2]
+[ext_resource path="res://Graphics/Environment/Water/water.jpg" type="Texture" id=3]
+[ext_resource path="res://sprites/water.png" type="Texture" id=4]
+[ext_resource path="res://addons/khairul169.2dwater/2d_water.gd" type="Script" id=5]
+[ext_resource path="res://addons/khairul169.2dwater/icon.png" type="Texture" id=6]
+[ext_resource path="res://Graphics/Environment/Water/bubble.png" type="Texture" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 
 render_priority = 0
+shader = ExtResource( 1 )
+shader_param/albedo = Color( 0.976562, 0.104129, 0.038147, 0 )
+shader_param/reflectionsEffect = 0.0
+shader_param/displacementEffect = 0.08
+shader_param/amplitude = 0.3
+shader_param/speed = 2.472
+shader_param/displacement = ExtResource( 3 )
+shader_param/backgroundDisplacement = ExtResource( 2 )
+_sections_unfolded = [ "shader_param" ]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="ShaderMaterial" id=2]
+
+render_priority = 0
+
+[sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=4]
 
 min_value = -200.0
 max_value = 200.0
 bake_resolution = 100
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.499271, 73.0469 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=4]
+[sub_resource type="CurveTexture" id=5]
 
 flags = 4
 width = 2048
-curve = SubResource( 3 )
+curve = SubResource( 4 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=6]
 
 min_value = 0.0
 max_value = 1.0
 bake_resolution = 100
 _data = [ Vector2( 0, 0.15625 ), 0.0, 0.0, 0, 0, Vector2( 0.750807, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.999427, 0.521484 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
+[sub_resource type="CurveTexture" id=7]
 
 flags = 4
 width = 2048
-curve = SubResource( 5 )
+curve = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=8]
 
 render_priority = 0
 trail_divisor = 1
@@ -98,7 +75,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 0.0
 linear_accel_random = 0.0
-linear_accel_curve = SubResource( 4 )
+linear_accel_curve = SubResource( 5 )
 radial_accel = 0.0
 radial_accel_random = 0.0
 tangential_accel = 1.0
@@ -109,7 +86,7 @@ angle = 0.0
 angle_random = 0.0
 scale = 0.3
 scale_random = 0.2
-scale_curve = SubResource( 6 )
+scale_curve = SubResource( 7 )
 color = Color( 1, 1, 1, 1 )
 hue_variation = 0.0
 hue_variation_random = 0.0
@@ -120,19 +97,19 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Angular Velocity", "Color", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Linear Accel", "Orbit Velocity", "Scale", "Spread", "Tangential Accel", "Trail" ]
 
-[node name="Water" type="Sprite"]
+[node name="Water" type="Sprite" index="0"]
 
-material = SubResource( 8 )
+material = SubResource( 1 )
 position = Vector2( -49.6002, -10.2484 )
-texture = ExtResource( 3 )
-script = ExtResource( 4 )
+texture = ExtResource( 4 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 __meta__ = {
-"_editor_icon": ExtResource( 5 )
+"_editor_icon": ExtResource( 6 )
 }
-displacement_map = ExtResource( 2 )
-background_displacement = ExtResource( 1 )
-water_color = Color( 0.327759, 0.507685, 0.699219, 0 )
+displacement_map = ExtResource( 3 )
+background_displacement = ExtResource( 2 )
+water_color = Color( 0.976562, 0.104129, 0.038147, 0 )
 displacement_effect = 0.08
 amplitudo = 0.3
 speed = 2.472
@@ -144,7 +121,7 @@ bubbles_randomness = 0.918
 
 editor/display_folded = true
 visible = false
-material = SubResource( 1 )
+material = SubResource( 2 )
 position = Vector2( -3.30811, 11.9956 )
 scale = Vector2( 8.07315, 2.14735 )
 input_pickable = false
@@ -164,7 +141,7 @@ audio_bus_name = "Master"
 
 position = Vector2( -0.0219811, 0.0412436 )
 scale = Vector2( 3.1428, 3.04009 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="bubbles" type="Particles2D" parent="." index="1"]
 
@@ -186,8 +163,8 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = true
 draw_order = 0
-process_material = SubResource( 7 )
-texture = ExtResource( 6 )
+process_material = SubResource( 8 )
+texture = ExtResource( 7 )
 normal_map = null
 h_frames = 1
 v_frames = 1
