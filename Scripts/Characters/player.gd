@@ -66,9 +66,9 @@ func _integrate_forces(s):
 	
 	if spawn:
 		#var e = enemy.instance()
-		var p = get_pos()
+		var p = get_position()
 		p.y = p.y - 100
-		e.set_pos(p)
+		e.set_position(p)
 		get_parent().add_child(e)
 	
 	# Deapply prev floor velocity
@@ -95,9 +95,9 @@ func _integrate_forces(s):
 			ss = -1.0
 		else:
 			ss = 1.0
-		#var pos = get_pos() + get_node("bullet_shoot").get_pos()*Vector2(ss, 1.0)
+		#var pos = get_position() + get_node("bullet_shoot").get_position()*Vector2(ss, 1.0)
 		
-		#bi.set_pos(pos)
+		#bi.set_position(pos)
 		#get_parent().add_child(bi)
 		
 		#bi.set_linear_velocity(Vector2(800.0*ss, -80))
@@ -208,7 +208,7 @@ func _integrate_forces(s):
 	
 	# Apply floor velocity
 	if (found_floor):
-		floor_h_velocity = s.get_contact_collider_velocity_at_pos(floor_index).x
+		floor_h_velocity = s.get_contact_collider_velocity_at_position(floor_index).x
 		lv.x += floor_h_velocity
 	
 	# Finally, apply gravity and set back the linear velocity
@@ -228,3 +228,4 @@ func _ready():
 #	var msg = "I just sneezed on your wall! Beat my score and Stop the Running nose!"
 #	var title = "I just sneezed on your wall!"
 #	Facebook.post("feed", msg, title, link, icon)
+

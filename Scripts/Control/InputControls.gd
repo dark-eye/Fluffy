@@ -32,3 +32,4 @@ func _ready():
 	self.left.connect("released", self.characterController,"rollLeft", [false]);
 	self.right.connect("released", self.characterController,"rollRight", [false]);
 	self.jump.connect("released", self.characterController,"floatUp", [false]);
+

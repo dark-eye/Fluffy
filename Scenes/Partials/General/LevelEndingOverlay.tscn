@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Control/LevelEndingScreen.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Partials/UI/Score.tscn" type="PackedScene" id=2]
@@ -9,82 +9,86 @@
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
-script/script = ExtResource( 1 )
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
 score = 0
 time = 0
+mouse_filter = 0
 
 [node name="Container" type="Container" parent="."]
 
-anchor/right = 1
-anchor/bottom = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 1.0
-margin/top = 0.0
-margin/right = -986.0
-margin/bottom = -559.0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 1.0
+margin_top = 0.0
+margin_right = 986.0
+margin_bottom = 559.0
+mouse_filter = 0
 
 [node name="Score" parent="Container" instance=ExtResource( 2 )]
 
-anchor/left = 2
-anchor/bottom = 2
-rect/scale = Vector2( 3, 3 )
-margin/left = 0.582439
-margin/top = 157.0
-margin/right = 661.0
-margin/bottom = 0.315526
+anchor_left = 0.0
+anchor_bottom = 0.0
+rect_scale = Vector2( 3, 3 )
+margin_left = 0.582439
+margin_top = 157.0
+margin_right = 661.0
+margin_bottom = 0.315526
 
 [node name="Clock" parent="Container" instance=ExtResource( 3 )]
 
-anchor/right = 2
-anchor/bottom = 2
-rect/scale = Vector2( 3, 3 )
-margin/left = 238.0
-margin/top = 157.0
-margin/right = 0.294634
-margin/bottom = 0.315526
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_scale = Vector2( 3, 3 )
+margin_left = 238.0
+margin_top = 157.0
+margin_right = 0.294634
+margin_bottom = 0.315526
 
 [node name="Effects" type="Container" parent="Container"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 0
 
 [node name="Confetti" type="Control" parent="Container/Effects"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 0.0
-margin/bottom = 0.0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+mouse_filter = 0
 
 [node name="Confetti Right" type="Particles2D" parent="Container/Effects/Confetti"]
 
-transform/pos = Vector2( 1015.36, 588.375 )
-config/amount = 1000
-config/lifetime = 20.0
-config/time_scale = 4.0
+position = Vector2( 1015.36, 588.375 )
+amount = 1000
+lifetime = 20.0
+speed_scale = 4.0
 config/emit_timeout = 1.0
-config/emitting = false
+emitting = false
 config/process_mode = 1
-config/explosiveness = 0.5
-config/texture = ExtResource( 4 )
+explosiveness = 0.5
+texture = ExtResource( 4 )
 params/direction = 213.19
 params/spread = 21.32
 params/linear_velocity = 65.0
@@ -113,15 +117,15 @@ color/color = Color( 1, 0.601562, 0.601562, 1 )
 
 [node name="Confetti Left" type="Particles2D" parent="Container/Effects/Confetti"]
 
-transform/pos = Vector2( 6.81021, 597.239 )
-config/amount = 1000
-config/lifetime = 20.0
-config/time_scale = 4.0
+position = Vector2( 6.81021, 597.239 )
+amount = 1000
+lifetime = 20.0
+speed_scale = 4.0
 config/emit_timeout = 1.0
-config/emitting = false
+emitting = false
 config/process_mode = 1
-config/explosiveness = 0.5
-config/texture = ExtResource( 4 )
+explosiveness = 0.5
+texture = ExtResource( 4 )
 params/direction = 213.19
 params/spread = 21.32
 params/linear_velocity = 65.0
@@ -147,5 +151,3 @@ randomness/initial_size = 0.44
 randomness/final_size = 1.0
 randomness/hue_variation = 1.0
 color/color = Color( 1, 0.601562, 0.601562, 1 )
-
-

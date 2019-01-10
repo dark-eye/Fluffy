@@ -16,11 +16,11 @@ func save(name):
 	if toolbar.save_material(name, confirm):
 		queue_free()
 	else:
-		confirm_text.set_opacity(1)
+		confirm_text.modulate.a = 1
 		confirm = true
 
 func _on_LineEdit_text_changed(text):
-	confirm_text.set_opacity(0)
+	confirm_text.modulate.a = 0
 	confirm = false
 	ok_button.set_disabled(text == "")
 
@@ -33,6 +33,7 @@ func _on_OK_pressed():
 
 func _on_Cancel_pressed():
 	queue_free()
+
 
 
 

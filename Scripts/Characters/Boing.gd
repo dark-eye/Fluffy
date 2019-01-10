@@ -2,7 +2,7 @@
 extends RigidBody2D
 
 export(NodePath) var spriteContainerPath = './Boing'; 
-export(NodePath) var soundPlayer = './SamplePlayer2D'; 
+export(NodePath) var soundPlayer = './AudioStreamPlayer2D'; 
 
 var state = Dictionary() setget get_state,set_state; 
 var acceleration = 2;
@@ -14,7 +14,7 @@ var lastContactCountAvg = 0.0;
 
 func _ready():
 	self.set_process(true);
-	self.set_fixed_process(true);
+	self.set_physics_process(true);
 	self.set_contact_monitor(true);
 	self.connect("body_enter",self,'on_contact');
 	self.connect("body_exit",self,'on_body_exit');
@@ -38,7 +38,7 @@ func _process(delta):
 		self.get_node(spriteContainerPath).set_scale( Vector2(1,1));
 	
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	lastContactCountAvg = lastContactCountAvg + (float(self.get_colliding_bodies().size())/2) - (lastContactCountAvg / 35)
 	if( int(lastContactCountAvg) == 0 && lastContact != null ):
 		lastContact = null;
@@ -60,8 +60,8 @@ func on_body_exit(body):
 #########################################
 
 func resetTo(x,y):
-	self.set_rot(0);
-	self.set_pos(Vector2(x,y));
+	self.set_rotation(0);
+	self.set_position(Vector2(x,y));
 
 func getCamera():
 	return self.find_node( 'Camera2D' );
@@ -73,5 +73,6 @@ func get_state():
 
 func set_state(newState):
 	state = newState;
+
 
 

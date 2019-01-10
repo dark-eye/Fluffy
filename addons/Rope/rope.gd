@@ -18,7 +18,7 @@ export var pined_points = [0]
 
 var rigid_bodies = []
 
-var uvs = Vector2Array([Vector2(0, 0), Vector2(1, 0), Vector2(1, 1), Vector2(0, 1)])
+var uvs = PoolVector2Array([Vector2(0, 0), Vector2(1, 0), Vector2(1, 1), Vector2(0, 1)])
 
 func set_use_texture(value):
     Use_Texture = value
@@ -72,8 +72,8 @@ func remove_point(index):
         if(pined_points[i] >= index):
             pined_points[i] = pined_points[i] - 1
 
-func set_point_pos(index, pos):
-    Curve.set_point_pos(index, pos)
+func set_point_position(index, pos):
+    Curve.set_point_position(index, pos)
 
 func set_point_in(index, pos):
     Curve.set_point_in(index, pos)
@@ -81,8 +81,8 @@ func set_point_in(index, pos):
 func set_point_out(index, pos):
     Curve.set_point_out(index, pos)
 
-func get_point_pos(index):
-    return Curve.get_point_pos(index)
+func get_point_position(index):
+    return Curve.get_point_position(index)
 
 func get_point_in(index):
     return Curve.get_point_in(index)
@@ -122,21 +122,21 @@ func ingame_ready():
         var shape = RectangleShape2D.new()
         shape.set_extents(Vector2(Width / 2, (next - current).length() * 0.9))
         body.add_shape(shape)
-        body.set_rot((next - current).angle())
+        body.set_rotation((next - current).angle())
         set_body_params(body)
-        body.set_pos(current)
+        body.set_position(current)
         add_child(body)
         if(rigid_bodies.size() > 0):
             var lastBody = rigid_bodies[rigid_bodies.size() - 1]
-            add_pin_joint(lastBody.get_path(), body.get_path(), body.get_pos())
+            add_pin_joint(lastBody.get_path(), body.get_path(), body.get_position())
 
         if(pined_baked_points.has(i)):
-            add_pin_joint(self.get_path(), body.get_path(), body.get_pos())
+            add_pin_joint(self.get_path(), body.get_path(), body.get_position())
         rigid_bodies.push_back(body)
 
     if(pined_baked_points.has(array.size() - 1)):
         var body = rigid_bodies[rigid_bodies.size() - 1]
-        var pos = get_end_pos(body)
+        var pos = get_end_position(body)
         add_pin_joint(self.get_path(), body.get_path(), pos)
     set_process(true)
 
@@ -151,7 +151,7 @@ func add_pin_joint(node_a, node_b, position):
     var pin = PinJoint2D.new()
     pin.set_node_a(node_a)
     pin.set_node_b(node_b)
-    pin.set_pos(position)
+    pin.set_position(position)
     pin.set_softness(Softness)
     pin.set_exclude_nodes_from_collision(true)
     add_child(pin)
@@ -160,10 +160,10 @@ func get_baked_pin_points():
     var array = Curve.get_baked_points()
     var pined_baked_points = []
     for i in pined_points:
-        var closest_length = (array[0] - Curve.get_point_pos(i)).length()
+        var closest_length = (array[0] - Curve.get_point_position(i)).length()
         var closest_index = 0;
         for j in range(1, array.size()):
-            var currentLength = (array[j] - Curve.get_point_pos(i)).length()
+            var currentLength = (array[j] - Curve.get_point_position(i)).length()
             if(currentLength < closest_length):
                 closest_length = currentLength
                 closest_index = j
@@ -197,12 +197,12 @@ func calculate_points_from_bodies(bodies):
 
         if(i > 0):
             last = bodies[i-1]
-            last_pos = last.get_pos()
+            last_pos = last.get_position()
         current = bodies[i]
         next = bodies[i+1]
 
-        current_pos = current.get_pos()
-        next_pos = next.get_pos()
+        current_pos = current.get_position()
+        next_pos = next.get_position()
 
 
         var up = null
@@ -216,20 +216,20 @@ func calculate_points_from_bodies(bodies):
             if(angle < 120 && angle > -120):
                 down = (back_vector + front_vector).normalized() * (Width / 2)
                 up = Vector2(-down.x, -down.y)
-                down += current.get_pos()
-                up += current.get_pos()
+                down += current.get_position()
+                up += current.get_position()
                 if(angle < 0):
                     var tmp = up
                     up = down
                     down = tmp
             else:
-                var current_vector = Vector2(0, 1).rotated(current.get_rot())
-                down = get_down_pos(current.get_pos(), current_vector)
-                up = get_up_pos(current.get_pos(), current_vector)
+                var current_vector = Vector2(0, 1).rotated(current.get_rotation())
+                down = get_down_position(current.get_position(), current_vector)
+                up = get_up_position(current.get_position(), current_vector)
         else:
-            var current_vector = Vector2(0, 1).rotated(current.get_rot())
-            down = get_down_pos(current.get_pos(), current_vector)
-            up = get_up_pos(current.get_pos(), current_vector)
+            var current_vector = Vector2(0, 1).rotated(current.get_rotation())
+            down = get_down_position(current.get_position(), current_vector)
+            up = get_up_position(current.get_position(), current_vector)
 
         array.push_back({up = up, down = down})
     return array
@@ -268,14 +268,14 @@ func calculate_points_from_points(points):
                 var front_vector = (next - current)
                 var angle = front_vector.angle()
                 var current_vector = Vector2(0, 1).rotated(angle)
-                down = get_down_pos(current, current_vector)
-                up = get_up_pos(current, current_vector)
+                down = get_down_position(current, current_vector)
+                up = get_up_position(current, current_vector)
         else:
             var front_vector = (next - current)
             var angle = front_vector.angle()
             var current_vector = Vector2(0, 1).rotated(angle)
-            down = get_down_pos(current, current_vector)
-            up = get_up_pos(current, current_vector)
+            down = get_down_position(current, current_vector)
+            up = get_up_position(current, current_vector)
 
         array.push_back({up = up, down = down})
     return array
@@ -285,20 +285,21 @@ func draw_rope(array):
         var current = array[i]
         var next = array[i + 1]
         if(Use_Texture && Rope_Texture != null):
-            draw_polygon(Vector2Array([current.up, current.down, next.down, next.up]), ColorArray([Rope_Color]), uvs, Rope_Texture)
+            draw_polygon(PoolVector2Array([current.up, current.down, next.down, next.up]), PoolColorArray([Rope_Color]), uvs, Rope_Texture)
         else:
-            draw_polygon(Vector2Array([current.up, current.down, next.down, next.up]), ColorArray([Rope_Color]))
+            draw_polygon(PoolVector2Array([current.up, current.down, next.down, next.up]), PoolColorArray([Rope_Color]))
 
 
 
-func get_down_pos(body_pos, body_normal_vector):
+func get_down_position(body_pos, body_normal_vector):
     return body_pos + Vector2(-body_normal_vector.y, body_normal_vector.x) * Width/2
 
-func get_up_pos(body_pos, body_normal_vector):
+func get_up_position(body_pos, body_normal_vector):
     return body_pos + Vector2(body_normal_vector.y, -body_normal_vector.x) * Width/2
 
-func get_end_pos(rigid_bodie):
+func get_end_position(rigid_bodie):
     var shape = rigid_bodie.get_shape(0)
     var position = Vector2(0, shape.get_extents().y)
-    position = position.rotated(rigid_bodie.get_rot())
-    return rigid_bodie.get_pos() + position
+    position = position.rotated(rigid_bodie.get_rotation())
+    return rigid_bodie.get_position() + position
+

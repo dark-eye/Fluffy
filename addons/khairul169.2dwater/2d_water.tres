@@ -1,23 +1,22 @@
-[gd_resource type="CanvasItemShader" format=1]
+[gd_resource type="Shader" format=2]
 
 [resource]
 
-_code = {
-"fragment": "uniform texture displacement_map;
-uniform float amplitudo = 0.015;
-uniform float speed = 2.0;
-uniform vec2 scaling = vec2(1,1);
+code = "shader_type canvas_item;
 
-vec2 uv = UV*scaling;
+uniform sampler2D displacement;
+uniform float displacementEffect = 0.1;
+uniform float amplitude = 0.1;
+uniform float speed = 0.2;
 
-vec2 displacement = tex(displacement_map, uv/6.0).xy;
-float t = uv.y + displacement.y * 0.1 - 0.15 + (sin (uv.x * 60.0+TIME*speed) * amplitudo);
- 
-COLOR = tex(TEXTURE, vec2(uv.x, t)).rgba;",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
+void fragment() {
+	float speedTimed = TIME*speed;
+    float actualAmplitude = amplitude/10.0;
+    float addPos = ((texture(displacement,UV).b * displacementEffect - displacementEffect)/10.0 + (sin(UV.x*60.0+speedTimed) * actualAmplitude)) ;
+    vec4 waterEffect = texture(TEXTURE,vec2(UV.x,UV.y + addPos));
+	
+    vec2 backDisplacment = (texture(displacement,UV-speedTimed/60.0).xy - texture(displacement,UV+speedTimed/60.0).xy) * displacementEffect * waterEffect.a;
+    COLOR =  texture(SCREEN_TEXTURE,SCREEN_UV - backDisplacment) * waterEffect;
+}"
+_sections_unfolded = [ "Resource" ]
 

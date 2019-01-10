@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/boing.ogg-92a250e35ff64db203ace2a5c3e26366.oggstr"
+
+[deps]
+
+source_file="res://Resources/Sounds/boing.ogg"
+dest_files=[ "res://.import/boing.ogg-92a250e35ff64db203ace2a5c3e26366.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

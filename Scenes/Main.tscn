@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Control/Main.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Control/LevelController.gd" type="Script" id=2]
@@ -61,42 +61,44 @@ srgb/enabled = false
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -29.0
-margin/top = -2.0
-margin/right = 4067.0
-margin/bottom = 4094.0
-script/script = ExtResource( 1 )
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = -29.0
+margin_top = -2.0
+margin_right = 4067.0
+margin_bottom = 4094.0
+script = ExtResource( 1 )
 __meta__ = {
 "__editor_plugin_screen__": "Script"
 }
 levelControllerPath = NodePath("Enviroment/LevelController")
 playerControllerPath = NodePath("Charcter Control")
+mouse_filter = 0
 
 [node name="Enviroment" type="Control" parent="."]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 0
 
 [node name="LevelController" type="Node2D" parent="Enviroment"]
 
-transform/pos = Vector2( 6.54413, -4.54419 )
-script/script = ExtResource( 2 )
-levels = StringArray( "res://Scenes/Levels/level1.scn", "res://Scenes/Levels/level2.scn", "res://Scenes/Levels/level3.scn", "res://Scenes/Levels/test_level.scn", "res://Scenes/Levels/level4.tscn", "res://Scenes/Levels/level5.tscn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level7.tscn" )
+position = Vector2( 6.54413, -4.54419 )
+script = ExtResource( 2 )
+levels = PoolStringArray( "res://Scenes/Levels/level1.scn", "res://Scenes/Levels/level2.scn", "res://Scenes/Levels/level3.scn", "res://Scenes/Levels/test_level.scn", "res://Scenes/Levels/level4.tscn", "res://Scenes/Levels/level5.tscn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level7.tscn" )
 currentLevel = 3
 
 [node name="BundingBox" type="Area2D" parent="Enviroment"]
 
-transform/pos = Vector2( 742.583, 265.242 )
-transform/scale = Vector2( 21.6627, 10.0612 )
-input/pickable = true
+position = Vector2( 742.583, 265.242 )
+scale = Vector2( 21.6627, 10.0612 )
+input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
@@ -106,23 +108,24 @@ angular_damp = 1.0
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 75.0
-margin/top = 75.0
-margin/right = 115.0
-margin/bottom = 115.0
-script/script = ExtResource( 3 )
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 75.0
+margin_top = 75.0
+margin_right = 115.0
+margin_bottom = 115.0
+script = ExtResource( 3 )
 chatacterPath = NodePath("Boing")
+mouse_filter = 0
 
 [node name="Boing" parent="Charcter Control" instance=ExtResource( 4 )]
 
-z/z = 1
+z_index = 1
 soundPlayer = "./SamplePlayer2D"
 
 [node name="Camera2D" parent="Charcter Control/Boing" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 0.155365, 3.47427 )
+position = Vector2( 0.155365, 3.47427 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Charcter Control/Boing/Camera2D"]
 
@@ -138,57 +141,61 @@ scale = Vector2( 1, 1 )
 
 [node name="Container" type="Container" parent="UI"]
 
-anchor/right = 1
-anchor/bottom = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 984.0
-margin/bottom = 560.0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = -984.0
+margin_bottom = -560.0
+mouse_filter = 0
 
 [node name="Clock" parent="UI/Container" instance=ExtResource( 6 )]
 
+
 [node name="InputControls" type="Container" parent="UI/Container"]
 
-anchor/top = 1
-anchor/right = 1
-anchor/bottom = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 3
-size_flags/vertical = 2
-margin/left = 9.0
-margin/top = -473.0
-margin/right = -984.0
-margin/bottom = -537.0
-script/script = ExtResource( 7 )
+size_flags_horizontal = 3
+size_flags_vertical = 1
+margin_left = 9.0
+margin_top = 473.0
+margin_right = 984.0
+margin_bottom = 537.0
+script = ExtResource( 7 )
 jumpPath = NodePath("LeftButtonGroup/Jump")
 leftPath = NodePath("RightButtonGroup/RollLeft")
 rightPath = NodePath("RightButtonGroup/RollRight")
 characterControllerPath = NodePath("../../../Charcter Control")
+mouse_filter = 0
 
 [node name="RightButtonGroup" type="ButtonGroup" parent="UI/Container/InputControls"]
 
-anchor/left = 1
-anchor/top = 1
-anchor/right = 1
-anchor/bottom = 1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 focus/ignore_mouse = false
 focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 198.0
-margin/top = 64.0
-margin/right = 158.0
-margin/bottom = 24.0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = -198.0
+margin_top = -64.0
+margin_right = -158.0
+margin_bottom = -24.0
 alignment = 0
+mouse_filter = 0
 
 [node name="RollLeft" type="TouchScreenButton" parent="UI/Container/InputControls/RightButtonGroup"]
 
-transform/scale = Vector2( 0.12, 0.12 )
+scale = Vector2( 0.12, 0.12 )
 normal = ExtResource( 8 )
 pressed = null
 bitmask = null
@@ -201,8 +208,8 @@ visibility_mode = 0
 
 [node name="RollRight" type="TouchScreenButton" parent="UI/Container/InputControls/RightButtonGroup"]
 
-transform/pos = Vector2( 128, 0 )
-transform/scale = Vector2( 0.12, 0.12 )
+position = Vector2( 128, 0 )
+scale = Vector2( 0.12, 0.12 )
 normal = ExtResource( 9 )
 pressed = null
 bitmask = null
@@ -217,17 +224,18 @@ visibility_mode = 0
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 25.0
-margin/top = 0.0
-margin/right = 65.0
-margin/bottom = 40.0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 25.0
+margin_top = 0.0
+margin_right = 65.0
+margin_bottom = 40.0
 alignment = 0
+mouse_filter = 0
 
 [node name="Jump" type="TouchScreenButton" parent="UI/Container/InputControls/LeftButtonGroup"]
 
-transform/scale = Vector2( 0.08, 0.08 )
+scale = Vector2( 0.08, 0.08 )
 normal = ExtResource( 10 )
 pressed = null
 bitmask = null
@@ -237,5 +245,3 @@ shape_visible = true
 passby_press = false
 action = ""
 visibility_mode = 0
-
-

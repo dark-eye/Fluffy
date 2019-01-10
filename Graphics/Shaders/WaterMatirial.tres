@@ -1,13 +1,24 @@
-[gd_resource type="CanvasItemMaterial" load_steps=3 format=1]
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
-[ext_resource path="res://Graphics/Shaders/WaterWobbleShader.tres" type="Shader" id=1]
-[ext_resource path="res://sprites/waterdisplacement.png" type="Texture" id=2]
+[sub_resource type="Shader" id=1]
+
+code = "shader_type canvas_item;
+
+uniform float amplitode = 0.1;
+uniform float randomness = 0.5;
+
+uniform vec4 bounderyColor = vec4(1,1,1,0.5);
+uniform vec4 tintColor = vec4(0.2,0.2,1,0.2);
+
+
+"
 
 [resource]
 
-shader/shader = ExtResource( 1 )
-shader/shading_mode = 0
-shader_param/Wabble = 0.01
-shader_param/Speed = 2.75
-shader_param/Displacment = ExtResource( 2 )
+render_priority = 0
+shader = SubResource( 1 )
+shader_param/amplitode = null
+shader_param/randomness = null
+shader_param/bounderyColor = null
+shader_param/tintColor = null
 

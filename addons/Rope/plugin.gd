@@ -91,7 +91,7 @@ func forward_draw_over_canvas(canvas_xform, canvas):
     buttons = []
 
     for i in range(pointsCount):
-        var p  = transform.xform(edited_object.get_point_pos(i))
+        var p  = transform.xform(edited_object.get_point_position(i))
         var p_in  = p + transform.basis_xform(edited_object.get_point_in(i))
         var p_out  = p + transform.basis_xform(edited_object.get_point_out(i))
         if(i > 0):
@@ -114,7 +114,7 @@ func forward_draw_over_canvas(canvas_xform, canvas):
         buttons.append({rect = pin_button_rect, type = BUTTON_PIN, index = i})
 
         if(i < pointsCount - 1):
-            var p_mid = transform.xform(0.5 * (edited_object.get_point_pos(i) + edited_object.get_point_pos(i+1)) + 0.375 * (edited_object.get_point_out(i) + edited_object.get_point_in(i+1)))
+            var p_mid = transform.xform(0.5 * (edited_object.get_point_position(i) + edited_object.get_point_position(i+1)) + 0.375 * (edited_object.get_point_out(i) + edited_object.get_point_in(i+1)))
             var button_rect = Rect2(int_coord(p_mid), add_tex.get_size())
             canvas.draw_texture_rect(add_tex, button_rect, false)
             buttons.append({ rect = button_rect, type = BUTTON_ADD, index = i })
@@ -124,16 +124,16 @@ func forward_draw_over_canvas(canvas_xform, canvas):
             canvas.draw_texture_rect(remove_tex, button_rect, false)
             buttons.append({ rect = button_rect, type = BUTTON_REMOVE, index = i })
 
-func forward_canvas_input_event(canvas_xform, event):
-    if event.type == InputEvent.MOUSE_BUTTON:
+func forward_canvas_gui_input(canvas_xform, event):
+    if event is InputEventMouseButton:
         if event.button_index == BUTTON_LEFT:
             if event.is_pressed():
                 for b in buttons:
-                    if b.rect.has_point(event.pos):
+                    if b.rect.has_point(event.position):
                         if b.type == BUTTON_ADD:
                             # Clicked on an "add" button
-                            var p_0 = edited_object.get_point_pos(b.index)
-                            var p_3 = edited_object.get_point_pos(b.index+1)
+                            var p_0 = edited_object.get_point_position(b.index)
+                            var p_3 = edited_object.get_point_position(b.index+1)
                             var p_1 = p_0 + edited_object.get_point_out(b.index)
                             var p_2 = p_3 + edited_object.get_point_in(b.index+1)
                             var p_1_2 = 0.5*(p_1+p_2)
@@ -156,7 +156,7 @@ func forward_canvas_input_event(canvas_xform, event):
                             undoredo.add_do_method(edited_object, "remove_pin_point", b.index)
                             undoredo.add_undo_method(edited_object, "add_pin_point", b.index)
                             undoredo.add_do_method(edited_object, "remove_point", b.index)
-                            undoredo.add_undo_method(edited_object, "add_point", edited_object.get_point_pos(b.index), edited_object.get_point_in(b.index), edited_object.get_point_out(b.index), b.index)
+                            undoredo.add_undo_method(edited_object, "add_point", edited_object.get_point_position(b.index), edited_object.get_point_in(b.index), edited_object.get_point_out(b.index), b.index)
                             undoredo.commit_action()
                         elif b.type == BUTTON_PIN:
                             if(edited_object.is_point_pined(b.index)):
@@ -175,13 +175,13 @@ func forward_canvas_input_event(canvas_xform, event):
                         edited_object.update()
                         return true
                 for h in handles:
-                    if (event.pos - h.pos).length() < 6:
+                    if (event.position - h.position).length() < 6:
                         # Activate handle
                         handle_mode = h.mode
                         handle_index = h.index
                         # Keep initial value for undo/redo
                         if handle_mode == HANDLE_POS:
-                            handle_pos = edited_object.get_point_pos(handle_index)
+                            handle_pos = edited_object.get_point_position(handle_index)
                         elif handle_mode == HANDLE_IN:
                             handle_pos = edited_object.get_point_in(handle_index)
                         elif handle_mode == HANDLE_OUT:
@@ -193,7 +193,7 @@ func forward_canvas_input_event(canvas_xform, event):
                 var undoredo = get_undo_redo()
                 undoredo.create_action("Move Rope control point")
                 if handle_mode == HANDLE_POS:
-                    undoredo.add_do_method(edited_object, "set_point_pos", handle_index, edited_object.get_point_pos(handle_index))
+                    undoredo.add_do_method(edited_object, "set_point_pos", handle_index, edited_object.get_point_position(handle_index))
                     undoredo.add_undo_method(edited_object, "set_point_pos", handle_index, handle_pos)
                 elif handle_mode == HANDLE_IN:
                         undoredo.add_do_method(edited_object, "set_point_in", handle_index, edited_object.get_point_in(handle_index))
@@ -204,16 +204,16 @@ func forward_canvas_input_event(canvas_xform, event):
                 undoredo.commit_action()
                 handle_mode = HANDLE_NONE
                 return true
-    elif event.type == InputEvent.MOUSE_MOTION && handle_mode != HANDLE_NONE:
+    elif event is InputEventMouseMotion && handle_mode != HANDLE_NONE:
         var transform_inv = edited_object.get_global_transform().affine_inverse()
         var viewport_transform_inv = edited_object.get_viewport().get_global_canvas_transform().affine_inverse()
-        var p = transform_inv.xform(viewport_transform_inv.xform(event.pos))
+        var p = transform_inv.xform(viewport_transform_inv.xform(event.position))
         if handle_mode == HANDLE_POS:
-            edited_object.set_point_pos(handle_index, p)
+            edited_object.set_point_position(handle_index, p)
         elif handle_mode == HANDLE_IN:
-            edited_object.set_point_in(handle_index, p-edited_object.get_point_pos(handle_index))
+            edited_object.set_point_in(handle_index, p-edited_object.get_point_position(handle_index))
         elif handle_mode == HANDLE_OUT:
-            edited_object.set_point_out(handle_index, p-edited_object.get_point_pos(handle_index))
+            edited_object.set_point_out(handle_index, p-edited_object.get_point_position(handle_index))
         update()
         edited_object.update()
         return true
@@ -221,7 +221,8 @@ func forward_canvas_input_event(canvas_xform, event):
 
 
 # Godot 2.1
-func forward_input_event(event):
+func forward_gui_input(event):
     if editor == null:
         return false
-    return forward_canvas_input_event(editor.get_viewport().get_global_canvas_transform(), event)
+    return forward_canvas_gui_input(editor.get_viewport().get_global_canvas_transform(), event)
+

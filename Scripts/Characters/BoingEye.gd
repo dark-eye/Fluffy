@@ -12,8 +12,9 @@ func _ready():
 	
 	
 func _input(event):
-	if(event.type == InputEvent.MOUSE_MOTION):
+	if(event is InputEventMouseMotion):
 		var localEvent = make_input_local( event )
-		var pos = self.get_pos()
-		self.set_rot( self.get_rot() - (self.get_rot()/rotSampling) + (pos.angle_to_point(localEvent.pos) / rotSampling) ) 
+		var pos = self.get_position()
+		self.set_rotation( self.get_rotation() - (self.get_rotation()/rotSampling) + (pos.angle_to_point(localEvent.position) / rotSampling) ) 
 	pass
+

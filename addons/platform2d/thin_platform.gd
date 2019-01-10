@@ -1,7 +1,7 @@
 tool
 extends "res://addons/platform2d/platform_base.gd"
 
-export(Curve2D)               var Curve = null setget set_curve
+export(Curve2D)               var curve = null setget set_curve
 export(float)                 var BakeInterval = 50 setget set_bake_interval
 export(Texture)               var LeftTexture = null setget set_left_texture
 export(Texture)               var MidTexture = null setget set_mid_texture
@@ -12,23 +12,23 @@ export(float)                 var Thickness = 100 setget set_thickness
 export(float, 0.0, 1.0, 0.01) var Position = 0.5 setget set_position
 
 func _ready():
-	if Curve == null:
-		Curve = load("res://addons/platform2d/thin_platform_default.tres")
-		Curve = Curve.duplicate()
-	Curve.connect("changed", self, "update")
+	if curve == null:
+		curve = load("res://addons/platform2d/thin_platform_default.tres")
+		curve = curve.duplicate()
+	curve.connect("changed", self, "update")
 
 func get_curve():
-	return Curve
+	return curve
 
 func set_curve(c):
-	Curve = c
-	Curve.set_bake_interval(BakeInterval)
+	curve = c
+	curve.set_bake_interval(BakeInterval)
 	update()
 	update_collision_polygon()
 
 func set_bake_interval(i):
 	BakeInterval = i
-	Curve.set_bake_interval(BakeInterval)
+	curve.set_bake_interval(BakeInterval)
 	update()
 	update_collision_polygon()
 
@@ -63,7 +63,7 @@ func set_position(p):
 	update_collision_polygon()
 
 func update_collision_polygon():
-	if is_inside_tree() && get_tree().is_editor_hint():
+	if is_inside_tree() && Engine.is_editor_hint():
 		var curve = get_curve()
 		var point_array = baked_points(curve)
 		var point_count = point_array.size()
@@ -127,3 +127,4 @@ func set_material(m):
 	Thickness = m.Thickness
 	Position = m.Position
 	update()
+

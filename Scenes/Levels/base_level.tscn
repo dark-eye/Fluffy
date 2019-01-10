@@ -1,21 +1,26 @@
-[gd_scene format=1]
+[gd_scene load_steps=5 format=2]
+
 
 [node name="level_name" type="Node2D"]
 
+
 [node name="SpawnPoint" type="Node2D" parent="."]
+
 
 [node name="Bounds" type="Container" parent="."]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 0.0
-margin/bottom = 0.0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+mouse_filter = 0
 
 [node name="Environment" type="Node2D" parent="."]
+
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Environment"]
 
@@ -23,11 +28,9 @@ layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
-scroll/offset = Vector2( 0, 0 )
-scroll/base_offset = Vector2( 0, 0 )
-scroll/base_scale = Vector2( 1, 1 )
-scroll/limit_begin = Vector2( 0, 0 )
-scroll/limit_end = Vector2( 0, 0 )
-scroll/ignore_camera_zoom = true
-
-
+scroll_offset = Vector2( 0, 0 )
+scroll_base_offset = Vector2( 0, 0 )
+scroll_base_scale = Vector2( 1, 1 )
+scroll_limit_begin = Vector2( 0, 0 )
+scroll_limit_end = Vector2( 0, 0 )
+scroll_ignore_camera_zoom = true

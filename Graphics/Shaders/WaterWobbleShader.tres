@@ -1,9 +1,42 @@
-[gd_resource type="CanvasItemShaderGraph" load_steps=2 format=1]
+[gd_resource type="CanvasItemShaderGraph" load_steps=1 format=2]
 
 [ext_resource path="res://Graphics/Environment/Water/water.jpg" type="Texture" id=1]
 
 [resource]
 
-_code = { "default_tex":[ "Displacment", ExtResource( 1 ) ], "fragment":"vec3 nd1sl3=vec3(SCREEN_UV,0);\nfloat nd7sl0=TIME;\nfloat nd8sl0=sin(nd7sl0);\nuniform float Wabble=0;\nfloat nd3sl0=Wabble;\nuniform float Speed=0;\nfloat nd4sl0=Speed;\nfloat nd15sl0def=0;\nfloat nd15sl0=mix(nd15sl0def,nd8sl0,nd4sl0);\nfloat nd11sl0=cos(nd7sl0);\nfloat nd5sl0def=0;\nfloat nd5sl0=mix(nd5sl0def,nd11sl0,nd4sl0);\nfloat nd10sl2def=0;\nvec3 nd10sl0=vec3(nd15sl0,nd5sl0,nd10sl2def);\nvec3 nd9sl0=mix(nd1sl3,nd10sl0,nd3sl0);\nuniform texture Displacment;vec4 rt_read_tex2=tex(Displacment,nd9sl0.xy);\nvec3 nd2sl0=rt_read_tex2.rgb;\nfloat nd2sl1=rt_read_tex2.a;\nfloat nd16sl1def=2;\nvec3 nd16sl0=nd2sl0/nd16sl1def;\nvec3 nd14sl0=mix(nd2sl0,nd16sl0,nd3sl0);\nvec3 nd6sl0=mix(nd1sl3,nd14sl0,nd3sl0);\nvec3 nd12sl0=texscreen(nd6sl0.xy);\nCOLOR.rgb=nd12sl0;\n", "fragment_ofs":0, "light":"", "light_ofs":0, "vertex":"", "vertex_ofs":0 }
-_data = { "shaders":[ [ 0, 33, Vector2( 1109, 88 ), null, null, [  ], 1, 0, Vector2( 465.992, 90.28 ), null, null, [  ] ], [ 0, 33, Vector2( 710.4, -228 ), null, null, [ 0, 12, 0 ], 1, 0, Vector2( -752.368, -448.68 ), null, null, [  ], 2, 30, Vector2( -64, -137.88 ), "Displacment", ExtResource( 1 ), [ 0, 9, 0, 2147483647, 0, null ], 3, 26, Vector2( -701.8, -269.08 ), "Wabble", 0.0, [  ], 4, 26, Vector2( -683.4, 73.32 ), "Speed", 0.0, [  ], 5, 22, Vector2( -478.317, 4.15 ), null, null, [ 1, 11, 0, 2, 4, 0, 2147483647, 0, null, 2147483647, 1, null, 2147483647, 2, null ], 6, 23, Vector2( 412.8, -201.6 ), null, null, [ 0, 1, 3, 1, 14, 0, 2, 3, 0, 2147483647, 0, null, 2147483647, 1, null, 2147483647, 2, null ], 7, 5, Vector2( -761.717, -101.45 ), null, null, [  ], 8, 14, Vector2( -619.117, -132.85 ), 0, null, [ 0, 7, 0, 2147483647, 0, null ], 9, 23, Vector2( -221.917, -78.45 ), null, null, [ 0, 1, 3, 1, 10, 0, 2, 3, 0, 2147483647, 0, null, 2147483647, 1, null, 2147483647, 2, null ], 10, 19, Vector2( -353.117, -68.45 ), null, null, [ 0, 15, 0, 1, 5, 0, 2147483647, 0, null, 2147483647, 1, null, 2147483647, 2, null ], 11, 14, Vector2( -621.317, -54.05 ), 1, null, [ 0, 7, 0, 2147483647, 0, null ], 12, 6, Vector2( 555.883, -208.05 ), null, [ 0, 0 ], [ 0, 6, 0, 2147483647, 0, null ], 14, 23, Vector2( 264, -103.2 ), null, null, [ 0, 2, 0, 1, 16, 0, 2, 3, 0, 2147483647, 0, null, 2147483647, 1, null, 2147483647, 2, 0.71 ], 15, 22, Vector2( -489.6, -98.4 ), null, null, [ 1, 8, 0, 2, 4, 0, 2147483647, 0, null, 2147483647, 1, null, 2147483647, 2, null ], 16, 9, Vector2( 82.6833, 26.75 ), 1, null, [ 0, 2, 0, 2147483647, 0, null, 2147483647, 1, 2.0 ] ], [ 0, 33, Vector2( 350, 40 ), null, null, [  ], 1, 0, Vector2( 50, 40 ), null, null, [  ] ] ] }
-
+_code = {
+"default_tex": [ "Displacment", ExtResource( 1 ) ],
+"fragment": "vec3 nd1sl3=vec3(SCREEN_UV,0);
+float nd7sl0=TIME;
+float nd8sl0=sin(nd7sl0);
+uniform float Wabble=0;
+float nd3sl0=Wabble;
+uniform float Speed=0;
+float nd4sl0=Speed;
+float nd15sl0def=0;
+float nd15sl0=mix(nd15sl0def,nd8sl0,nd4sl0);
+float nd11sl0=cos(nd7sl0);
+float nd5sl0def=0;
+float nd5sl0=mix(nd5sl0def,nd11sl0,nd4sl0);
+float nd10sl2def=0;
+vec3 nd10sl0=vec3(nd15sl0,nd5sl0,nd10sl2def);
+vec3 nd9sl0=mix(nd1sl3,nd10sl0,nd3sl0);
+uniform texture Displacment;vec4 rt_read_tex2=tex(Displacment,nd9sl0.xy);
+vec3 nd2sl0=rt_read_tex2.rgb;
+float nd2sl1=rt_read_tex2.a;
+float nd16sl1def=2;
+vec3 nd16sl0=nd2sl0/nd16sl1def;
+vec3 nd14sl0=mix(nd2sl0,nd16sl0,nd3sl0);
+vec3 nd6sl0=mix(nd1sl3,nd14sl0,nd3sl0);
+vec3 nd12sl0=texscreen(nd6sl0.xy);
+COLOR.rgb=nd12sl0;
+",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+_data = {
+"shaders": [ [ 0, 33, Vector2( 1109, 88 ), null, null, [  ], 1, 0, Vector2( 465.992, 90.28 ), null, null, [  ] ], [ 0, 33, Vector2( 710.4, -228 ), null, null, [ 0, 12, 0 ], 1, 0, Vector2( -752.368, -448.68 ), null, null, [  ], 2, 30, Vector2( -64, -137.88 ), "Displacment", ExtResource( 1 ), [ 0, 9, 0, 2147483647, 0, null ], 3, 26, Vector2( -701.8, -269.08 ), "Wabble", 0.0, [  ], 4, 26, Vector2( -683.4, 73.32 ), "Speed", 0.0, [  ], 5, 22, Vector2( -478.317, 4.15 ), null, null, [ 1, 11, 0, 2, 4, 0, 2147483647, 0, null, 2147483647, 1, null, 2147483647, 2, null ], 6, 23, Vector2( 412.8, -201.6 ), null, null, [ 0, 1, 3, 1, 14, 0, 2, 3, 0, 2147483647, 0, null, 2147483647, 1, null, 2147483647, 2, null ], 7, 5, Vector2( -761.717, -101.45 ), null, null, [  ], 8, 14, Vector2( -619.117, -132.85 ), 0, null, [ 0, 7, 0, 2147483647, 0, null ], 9, 23, Vector2( -221.917, -78.45 ), null, null, [ 0, 1, 3, 1, 10, 0, 2, 3, 0, 2147483647, 0, null, 2147483647, 1, null, 2147483647, 2, null ], 10, 19, Vector2( -353.117, -68.45 ), null, null, [ 0, 15, 0, 1, 5, 0, 2147483647, 0, null, 2147483647, 1, null, 2147483647, 2, null ], 11, 14, Vector2( -621.317, -54.05 ), 1, null, [ 0, 7, 0, 2147483647, 0, null ], 12, 6, Vector2( 555.883, -208.05 ), null, [ 0, 0 ], [ 0, 6, 0, 2147483647, 0, null ], 14, 23, Vector2( 264, -103.2 ), null, null, [ 0, 2, 0, 1, 16, 0, 2, 3, 0, 2147483647, 0, null, 2147483647, 1, null, 2147483647, 2, 0.71 ], 15, 22, Vector2( -489.6, -98.4 ), null, null, [ 1, 8, 0, 2, 4, 0, 2147483647, 0, null, 2147483647, 1, null, 2147483647, 2, null ], 16, 9, Vector2( 82.6833, 26.75 ), 1, null, [ 0, 2, 0, 2147483647, 0, null, 2147483647, 1, 2.0 ] ], [ 0, 33, Vector2( 350, 40 ), null, null, [  ], 1, 0, Vector2( 50, 40 ), null, null, [  ] ] ]
+}

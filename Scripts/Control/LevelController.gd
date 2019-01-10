@@ -3,7 +3,7 @@ extends Node2D
 
 signal level_loaded
 
-export(StringArray) var levels = [] 
+export(PoolStringArray) var levels = [] 
 export(int) var currentLevel = 0 setget _set_currentLevel, _get_currentLevel;
 var currentScene = null
 
@@ -41,7 +41,7 @@ func getSpawnPoint():
 	if(!spawnPoint):
 		return false;
 	
-	return spawnPoint.get_pos();
+	return spawnPoint.get_position();
 
 func getBoundsNode():
 	if(!currentScene):

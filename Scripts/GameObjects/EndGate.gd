@@ -29,3 +29,4 @@ func _update_visual():
 			self.spriteAnim.set_frame(1);
 		else:
 			self.spriteAnim.set_frame(0);
+

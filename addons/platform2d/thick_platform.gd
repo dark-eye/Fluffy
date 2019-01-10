@@ -109,11 +109,11 @@ func _draw():
 	var point_count = point_array.size()
 	if point_count == 0:
 		return
-	point_array.remove(point_count - 1)
+	point_array.remove_and_collide(point_count - 1)
 	# Fill
 	if FillTexture != null:
 		var scale = FillSize/FillTexture.get_width()
-		var uvs = Vector2Array()
+		var uvs = PoolVector2Array()
 		for p in point_array:
 			uvs.append(scale*p)
 		draw_colored_polygon(point_array, Color(1, 1, 1, 1), uvs, FillTexture)
@@ -125,7 +125,7 @@ func _draw():
 			var curve_is_border2
 			var top_curves = []
 			for i in range(curve.get_point_count()):
-				current_curve.add_point(curve.get_point_pos(i), curve.get_point_in(i), curve.get_point_out(i))
+				current_curve.add_point(curve.get_point_position(i), curve.get_point_in(i), curve.get_point_out(i))
 				var out_normal_angle = curve.get_point_out(i).rotated(PI/2).angle()
 				var is_border2 = abs(out_normal_angle) < Angle
 				if i == 0:
@@ -145,7 +145,7 @@ func _draw():
 					else:
 						top_curves.append(current_curve)
 					current_curve = Curve2D.new()
-					current_curve.add_point(curve.get_point_pos(i), curve.get_point_in(i), curve.get_point_out(i))
+					current_curve.add_point(curve.get_point_position(i), curve.get_point_in(i), curve.get_point_out(i))
 					curve_is_border2 = is_border2
 			for c in top_curves:
 				c.set_bake_interval(BakeInterval)
@@ -177,19 +177,19 @@ func _draw():
 				ratio2 = BakeInterval*SideTexture.get_height()/SideThickness/SideTexture.get_width()
 			point_array.append(point_array[0])
 			point_array.append(point_array[1])
-			var points = Vector2Array()
+			var points = PoolVector2Array()
 			points.push_back(Vector2(0, 0))
 			points.push_back(Vector2(0, 0))
 			points.push_back(Vector2(0, 0))
-			var colors = ColorArray()
+			var colors = PoolColorArray()
 			colors.push_back(Color(1.0, 1.0, 1.0))
 			colors.push_back(Color(1.0, 1.0, 1.0))
 			colors.push_back(Color(1.0, 1.0, 1.0))
-			var uvs = Vector2Array()
+			var uvs = PoolVector2Array()
 			uvs.push_back(Vector2(0, 0))
 			uvs.push_back(Vector2(0, 0))
 			uvs.push_back(Vector2(0, 0))
-			var normal = Vector2Array()
+			var normal = PoolVector2Array()
 			for i in range(point_count):
 				var i0 = i-1
 				if i0 == -1:
@@ -271,3 +271,4 @@ func set_material(m):
 		SideThickness = m.SideThickness
 		SidePosition = m.SidePosition
 	update()
+

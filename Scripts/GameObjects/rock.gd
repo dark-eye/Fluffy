@@ -23,3 +23,4 @@ func _setTexture(value):
 
 func _getTexture():
 	return texture;
+

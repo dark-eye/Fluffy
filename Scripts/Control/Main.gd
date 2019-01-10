@@ -51,10 +51,10 @@ func level_loaded(idx,levelScene):
 	var bounds = get_level_controller().getBoundsNode();
 	if(bounds):
 		var boundsRect = bounds.get_item_rect();
-		camera.set_limit(MARGIN_LEFT, boundsRect.pos.x);
-		camera.set_limit(MARGIN_TOP, boundsRect.pos.y);
-		camera.set_limit(MARGIN_RIGHT, boundsRect.size.width+boundsRect.pos.x);
-		camera.set_limit(MARGIN_BOTTOM, boundsRect.size.height+boundsRect.pos.y);
+		camera.set_limit(MARGIN_LEFT, boundsRect.position.x);
+		camera.set_limit(MARGIN_TOP, boundsRect.position.y);
+		camera.set_limit(MARGIN_RIGHT, boundsRect.size.width+boundsRect.position.x);
+		camera.set_limit(MARGIN_BOTTOM, boundsRect.size.height+boundsRect.position.y);
 		
 		self.set_borders(boundsRect);
 
@@ -71,10 +71,10 @@ func add_segment_to_body(body,v1,v2):
 func set_borders(bounds):
 	self.remove_child(physicsBorders);
 	physicsBorders = StaticBody2D.new();
-	self.add_segment_to_body(physicsBorders, Vector2(bounds.pos.x,bounds.pos.y), Vector2(bounds.size.width+bounds.pos.x,bounds.pos.y));
-	self.add_segment_to_body(physicsBorders, Vector2(bounds.pos.x,bounds.pos.y), Vector2(bounds.pos.x,bounds.size.height+bounds.pos.y));
-	self.add_segment_to_body(physicsBorders, Vector2(bounds.pos.x,bounds.size.height+bounds.pos.y), Vector2(bounds.size.width+bounds.pos.x,bounds.size.height+bounds.pos.y));
-	self.add_segment_to_body(physicsBorders, Vector2(bounds.size.width+bounds.pos.x,bounds.pos.y), Vector2(bounds.size.width+bounds.pos.x,bounds.size.height+bounds.pos.y));
+	self.add_segment_to_body(physicsBorders, Vector2(bounds.position.x,bounds.position.y), Vector2(bounds.size.width+bounds.position.x,bounds.position.y));
+	self.add_segment_to_body(physicsBorders, Vector2(bounds.position.x,bounds.position.y), Vector2(bounds.position.x,bounds.size.height+bounds.position.y));
+	self.add_segment_to_body(physicsBorders, Vector2(bounds.position.x,bounds.size.height+bounds.position.y), Vector2(bounds.size.width+bounds.position.x,bounds.size.height+bounds.position.y));
+	self.add_segment_to_body(physicsBorders, Vector2(bounds.size.width+bounds.position.x,bounds.position.y), Vector2(bounds.size.width+bounds.position.x,bounds.size.height+bounds.position.y));
 	self.add_child(physicsBorders);
 
 #--------------------------------------
@@ -87,3 +87,4 @@ func get_player_controller():
 	
 func getCamera():
 	return self.find_node('Camera2D');
+

@@ -1,0 +1,42 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=3
+
+[application]
+
+config/name="boing"
+run/main_scene="res://boing.scn"
+config/icon="res://icon.png"
+
+[display]
+
+driver/name="GLES2"
+
+[display.Android]
+
+driver="GLES2"
+
+[editor_plugins]
+
+enabled=[ "Rope", "khairul169.2dwater", "platform2d" ]
+
+[importer_defaults]
+
+texture={
+"flags/filter": true,
+"flags/mipmaps": true
+}
+
+[render]
+
+room_cull_enabled=false
+
+[rendering]
+
+quality/intended_usage/framebuffer_allocation=0

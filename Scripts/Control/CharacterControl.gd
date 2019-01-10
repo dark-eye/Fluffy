@@ -8,7 +8,7 @@ func _ready():
 	self.set_process_input(true);
 
 func _input(event):
-	if(event.type == InputEvent.KEY ):
+	if(event is InputEventKey ):
 		var scancode = event.scancode
 		if(scancode == 16777233):
 			self.rollRight(event.is_pressed());
