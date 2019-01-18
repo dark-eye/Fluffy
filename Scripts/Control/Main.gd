@@ -9,7 +9,7 @@ var physicsBorders = StaticBody2D.new();
 #================================================
 func _ready():
 	endGameTimer.connect("timeout", self, "next_level");
-	endGameTimer.set_active( false );
+	endGameTimer.stop();
 	self.add_child( endGameTimer );
 	self.reset();
 	pass
@@ -26,7 +26,7 @@ func next_level():
 	self.reset();
 
 func reset():
-	endGameTimer.set_active( false );
+	endGameTimer.stop();
 	get_level_controller().reset();
 	var spawnPoint = get_level_controller().getSpawnPoint();
 	get_player_controller().setSpawnPoint(spawnPoint);
@@ -40,7 +40,7 @@ func player_at_end_gate():
 	if(!endGameTimer.is_active() ):
 		endGameTimer.set_wait_time(2)
 		endGameTimer.start()
-		endGameTimer.set_active( true );
+		#endGameTimer.set_active( true );
 		get_player_controller().getPlayer().find_node('AnimationPlayer').play('going_away');
 		getCamera().find_node('CameraAnimation').play('end_level');
 		self.find_node("Clock",true).pause();

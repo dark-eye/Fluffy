@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Control/Main.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Control/LevelController.gd" type="Script" id=2]
@@ -13,88 +13,131 @@
 
 [sub_resource type="Environment" id=1]
 
-ambient_light/enabled = false
-ambient_light/color = Color( 0, 0, 0, 1 )
-ambient_light/energy = 1.0
-fxaa/enabled = false
-background/mode = 1
-background/color = Color( 0, 0, 0, 1 )
-background/energy = 1.0
-background/scale = 1.0
-background/glow = 0.0
-background/canvas_max_layer = null
-glow/enabled = true
-glow/blur_passes = 1
-glow/blur_scale = 1
-glow/blur_strength = 1
-glow/blur_blend_mode = null
-glow/bloom = 0.0
-glow/bloom_treshold = 0.5
-dof_blur/enabled = false
-dof_blur/blur_passes = 1
-dof_blur/begin = 100.0
-dof_blur/range = 10.0
-hdr/enabled = true
-hdr/tonemapper = 0
-hdr/exposure = 0.4
-hdr/white = 1.0
-hdr/glow_treshold = 0.95
-hdr/glow_scale = 0.2
-hdr/min_luminance = 0.4
-hdr/max_luminance = 8.0
-hdr/exposure_adj_speed = 0.5
-fog/enabled = false
-fog/begin = 100.0
-fog/begin_color = Color( 0, 0, 0, 1 )
-fog/end_color = Color( 0, 0, 0, 1 )
-fog/attenuation = 1.0
-fog/bg = true
-bcs/enabled = false
-bcs/brightness = 1.0
-bcs/contrast = 1.0
-bcs/saturation = 1.0
-srgb/enabled = false
+background_mode = 0
+background_sky_custom_fov = 0.0
+background_color = Color( 0, 0, 0, 1 )
+background_energy = 1.0
+background_canvas_max_layer = 0
+ambient_light_color = Color( 0, 0, 0, 1 )
+ambient_light_energy = 1.0
+ambient_light_sky_contribution = 1.0
+fog_enabled = false
+fog_color = Color( 0.5, 0.6, 0.7, 1 )
+fog_sun_color = Color( 1, 0.9, 0.7, 1 )
+fog_sun_amount = 0.0
+fog_depth_enabled = true
+fog_depth_begin = 10.0
+fog_depth_curve = 1.0
+fog_transmit_enabled = false
+fog_transmit_curve = 1.0
+fog_height_enabled = false
+fog_height_min = 0.0
+fog_height_max = 100.0
+fog_height_curve = 1.0
+tonemap_mode = 0
+tonemap_exposure = 1.0
+tonemap_white = 1.0
+auto_exposure_enabled = false
+auto_exposure_scale = 0.4
+auto_exposure_min_luma = 0.05
+auto_exposure_max_luma = 8.0
+auto_exposure_speed = 0.5
+ss_reflections_enabled = false
+ss_reflections_max_steps = 64
+ss_reflections_fade_in = 0.15
+ss_reflections_fade_out = 2.0
+ss_reflections_depth_tolerance = 0.2
+ss_reflections_roughness = true
+ssao_enabled = false
+ssao_radius = 1.0
+ssao_intensity = 1.0
+ssao_radius2 = 0.0
+ssao_intensity2 = 1.0
+ssao_bias = 0.01
+ssao_light_affect = 0.0
+ssao_color = Color( 0, 0, 0, 1 )
+ssao_quality = 0
+ssao_blur = 3
+ssao_edge_sharpness = 4.0
+dof_blur_far_enabled = false
+dof_blur_far_distance = 10.0
+dof_blur_far_transition = 5.0
+dof_blur_far_amount = 0.1
+dof_blur_far_quality = 1
+dof_blur_near_enabled = false
+dof_blur_near_distance = 2.0
+dof_blur_near_transition = 1.0
+dof_blur_near_amount = 0.1
+dof_blur_near_quality = 1
+glow_enabled = false
+glow_levels/1 = false
+glow_levels/2 = false
+glow_levels/3 = true
+glow_levels/4 = false
+glow_levels/5 = true
+glow_levels/6 = false
+glow_levels/7 = false
+glow_intensity = 0.8
+glow_strength = 1.0
+glow_bloom = 0.0
+glow_blend_mode = 2
+glow_hdr_threshold = 1.0
+glow_hdr_scale = 2.0
+glow_bicubic_upscale = false
+adjustment_enabled = false
+adjustment_brightness = 1.0
+adjustment_contrast = 1.0
+adjustment_saturation = 1.0
 
-[node name="Main Control" type="Control" groups=[
+[node name="Main Control" type="Control" index="0" groups=[
 "Control",
 ]]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags_horizontal = 1
-size_flags_vertical = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = -29.0
 margin_top = -2.0
 margin_right = 4067.0
 margin_bottom = 4094.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 script = ExtResource( 1 )
 __meta__ = {
 "__editor_plugin_screen__": "Script"
 }
 levelControllerPath = NodePath("Enviroment/LevelController")
 playerControllerPath = NodePath("Charcter Control")
-mouse_filter = 0
 
-[node name="Enviroment" type="Control" parent="."]
+[node name="Enviroment" type="Control" parent="." index="0"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags_horizontal = 1
-size_flags_vertical = 1
-margin_left = 0.0
-margin_top = 0.0
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 40.0
 margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
-[node name="LevelController" type="Node2D" parent="Enviroment"]
+[node name="LevelController" type="Node2D" parent="Enviroment" index="0"]
 
 position = Vector2( 6.54413, -4.54419 )
 script = ExtResource( 2 )
 levels = PoolStringArray( "res://Scenes/Levels/level1.scn", "res://Scenes/Levels/level2.scn", "res://Scenes/Levels/level3.scn", "res://Scenes/Levels/test_level.scn", "res://Scenes/Levels/level4.tscn", "res://Scenes/Levels/level5.tscn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level7.tscn" )
 currentLevel = 3
 
-[node name="BundingBox" type="Area2D" parent="Enviroment"]
+[node name="BundingBox" type="Area2D" parent="Enviroment" index="1"]
 
 position = Vector2( 742.583, 265.242 )
 scale = Vector2( 21.6627, 10.0612 )
@@ -103,145 +146,184 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 
-[node name="Charcter Control" type="Control" parent="."]
+[node name="Charcter Control" type="Control" parent="." index="1"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags_horizontal = 1
-size_flags_vertical = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 75.0
 margin_top = 75.0
 margin_right = 115.0
 margin_bottom = 115.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 script = ExtResource( 3 )
 chatacterPath = NodePath("Boing")
-mouse_filter = 0
 
-[node name="Boing" parent="Charcter Control" instance=ExtResource( 4 )]
+[node name="Boing" parent="Charcter Control" index="0" instance=ExtResource( 4 )]
 
+position = Vector2( 0, -2.05054 )
 z_index = 1
-soundPlayer = "./SamplePlayer2D"
+soundPlayer = "./AudioStreamPlayer2D"
 
-[node name="Camera2D" parent="Charcter Control/Boing" instance=ExtResource( 5 )]
+[node name="Camera2D" parent="Charcter Control/Boing" index="5" instance=ExtResource( 5 )]
 
 position = Vector2( 0.155365, 3.47427 )
+limit_smoothed = false
+offset_v = 0.0
+offset_h = 0.0
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Charcter Control/Boing/Camera2D"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Charcter Control/Boing/Camera2D" index="2"]
 
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 environment = SubResource( 1 )
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." index="2"]
 
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="Container" type="Container" parent="UI"]
+[node name="Container" type="Container" parent="UI" index="0"]
 
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags_horizontal = 1
-size_flags_vertical = 1
-margin_left = 0.0
-margin_top = 0.0
 margin_right = -984.0
 margin_bottom = -560.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
-[node name="Clock" parent="UI/Container" instance=ExtResource( 6 )]
+[node name="Clock" parent="UI/Container" index="0" instance=ExtResource( 6 )]
 
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_default_cursor_shape = 0
 
-[node name="InputControls" type="Container" parent="UI/Container"]
+[node name="InputControls" type="Container" parent="UI/Container" index="1"]
 
-anchor_top = 1.0
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags_horizontal = 3
-size_flags_vertical = 1
 margin_left = 9.0
-margin_top = 473.0
+margin_top = 423.0
 margin_right = 984.0
 margin_bottom = 537.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
 script = ExtResource( 7 )
+_sections_unfolded = [ "Anchor", "Theme" ]
 jumpPath = NodePath("LeftButtonGroup/Jump")
 leftPath = NodePath("RightButtonGroup/RollLeft")
 rightPath = NodePath("RightButtonGroup/RollRight")
 characterControllerPath = NodePath("../../../Charcter Control")
-mouse_filter = 0
 
-[node name="RightButtonGroup" type="ButtonGroup" parent="UI/Container/InputControls"]
+[node name="RightButtonGroup" type="MarginContainer" parent="UI/Container/InputControls" index="0"]
 
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags_horizontal = 1
-size_flags_vertical = 1
-margin_left = -198.0
-margin_top = -64.0
-margin_right = -158.0
-margin_bottom = -24.0
-alignment = 0
+margin_left = -1015.0
+margin_top = -154.0
+margin_right = -17.0
+margin_bottom = -10.0
+rect_min_size = Vector2( 150, 50 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 15.0
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Pause", "Rect", "custom_constants" ]
 
-[node name="RollLeft" type="TouchScreenButton" parent="UI/Container/InputControls/RightButtonGroup"]
+[node name="RollLeft" type="TouchScreenButton" parent="UI/Container/InputControls/RightButtonGroup" index="0"]
 
-scale = Vector2( 0.12, 0.12 )
+position = Vector2( 729.994, 16.4043 )
+scale = Vector2( 0.25, 0.25 )
 normal = ExtResource( 8 )
 pressed = null
 bitmask = null
 shape = null
 shape_centered = true
 shape_visible = true
-passby_press = false
+passby_press = true
 action = ""
 visibility_mode = 0
+_sections_unfolded = [ "Transform" ]
 
-[node name="RollRight" type="TouchScreenButton" parent="UI/Container/InputControls/RightButtonGroup"]
+[node name="RollRight" type="TouchScreenButton" parent="UI/Container/InputControls/RightButtonGroup" index="1"]
 
-position = Vector2( 128, 0 )
-scale = Vector2( 0.12, 0.12 )
+position = Vector2( 864.146, 16.4044 )
+scale = Vector2( 0.25, 0.25 )
 normal = ExtResource( 9 )
 pressed = null
 bitmask = null
 shape = null
 shape_centered = true
 shape_visible = true
-passby_press = false
+passby_press = true
 action = ""
 visibility_mode = 0
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 
-[node name="LeftButtonGroup" type="ButtonGroup" parent="UI/Container/InputControls"]
+[node name="LeftButtonGroup" type="MarginContainer" parent="UI/Container/InputControls" index="1"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = false
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = -154.0
+margin_right = -893.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-margin_left = 25.0
-margin_top = 0.0
-margin_right = 65.0
-margin_bottom = 40.0
-alignment = 0
-mouse_filter = 0
+_sections_unfolded = [ "Anchor", "Margin", "Pause" ]
 
-[node name="Jump" type="TouchScreenButton" parent="UI/Container/InputControls/LeftButtonGroup"]
+[node name="Jump" type="TouchScreenButton" parent="UI/Container/InputControls/LeftButtonGroup" index="0"]
 
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -6.15167, 16.4044 )
+scale = Vector2( 0.12, 0.12 )
 normal = ExtResource( 10 )
 pressed = null
 bitmask = null
 shape = null
 shape_centered = true
 shape_visible = true
-passby_press = false
+passby_press = true
 action = ""
 visibility_mode = 0
+_sections_unfolded = [ "Transform" ]
+
+

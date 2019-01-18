@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/simple_dirt.png-cb751b1b9b656e322ae5d162369aff22.stex"
+path="res://.import/explosionFragment.png-92e0cec559c3cf67b7a28b2234598d53.stex"
 
 [deps]
 
-source_file="res://addons/platform2d/textures/simple_dirt.png"
-dest_files=[ "res://.import/simple_dirt.png-cb751b1b9b656e322ae5d162369aff22.stex" ]
+source_file="res://Graphics/Temporary/Effects/explosionFragment.png"
+dest_files=[ "res://.import/explosionFragment.png-92e0cec559c3cf67b7a28b2234598d53.stex" ]
 
 [params]
 
@@ -15,7 +15,7 @@ compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=true
 flags/mipmaps=true
 flags/anisotropic=false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Graphics/GameObjects/Cannon/Berral.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/GameObjects/Cannon/Ball.png" type="Texture" id=2]
@@ -7,59 +7,162 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends StaticBody2D
+script/source = "extends Node2D
 
 # class member variables go here, for example:
 export(bool) var shooting setget _set_shooting, _get_shooting; 
 export(float) var angle setget _set_angle, _get_angle; 
 
+
 func _set_shooting(value):
-	var ballSource = self.find_node(\"BallSource\",true);
+	var ballSource = self.get_node(\"Berral/BallSource\");
+	var explosion = self.get_node(\"Berral/Explosion\");
 	if(ballSource): 
 		ballSource.set_emitting( value );
+		explosion.set_emitting( value );
 	shooting = value;
+	update();
 
 func _get_shooting():
 	return shooting;
 
 func _set_angle(value):
-	var berral = self.find_node(\"Berral\",true);
+	var berral = self.get_node(\"Berral\");
 	if(berral):
-		berral.set_rot( deg2rad(value) );
+		berral.rotate( deg2rad(value) );
 	angle = value;
+	update()
 	
 func _get_angle():
 	return angle;
 
 "
 
-[node name="Cannon" type="StaticBody2D"]
+[sub_resource type="CanvasItemMaterial" id=2]
 
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[sub_resource type="ParticlesMaterial" id=3]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 0.0
+flatness = 0.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 1000.0
+initial_velocity_random = 0.0
+angular_velocity = 2.41137e-38
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 50.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 1.0
+scale_random = 0.0
+color = Color( 1, 1, 1, 1 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Angle", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Linear Accel", "Spread" ]
+
+[sub_resource type="Curve" id=4]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.127435, 0.951172 ), -4.09269, -4.09269, 0, 0, Vector2( 0.642173, 0.220703 ), 0.0, 0.0, 0, 0, Vector2( 0.99724, 0 ), 0.0930158, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+
+flags = 4
+width = 2048
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 45.0
+flatness = 0.0
+gravity = Vector3( 0, -9.8, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 0.0
+angular_velocity = 25.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 1.0
+scale_random = 0.25
+scale_curve = SubResource( 5 )
+color = Color( 1, 1, 1, 1 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Angular Velocity", "Gravity", "Scale" ]
+
+[node name="Cannon" type="Node2D"]
+
+position = Vector2( 2.26472, 21.0297 )
+rotation = 6.28195
 scale = Vector2( 0.5, 0.5 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
 script = SubResource( 1 )
-shooting = true
+_sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_ik_": true
+}
+shooting = null
 angle = null
 
 [node name="Berral" type="Sprite" parent="." index="0"]
 
-position = Vector2( -0.756653, 57.2858 )
+position = Vector2( -2.69786, 57.2839 )
+rotation = 0.00123054
 texture = ExtResource( 1 )
 offset = Vector2( 0.610647, -59.2874 )
-__meta__ = {
-"_edit_bone_": true
-}
+region_rect = Rect2( 160, 0, 188, 400 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="BallSource" type="Particles2D" parent="Berral" index="0"]
 
+material = SubResource( 2 )
 position = Vector2( 6.32418, -223.613 )
-rotation = -3.14159
+rotation = -1.5708
 emitting = false
 amount = 1
 lifetime = 5.0
@@ -73,18 +176,19 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
-process_material = null
+process_material = SubResource( 3 )
 texture = ExtResource( 2 )
 normal_map = null
 h_frames = 1
 v_frames = 1
+_sections_unfolded = [ "Material", "Process Material", "Transform" ]
 
 [node name="Explosion" type="Particles2D" parent="Berral" index="1"]
 
 position = Vector2( 6.32418, -223.613 )
 rotation = 3.10576
 emitting = false
-amount = 3
+amount = 1
 lifetime = 5.0
 one_shot = false
 preprocess = 10.0
@@ -96,15 +200,47 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = false
 draw_order = 0
-process_material = null
+process_material = SubResource( 6 )
 texture = ExtResource( 3 )
 normal_map = null
 h_frames = 1
 v_frames = 1
+_sections_unfolded = [ "Process Material" ]
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="Berral" index="2"]
+
+position = Vector2( 0.880242, -271.118 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Berral/KinematicBody2D" index="0"]
+
+visible = false
+build_mode = 0
+polygon = PoolVector2Array( 69.0424, -48.3123, 83.4121, -26.7577, 83.4121, 3.17913, 75.0298, 25.9311, 63.3757, 43.411, 36.5126, 59.7624, 7.31375, 63.2663, -30.3479, 55.868, -54.2974, 40.3008, -67.4696, 21.1413, -74.6545, -9.99308, -72.2595, -37.535, -62.6797, -60.287, -51.9025, -69.8668, -47.8485, -211.759, -57.1466, -228.418, -61.4083, -241.203, -55.9844, -254.762, -33.9013, -265.61, 0.191956, -270.647, 35.5132, -265.055, 52.2778, -259.068, 64.2526, -248.29, 65.45, -235.118, 59.4626, -221.946 )
 
 [node name="base" type="Sprite" parent="." index="1"]
 
 position = Vector2( 0.735077, -2.94037 )
 texture = ExtResource( 4 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="base" index="0"]
+
+position = Vector2( -82.8222, -2.04312 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="base/KinematicBody2D" index="0"]
+
+visible = false
+build_mode = 0
+polygon = PoolVector2Array( 138.889, 165.888, 137.943, 194.289, -141.643, 192.974, -141.327, 166.519, -128.738, 165.729, -9.1077, 57.6518, -8.47659, 51.3406, 5.33575, 51.0131, 6.05273, 57.4659, 125.005, 165.257 )
 
 

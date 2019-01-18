@@ -44,7 +44,7 @@ func switchToStartScene():
 "
 _sections_unfolded = [ "Resource" ]
 
-[node name="Init" type="Container"]
+[node name="Init" type="Container" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -58,7 +58,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = SubResource( 1 )
-scenes = null
+scenes = [ "res://Scenes/Levels/test_level.scn" ]
 startScenePath = ""
 
 [node name="LoadingScreen" parent="." index="0" instance=ExtResource( 1 )]
