@@ -11,7 +11,8 @@ func _ready():
 func set_moving_platform(b):
 	MovingPlatform = b
 	set_physics_process(MovingPlatform)
-	last_position = get_global_position()
+	if is_inside_tree():
+		last_position = get_global_position()
 
 func _physics_process(delta):
 	var position = get_global_position()

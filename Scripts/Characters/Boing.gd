@@ -2,7 +2,7 @@
 extends RigidBody2D
 
 export(NodePath) var spriteContainerPath = './Boing'; 
-export(NodePath) var soundPlayer = './AudioStreamPlayer2D'; 
+export(NodePath) var soundPlayer = './SamplePlayer2D'; 
 
 var state = Dictionary() setget get_state,set_state; 
 var acceleration = 2;
@@ -16,8 +16,8 @@ func _ready():
 	self.set_process(true);
 	self.set_physics_process(true);
 	self.set_contact_monitor(true);
-	self.connect("body_enter",self,'on_contact');
-	self.connect("body_exit",self,'on_body_exit');
+	self.connect("body_entered",self,'on_contact');
+	self.connect("body_exited",self,'on_body_exit');
 	
 	
 func _process(delta):
@@ -45,13 +45,13 @@ func _physics_process(delta):
 
 func on_contact(body):
 	if(body != lastContact): 
-		self.get_node(soundPlayer).play('boing');
+		self.get_node(soundPlayer).play();
 		lastContact = body;
 		
 #TODO should this be reomved? hit volume base on current speed
 func _integrate_forces(state):
-	if(lastContact && self.get_node(soundPlayer).is_voice_active(0)):
-		self.get_node(soundPlayer).voice_set_volume_scale_db(0,state.get_linear_velocity().length());
+	if(lastContact && self.get_node(soundPlayer).playing):
+		self.get_node(soundPlayer).volume_db = state.get_linear_velocity().length()/100;
 
 func on_body_exit(body):
 	pass

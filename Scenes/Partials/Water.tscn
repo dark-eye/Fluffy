@@ -13,13 +13,12 @@
 render_priority = 0
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 0.976562, 0.104129, 0.038147, 0 )
-shader_param/reflectionsEffect = 0.5
+shader_param/reflectionsEffect = null
 shader_param/displacementEffect = 0.08
 shader_param/amplitude = 0.3
 shader_param/speed = 2.472
 shader_param/displacement = ExtResource( 3 )
 shader_param/backgroundDisplacement = ExtResource( 2 )
-_sections_unfolded = [ "shader_param" ]
 
 [sub_resource type="ShaderMaterial" id=2]
 
@@ -97,7 +96,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Angular Velocity", "Color", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Linear Accel", "Orbit Velocity", "Scale", "Spread", "Tangential Accel", "Trail" ]
 
-[node name="Water" type="Sprite" index="0"]
+[node name="Water" type="Sprite"]
 
 material = SubResource( 1 )
 position = Vector2( -49.6002, -10.2484 )
@@ -119,7 +118,6 @@ bubbles_randomness = 0.918
 
 [node name="AffectedArea" type="Area2D" parent="." index="0"]
 
-editor/display_folded = true
 visible = false
 material = SubResource( 2 )
 position = Vector2( -3.30811, 11.9956 )

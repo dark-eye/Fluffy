@@ -71,7 +71,7 @@ damping = 0.0
 damping_random = 0.0
 angle = 0.0
 angle_random = 0.0
-scale = 1.0
+scale = 0.5
 scale_random = 0.0
 color = Color( 1, 1, 1, 1 )
 hue_variation = 0.0
@@ -81,7 +81,7 @@ anim_speed_random = 0.0
 anim_offset = 0.0
 anim_offset_random = 0.0
 anim_loop = false
-_sections_unfolded = [ "Angle", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Linear Accel", "Spread" ]
+_sections_unfolded = [ "Angle", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Linear Accel", "Scale", "Spread" ]
 
 [sub_resource type="Curve" id=4]
 
@@ -136,7 +136,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Angular Velocity", "Gravity", "Scale" ]
 
-[node name="Cannon" type="Node2D"]
+[node name="Cannon" type="Node2D" index="0"]
 
 position = Vector2( 2.26472, 21.0297 )
 rotation = 6.28195
@@ -146,7 +146,7 @@ _sections_unfolded = [ "Collision" ]
 __meta__ = {
 "_edit_ik_": true
 }
-shooting = null
+shooting = false
 angle = null
 
 [node name="Berral" type="Sprite" parent="." index="0"]

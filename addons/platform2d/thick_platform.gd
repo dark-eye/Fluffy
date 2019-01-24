@@ -109,7 +109,7 @@ func _draw():
 	var point_count = point_array.size()
 	if point_count == 0:
 		return
-	point_array.remove_and_collide(point_count - 1)
+	point_array.remove(point_count - 1)
 	# Fill
 	if FillTexture != null:
 		var scale = FillSize/FillTexture.get_width()

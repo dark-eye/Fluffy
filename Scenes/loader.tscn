@@ -30,12 +30,12 @@ func fade_in():
 func _check_loading_done(value):
 	if(value > 99):
 		self.animPlayer.play(\"fade out\");
-		self.animPlayer.connect(\"finished\",self,\"_faded_out\");
+		self.animPlayer.connect(\"animation_finished\",self,\"_faded_out\");
 
-func _faded_in():
+func _faded_in(animName):
 	 emit_signal(\"faded_in\");
 	
-func _faded_out():
+func _faded_out(animName):
 	 emit_signal(\"faded_out\");"
 
 [sub_resource type="SpriteFrames" id=2]
@@ -175,7 +175,7 @@ percent_visible = true
 position = Vector2( 0, -180 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 2
+frame = 6
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]

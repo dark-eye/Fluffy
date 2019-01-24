@@ -89,7 +89,7 @@ adjustment_brightness = 1.0
 adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 
-[node name="Main Control" type="Control" index="0" groups=[
+[node name="Main Control" type="Control" groups=[
 "Control",
 ]]
 
@@ -116,7 +116,6 @@ playerControllerPath = NodePath("Charcter Control")
 
 [node name="Enviroment" type="Control" parent="." index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -135,7 +134,7 @@ size_flags_vertical = 1
 position = Vector2( 6.54413, -4.54419 )
 script = ExtResource( 2 )
 levels = PoolStringArray( "res://Scenes/Levels/level1.scn", "res://Scenes/Levels/level2.scn", "res://Scenes/Levels/level3.scn", "res://Scenes/Levels/test_level.scn", "res://Scenes/Levels/level4.tscn", "res://Scenes/Levels/level5.tscn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level7.tscn" )
-currentLevel = 3
+currentLevel = 0
 
 [node name="BundingBox" type="Area2D" parent="Enviroment" index="1"]
 
@@ -172,7 +171,7 @@ chatacterPath = NodePath("Boing")
 
 position = Vector2( 0, -2.05054 )
 z_index = 1
-soundPlayer = "./AudioStreamPlayer2D"
+soundPlayer = "./SamplePlayer2D"
 
 [node name="Camera2D" parent="Charcter Control/Boing" index="5" instance=ExtResource( 5 )]
 

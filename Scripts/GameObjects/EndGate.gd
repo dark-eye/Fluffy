@@ -7,7 +7,7 @@ export var isopen=false setget _set_open,_get_open
 var spriteAnim
 
 func _ready():
-	self.connect("body_enter",self,'on_enter');
+	self.connect("body_entered",self,'on_enter');
 	self.spriteAnim = self.get_node("AnimatedSprite");
 	self._update_visual();
 

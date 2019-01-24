@@ -25,8 +25,8 @@ func load_scenes(value):
 	
 	for scenePath in scenes:
 		var scene = self.load_scene(scenePath);
-		if( scenePath ==  startScenePath):
-			startScene = scene;
+		if( scenePath == startScenePath):
+			self.startScene = scene;
 		progressBar.set_value( progressBar.get_value() + progressStep );
 
 func load_scene(scenePath):
@@ -44,7 +44,7 @@ func switchToStartScene():
 "
 _sections_unfolded = [ "Resource" ]
 
-[node name="Init" type="Container" index="0"]
+[node name="Init" type="Container"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -58,8 +58,9 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = SubResource( 1 )
+_sections_unfolded = [ "Anchor" ]
 scenes = [ "res://Scenes/Levels/test_level.scn" ]
-startScenePath = ""
+startScenePath = "res://Scenes/Levels/test_level.scn"
 
 [node name="LoadingScreen" parent="." index="0" instance=ExtResource( 1 )]
 

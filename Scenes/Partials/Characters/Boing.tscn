@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Characters/Boing.gd" type="Script" id=1]
-[ext_resource path="res://Graphics/Charcters/hairy_ball.tex" type="Texture" id=2]
-[ext_resource path="res://Graphics/Charcters/hairy_ball_righteye.tex" type="Texture" id=3]
-[ext_resource path="res://Scripts/Characters/BoingEye.gd" type="Script" id=4]
+[ext_resource path="res://Resources/Sounds/boing.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Graphics/Charcters/hairy_ball.tex" type="Texture" id=3]
+[ext_resource path="res://Graphics/Charcters/hairy_ball_righteye.tex" type="Texture" id=4]
+[ext_resource path="res://Scripts/Characters/BoingEye.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=1]
 
@@ -119,7 +120,7 @@ shape = SubResource( 3 )
 
 [node name="SamplePlayer2D" type="AudioStreamPlayer2D" parent="." index="3"]
 
-stream = null
+stream = ExtResource( 2 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = false
@@ -133,22 +134,22 @@ area_mask = 1
 [node name="body" type="Sprite" parent="Boing" index="0"]
 
 position = Vector2( 0.902466, 0 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 64, 65 )
 
 [node name="eye right" type="Sprite" parent="Boing" index="1"]
 
 position = Vector2( 8.70303, -7.90561 )
 rotation = 0.00160734
-texture = ExtResource( 3 )
-script = ExtResource( 4 )
+texture = ExtResource( 4 )
+script = ExtResource( 5 )
 
 [node name="eye left" type="Sprite" parent="Boing" index="2"]
 
 position = Vector2( -11.297, -7.90561 )
 rotation = 0.00160734
-texture = ExtResource( 3 )
-script = ExtResource( 4 )
+texture = ExtResource( 4 )
+script = ExtResource( 5 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Boing" index="3"]
 
