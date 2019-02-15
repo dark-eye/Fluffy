@@ -20,6 +20,7 @@ const thick_platform_script = preload("res://addons/platform2d/thick_platform.gd
 const curve_editor_script = preload("res://addons/platform2d/curve_editor.gd")
 
 const handle_tex = preload("res://addons/platform2d/handle.png")
+const move_handle_tex = preload("res://addons/platform2d/move_handle.png")
 const add_tex = preload("res://addons/platform2d/add.png")
 const remove_tex = preload("res://addons/platform2d/remove.png")
 
@@ -134,7 +135,7 @@ func forward_draw_over_canvas(canvas_xform, canvas):
 				canvas.draw_line(p, p_out, COLOR_2)
 				canvas.draw_texture_rect(handle_tex, Rect2(int_coord(p_out)-Vector2(5, 5), Vector2(11, 11)), false)
 				handles.append({ pos = p_out, mode = HANDLE_OUT, index = i })
-			canvas.draw_texture_rect(handle_tex, Rect2(int_coord(p)-Vector2(5, 5), Vector2(11, 11)), false)
+			canvas.draw_texture_rect(move_handle_tex, Rect2(int_coord(p)-Vector2(5, 5), Vector2(11, 11)), false)
 			handles.append({ pos = p, mode = HANDLE_POS, index = i })
 			if curve.get_point_count() + notclosed_int >= 4:
 				# minimum number of points is 3 for closed curves and 2 for others
@@ -165,7 +166,7 @@ func forward_draw_over_canvas(canvas_xform, canvas):
 		canvas.draw_texture_rect(handle_tex, Rect2(int_coord(p)-Vector2(5, 5), Vector2(11, 11)), false)
 		handles.append({ pos = p, mode = HANDLE_VNBOTTOM, index = 0 })
 
-func forward_canvas_gui_input(canvas_xform, event):
+func forward_canvas_gui_input(event):
 	var curve = null
 	if edited_type == EDIT_PLATFORM:
 		curve = edited_object.get_curve()
@@ -214,7 +215,7 @@ func forward_canvas_gui_input(canvas_xform, event):
 						edited_object.update()
 						return true
 				for h in handles:
-					if (event.position - h.position).length() < 6:
+					if (event.position - h.pos).length() < 6:
 						# Activate handle
 						handle_mode = h.mode
 						handle_index = h.index

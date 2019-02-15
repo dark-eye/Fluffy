@@ -14,7 +14,7 @@ func _ready():
 func on_enter( body ):
 	if(body.is_in_group('Player') && self.isopen):
 		self.emit_signal('player_at_end_gate', body );
-		self.get_tree().call_group(0,'Control','player_at_end_gate');
+		self.get_tree().call_group('Control','player_at_end_gate');
 
 func _set_open(value):
 	isopen = value

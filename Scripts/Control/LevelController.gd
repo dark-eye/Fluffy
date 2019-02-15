@@ -24,7 +24,7 @@ func loadLevel(levelIdx):
 	
 	if(get_tree() != null):
 		self.emit_signal('level_loaded',levelIdx,currentScene);
-		self.get_tree().call_group(0,'Control','level_loaded',levelIdx,currentScene);
+		self.get_tree().call_group('Control','level_loaded',levelIdx,currentScene);
 
 
 func reset():

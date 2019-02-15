@@ -37,7 +37,7 @@ func reset():
 #-------------- Signals --------------
 
 func player_at_end_gate():
-	if(!endGameTimer.is_active() ):
+	if(endGameTimer.is_stopped() ):
 		endGameTimer.set_wait_time(2)
 		endGameTimer.start()
 		#endGameTimer.set_active( true );
@@ -50,31 +50,33 @@ func level_loaded(idx,levelScene):
 	var camera = getCamera();
 	var bounds = get_level_controller().getBoundsNode();
 	if(bounds):
-		var boundsRect = bounds.get_item_rect();
+		var boundsRect = bounds.get_rect();
 		camera.set_limit(MARGIN_LEFT, boundsRect.position.x);
 		camera.set_limit(MARGIN_TOP, boundsRect.position.y);
-		camera.set_limit(MARGIN_RIGHT, boundsRect.size.width+boundsRect.position.x);
-		camera.set_limit(MARGIN_BOTTOM, boundsRect.size.height+boundsRect.position.y);
+		camera.set_limit(MARGIN_RIGHT, boundsRect.size.x+boundsRect.position.x);
+		camera.set_limit(MARGIN_BOTTOM, boundsRect.size.y+boundsRect.position.y);
 		
 		self.set_borders(boundsRect);
 
 
 #--------------------------------------
 #TODO move to an external utils
-func add_segment_to_body(body,v1,v2):
+func add_segment_to_body(body,ownderId,v1,v2):
 	var shape = SegmentShape2D.new();
 	shape.set_a(Vector2(v1.x,v1.y));
 	shape.set_b(Vector2(v2.x,v2.y));
-	body.add_shape(shape);
+	
+	body.shape_owner_add_shape(ownderId,shape);
 	return body;
 
 func set_borders(bounds):
 	self.remove_child(physicsBorders);
 	physicsBorders = StaticBody2D.new();
-	self.add_segment_to_body(physicsBorders, Vector2(bounds.position.x,bounds.position.y), Vector2(bounds.size.width+bounds.position.x,bounds.position.y));
-	self.add_segment_to_body(physicsBorders, Vector2(bounds.position.x,bounds.position.y), Vector2(bounds.position.x,bounds.size.height+bounds.position.y));
-	self.add_segment_to_body(physicsBorders, Vector2(bounds.position.x,bounds.size.height+bounds.position.y), Vector2(bounds.size.width+bounds.position.x,bounds.size.height+bounds.position.y));
-	self.add_segment_to_body(physicsBorders, Vector2(bounds.size.width+bounds.position.x,bounds.position.y), Vector2(bounds.size.width+bounds.position.x,bounds.size.height+bounds.position.y));
+	var ownderId=  physicsBorders.create_shape_owner(physicsBorders);
+	self.add_segment_to_body(physicsBorders, ownderId, Vector2(bounds.position.x,bounds.position.y), Vector2(bounds.size.x+bounds.position.x,bounds.position.y));
+	self.add_segment_to_body(physicsBorders, ownderId, Vector2(bounds.position.x,bounds.position.y), Vector2(bounds.position.x,bounds.size.y+bounds.position.y));
+	self.add_segment_to_body(physicsBorders, ownderId, Vector2(bounds.position.x,bounds.size.y+bounds.position.y), Vector2(bounds.size.x+bounds.position.x,bounds.size.y+bounds.position.y));
+	self.add_segment_to_body(physicsBorders, ownderId, Vector2(bounds.size.x+bounds.position.x,bounds.position.y), Vector2(bounds.size.x+bounds.position.x,bounds.size.y+bounds.position.y));
 	self.add_child(physicsBorders);
 
 #--------------------------------------

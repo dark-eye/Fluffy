@@ -89,7 +89,7 @@ adjustment_brightness = 1.0
 adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 
-[node name="Main Control" type="Control" groups=[
+[node name="Main Control" type="Control" index="0" groups=[
 "Control",
 ]]
 
