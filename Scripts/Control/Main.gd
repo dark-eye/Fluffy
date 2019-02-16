@@ -39,8 +39,7 @@ func reset():
 func player_at_end_gate():
 	if(endGameTimer.is_stopped() ):
 		endGameTimer.set_wait_time(2)
-		endGameTimer.start()
-		#endGameTimer.set_active( true );
+		endGameTimer.start();
 		get_player_controller().getPlayer().find_node('AnimationPlayer').play('going_away');
 		getCamera().find_node('CameraAnimation').play('end_level');
 		self.find_node("Clock",true).pause();

@@ -84,6 +84,7 @@ func draw_border(point_array, thickness, position, sections, left_overflow = 0.0
 	var texture = sections[0].texture
 	var limit   = sections[0].limit
 	var scale   = sections[0].scale
+	var normalmap = sections[0].normalmap
 	if u != 0.0:
 		points[3] = point_array[0] + normal[0] * position
 		points[2] = point_array[0] - normal[0] * (1-position)
@@ -94,7 +95,7 @@ func draw_border(point_array, thickness, position, sections, left_overflow = 0.0
 		uvs[1] = Vector2(0, 0)
 		uvs[2] = Vector2(u, 0)
 		uvs[3] = Vector2(u, 1)
-		draw_polygon(points, colors, uvs, texture)
+		draw_polygon(points, colors, uvs, texture, normalmap)
 	for i in range(point_count-1):
 		var interval = (point_array[i+1] - point_array[i]).length()
 		if i == 0:
@@ -115,7 +116,7 @@ func draw_border(point_array, thickness, position, sections, left_overflow = 0.0
 			points[3] = p + n * position
 			uvs[2] = Vector2(limit, 0)
 			uvs[3] = Vector2(limit, 1)
-			draw_polygon(points, colors, uvs, texture)
+			draw_polygon(points, colors, uvs, texture, normalmap)
 			texture_index = texture_index + 1
 			if texture_index >= sections.size():
 				u = next_u
@@ -123,6 +124,7 @@ func draw_border(point_array, thickness, position, sections, left_overflow = 0.0
 			texture = sections[texture_index].texture
 			limit   = sections[texture_index].limit
 			scale   = sections[texture_index].scale
+			normalmap   = sections[texture_index].normalmap
 			points[0] = points[3]
 			points[1] = points[2]
 			uvs[0] = Vector2(0, 1)
@@ -132,13 +134,13 @@ func draw_border(point_array, thickness, position, sections, left_overflow = 0.0
 			points[3] = point_array[i+1] + normal[i+1] * position
 			uvs[2] = Vector2(u, 0)
 			uvs[3] = Vector2(u, 1)
-			draw_polygon(points, colors, uvs, texture)
+			draw_polygon(points, colors, uvs, texture, normalmap)
 		else:
 			points[2] = point_array[i+1] - normal[i+1] * (1-position)
 			points[3] = point_array[i+1] + normal[i+1] * position
 			uvs[2] = Vector2(next_u, 0)
 			uvs[3] = Vector2(next_u, 1)
-			draw_polygon(points, colors, uvs, texture)
+			draw_polygon(points, colors, uvs, texture, normalmap)
 			u = next_u
 	if u < limit:
 		points[0] = points[3]
@@ -150,5 +152,5 @@ func draw_border(point_array, thickness, position, sections, left_overflow = 0.0
 		uvs[1] = Vector2(u, 0)
 		uvs[2] = Vector2(limit, 0)
 		uvs[3] = Vector2(limit, 1)
-		draw_polygon(points, colors, uvs, texture)
+		draw_polygon(points, colors, uvs, texture, normalmap)
 

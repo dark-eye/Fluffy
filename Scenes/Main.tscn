@@ -13,7 +13,7 @@
 
 [sub_resource type="Environment" id=1]
 
-background_mode = 0
+background_mode = 4
 background_sky_custom_fov = 0.0
 background_color = Color( 0, 0, 0, 1 )
 background_energy = 1.0
@@ -69,7 +69,7 @@ dof_blur_near_distance = 2.0
 dof_blur_near_transition = 1.0
 dof_blur_near_amount = 0.1
 dof_blur_near_quality = 1
-glow_enabled = false
+glow_enabled = true
 glow_levels/1 = false
 glow_levels/2 = false
 glow_levels/3 = true
@@ -88,6 +88,7 @@ adjustment_enabled = false
 adjustment_brightness = 1.0
 adjustment_contrast = 1.0
 adjustment_saturation = 1.0
+_sections_unfolded = [ "Adjustments", "Background", "DOF Far Blur", "DOF Near Blur", "Resource", "SSAO" ]
 
 [node name="Main Control" type="Control" index="0" groups=[
 "Control",
@@ -133,7 +134,8 @@ size_flags_vertical = 1
 
 position = Vector2( 6.54413, -4.54419 )
 script = ExtResource( 2 )
-levels = PoolStringArray( "res://Scenes/Levels/level1.scn", "res://Scenes/Levels/level2.scn", "res://Scenes/Levels/level3.scn", "res://Scenes/Levels/test_level.scn", "res://Scenes/Levels/level4.tscn", "res://Scenes/Levels/level5.tscn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level7.tscn" )
+_sections_unfolded = [ "Visibility" ]
+levels = PoolStringArray( "res://Scenes/Levels/level1.scn", "res://Scenes/Levels/level2.scn", "res://Scenes/Levels/level3.scn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level4.tscn", "res://Scenes/Levels/level5.tscn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level7.tscn" )
 currentLevel = 0
 
 [node name="BundingBox" type="Area2D" parent="Enviroment" index="1"]
@@ -176,12 +178,6 @@ soundPlayer = "./SamplePlayer2D"
 [node name="Camera2D" parent="Charcter Control/Boing" index="5" instance=ExtResource( 5 )]
 
 position = Vector2( 0.155365, 3.47427 )
-limit_smoothed = false
-offset_v = 0.0
-offset_h = 0.0
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Charcter Control/Boing/Camera2D" index="2"]
 

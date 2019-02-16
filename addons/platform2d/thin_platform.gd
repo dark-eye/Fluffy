@@ -4,8 +4,11 @@ extends "res://addons/platform2d/platform_base.gd"
 export(Curve2D)               var curve = null setget set_curve
 export(float)                 var BakeInterval = 50 setget set_bake_interval
 export(Texture)               var LeftTexture = null setget set_left_texture
+export(Texture)               var LeftTextureNormal = null setget set_left_texture_normal
 export(Texture)               var MidTexture = null setget set_mid_texture
+export(Texture)               var MidTextureNormal = null setget set_mid_texture_normal
 export(Texture)               var RightTexture = null setget set_right_texture
+export(Texture)               var RightTextureNormal = null setget set_right_texture_normal
 export(float, 0.0, 1.0, 0.01) var LeftOverflow = 0.0 setget set_left_overflow
 export(float, 0.0, 1.0, 0.01) var RightOverflow = 0.0 setget set_right_overflow
 export(float)                 var Thickness = 100 setget set_thickness
@@ -35,13 +38,25 @@ func set_bake_interval(i):
 func set_left_texture(t):
 	LeftTexture = t
 	update()
+	
+func set_left_texture_normal(t):
+	LeftTextureNormal = t
+	update()
 
 func set_mid_texture(t):
 	MidTexture = t
 	update()
 
+func set_mid_texture_normal(t):
+	MidTextureNormal = t
+	update()
+
 func set_right_texture(t):
 	RightTexture = t
+	update()
+
+func set_right_texture_normal(t):
+	RightTextureNormal = t
 	update()
 
 func set_left_overflow(o):
@@ -67,7 +82,7 @@ func update_collision_polygon():
 		var curve = get_curve()
 		var point_array = baked_points(curve)
 		var point_count = point_array.size()
-		var polygon_height = Vector2(0, Position * Thickness)
+		var polygon_height = Vector2(0, Thickness)
 		for i in range(point_count):
 			point_array.append(point_array[point_count-i-1] + polygon_height)
 		var polygon = get_node("CollisionPolygon2D")
@@ -94,13 +109,13 @@ func _draw():
 		var right_length = (1.0 - RightOverflow) * RightTexture.get_width() * Thickness / RightTexture.get_height()
 		var mid_texture_count = floor(0.5 + (curve_length - left_length - right_length) / mid_length)
 		var ratio_adjust = (left_length + mid_texture_count * mid_length + right_length) / curve_length
-		sections.append({texture = LeftTexture, limit = 1.0, scale = ratio_adjust * LeftTexture.get_height() / (Thickness * LeftTexture.get_width())})
+		sections.append({texture = LeftTexture, limit = 1.0, scale = ratio_adjust * LeftTexture.get_height() / (Thickness * LeftTexture.get_width()), normalmap = LeftTextureNormal})
 		if mid_texture_count > 0:
-			sections.append({texture = MidTexture, limit = mid_texture_count, scale = ratio_adjust * MidTexture.get_height() / (Thickness * MidTexture.get_width())})
-		sections.append({texture = RightTexture, limit = 1.0, scale = ratio_adjust * RightTexture.get_height() / (Thickness * RightTexture.get_width())})
+			sections.append({texture = MidTexture, limit = mid_texture_count, scale = ratio_adjust * MidTexture.get_height() / (Thickness * MidTexture.get_width()), normalmap = MidTextureNormal})
+		sections.append({texture = RightTexture, limit = 1.0, scale = ratio_adjust * RightTexture.get_height() / (Thickness * RightTexture.get_width()), normalmap = RightTextureNormal})
 	else:
 		var mid_texture_count = curve_length / mid_length
-		sections.append({texture = MidTexture, limit = mid_texture_count, scale = MidTexture.get_height() / (Thickness * MidTexture.get_width())})
+		sections.append({texture = MidTexture, limit = mid_texture_count, scale = MidTexture.get_height() / (Thickness * MidTexture.get_width()), normalmap = MidTextureNormal})
 	draw_border(point_array, Thickness, Position, sections, LeftOverflow)
 
 func get_material():

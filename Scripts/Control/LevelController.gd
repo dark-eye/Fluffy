@@ -56,8 +56,8 @@ func getBoundsNode():
 #---------------------------------------------------------------
 
 func _set_currentLevel(newLevel):
-	yield();
 	self.loadLevel(newLevel)
+	#yield();
 	currentLevel = newLevel
 
 func _get_currentLevel():

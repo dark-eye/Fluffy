@@ -6,13 +6,17 @@ export(float)                 var BakeInterval = 50 setget set_bake_interval
 export(Texture)               var FillTexture = null setget set_fill_texture
 export(float)                 var FillSize = 1.0 setget set_fill_size
 export(Texture)               var TopLeftTexture = null setget set_topleft_texture
+export(Texture)               var TopLeftTextureNormal = null setget set_topleft_texture_normal
 export(Texture)               var TopTexture = null setget set_top_texture
+export(Texture)               var TopTextureNormal = null setget set_top_texture_normal
 export(Texture)               var TopRightTexture = null setget set_topright_texture
+export(Texture)               var TopRightTextureNormal = null setget set_topright_texture_normal
 export(float)                 var TopThickness = 100 setget set_top_thickness
 export(float, 0.0, 1.0, 0.01) var TopPosition = 0.5 setget set_top_position
 export(float, 0.0, 1.0, 0.01) var TopLeftOverflow = 0.0 setget set_topleft_overflow
 export(float, 0.0, 1.0, 0.01) var TopRightOverflow = 0.0 setget set_topright_overflow
 export(Texture)               var SideTexture = null setget set_side_texture
+export(Texture)               var SideTextureNormal = null setget set_side_texture_normal
 export(float)                 var SideThickness = 10 setget set_side_thickness
 export(float, 0.0, 1.0, 0.01) var SidePosition = 0.5 setget set_side_position
 export(float, 0.0, 3.2, 0.01) var Angle = 0.5 setget set_angle
@@ -50,12 +54,24 @@ func set_topleft_texture(t):
 	TopLeftTexture = t
 	update()
 
+func set_topleft_texture_normal(t):
+	TopLeftTextureNormal = t
+	update()
+
 func set_topright_texture(t):
 	TopRightTexture = t
+	update()
+	
+func set_topright_texture_normal(t):
+	TopRightTextureNormal = t
 	update()
 
 func set_top_texture(t):
 	TopTexture = t
+	update()
+	
+func set_top_texture_normal(t):
+	TopTextureNormal = t
 	update()
 
 func set_top_thickness(s):
@@ -78,6 +94,10 @@ func set_side_texture(t):
 	SideTexture = t
 	update()
 
+func set_side_texture_normal(t):
+	SideTextureNormal = t
+	update()
+
 func set_side_thickness(s):
 	SideThickness = s
 	update()
@@ -91,7 +111,7 @@ func set_angle(a):
 	update()
 
 func update_collision_polygon():
-	if is_inside_tree() && get_tree().is_editor_hint():
+	if is_inside_tree() && Engine.is_editor_hint():
 		var curve = get_curve()
 		var point_array = baked_points(curve)
 		var polygon = get_node("CollisionPolygon2D")
@@ -140,7 +160,7 @@ func _draw():
 						var curve_length = baked_points_and_length.length
 						var mid_length = SideTexture.get_width() * SideThickness / SideTexture.get_height()
 						var mid_texture_count = curve_length / mid_length
-						sections.append({texture = SideTexture, limit = mid_texture_count, scale = SideTexture.get_height() / (SideThickness * SideTexture.get_width())})
+						sections.append({texture = SideTexture, limit = mid_texture_count, scale = SideTexture.get_height() / (SideThickness * SideTexture.get_width()), normalmap = SideTextureNormal})
 						draw_border(point_array, SideThickness, SidePosition, sections)
 					else:
 						top_curves.append(current_curve)
@@ -161,14 +181,14 @@ func _draw():
 					var right_length = (1.0 - TopRightOverflow) * TopRightTexture.get_width() * TopThickness / TopRightTexture.get_height()
 					var mid_texture_count = floor(0.5 + (curve_length - left_length - right_length) / mid_length)
 					var ratio_adjust = (left_length + mid_texture_count * mid_length + right_length) / curve_length
-					sections.append({texture = TopLeftTexture, limit = 1.0, scale = ratio_adjust * TopLeftTexture.get_height() / (TopThickness * TopLeftTexture.get_width())})
+					sections.append({texture = TopLeftTexture, limit = 1.0, scale = ratio_adjust * TopLeftTexture.get_height() / (TopThickness * TopLeftTexture.get_width()), normalmap = TopLeftTextureNormal})
 					if mid_texture_count > 0:
-						sections.append({texture = TopTexture, limit = mid_texture_count, scale = ratio_adjust * TopTexture.get_height() / (TopThickness * TopTexture.get_width())})
-					sections.append({texture = TopRightTexture, limit = 1.0, scale = ratio_adjust * TopRightTexture.get_height() / (TopThickness * TopRightTexture.get_width())})
+						sections.append({texture = TopTexture, limit = mid_texture_count, scale = ratio_adjust * TopTexture.get_height() / (TopThickness * TopTexture.get_width()), normalmap = TopTextureNormal})
+					sections.append({texture = TopRightTexture, limit = 1.0, scale = ratio_adjust * TopRightTexture.get_height() / (TopThickness * TopRightTexture.get_width()), normalmap = TopRightTextureNormal})
 					left_overflow = TopLeftOverflow
 				else:
 					var mid_texture_count = curve_length / mid_length
-					sections.append({texture = TopTexture, limit = mid_texture_count, scale = TopTexture.get_height() / (TopThickness * TopTexture.get_width())})
+					sections.append({texture = TopTexture, limit = mid_texture_count, scale = TopTexture.get_height() / (TopThickness * TopTexture.get_width()), normalmap = TopTextureNormal})
 				draw_border(point_array, TopThickness, TopPosition, sections, left_overflow)
 		else:
 			var ratio1 = BakeInterval*TopTexture.get_height()/TopThickness/TopTexture.get_width()
