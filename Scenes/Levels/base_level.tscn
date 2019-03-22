@@ -2,35 +2,12 @@
 
 [node name="level_name" type="Node2D"]
 
-[node name="SpawnPoint" type="Node2D" parent="." index="0"]
+[node name="SpawnPoint" type="Node2D" parent="."]
 
-[node name="Bounds" type="Container" parent="." index="1"]
+[node name="Bounds" type="Container" parent="."]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
+[node name="Environment" type="Node2D" parent="."]
 
-[node name="Environment" type="Node2D" parent="." index="2"]
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="Environment" index="0"]
-
-layer = -1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-scroll_offset = Vector2( 0, 0 )
-scroll_base_offset = Vector2( 0, 0 )
-scroll_base_scale = Vector2( 1, 1 )
-scroll_limit_begin = Vector2( 0, 0 )
-scroll_limit_end = Vector2( 0, 0 )
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Environment"]
 scroll_ignore_camera_zoom = true
-
 

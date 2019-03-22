@@ -9,62 +9,35 @@
 [ext_resource path="res://Graphics/Environment/Water/bubble.png" type="Texture" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
-
-render_priority = 0
 shader = ExtResource( 1 )
-shader_param/albedo = Color( 0.976562, 0.104129, 0.038147, 0 )
-shader_param/reflectionsEffect = null
+shader_param/albedo = Color( 0.038147, 0.448704, 0.976562, 0.342549 )
+shader_param/reflectionsEffect = 0.5
 shader_param/displacementEffect = 0.08
-shader_param/amplitude = 0.3
+shader_param/amplitude = 0.11
 shader_param/speed = 2.472
 shader_param/displacement = ExtResource( 3 )
 shader_param/backgroundDisplacement = ExtResource( 2 )
 
 [sub_resource type="ShaderMaterial" id=2]
 
-render_priority = 0
-
 [sub_resource type="RectangleShape2D" id=3]
 
-custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
-
 [sub_resource type="Curve" id=4]
-
 min_value = -200.0
 max_value = 200.0
-bake_resolution = 100
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.499271, 73.0469 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=5]
-
-flags = 4
-width = 2048
 curve = SubResource( 4 )
 
 [sub_resource type="Curve" id=6]
-
-min_value = 0.0
-max_value = 1.0
-bake_resolution = 100
 _data = [ Vector2( 0, 0.15625 ), 0.0, 0.0, 0, 0, Vector2( 0.750807, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.999427, 0.521484 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=7]
-
-flags = 4
-width = 2048
 curve = SubResource( 6 )
 
 [sub_resource type="ParticlesMaterial" id=8]
-
-render_priority = 0
-trail_divisor = 1
-emission_shape = 0
-flag_align_y = false
-flag_rotate_y = false
 flag_disable_z = true
-spread = 45.0
-flatness = 0.0
 gravity = Vector3( 0, -98, 0 )
 initial_velocity = 100.0
 initial_velocity_random = 1.0
@@ -72,52 +45,31 @@ angular_velocity = 36.0
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-linear_accel = 0.0
-linear_accel_random = 0.0
 linear_accel_curve = SubResource( 5 )
-radial_accel = 0.0
-radial_accel_random = 0.0
 tangential_accel = 1.0
 tangential_accel_random = 1.0
-damping = 0.0
-damping_random = 0.0
-angle = 0.0
-angle_random = 0.0
 scale = 0.3
 scale_random = 0.2
 scale_curve = SubResource( 7 )
-color = Color( 1, 1, 1, 1 )
-hue_variation = 0.0
-hue_variation_random = 0.0
-anim_speed = 0.0
-anim_speed_random = 0.0
-anim_offset = 0.0
-anim_offset_random = 0.0
-anim_loop = false
-_sections_unfolded = [ "Angular Velocity", "Color", "Emission Shape", "Flags", "Gravity", "Initial Velocity", "Linear Accel", "Orbit Velocity", "Scale", "Spread", "Tangential Accel", "Trail" ]
 
 [node name="Water" type="Sprite"]
-
 material = SubResource( 1 )
 position = Vector2( -49.6002, -10.2484 )
 texture = ExtResource( 4 )
 script = ExtResource( 5 )
-_sections_unfolded = [ "Material", "Transform", "Visibility" ]
 __meta__ = {
 "_editor_icon": ExtResource( 6 )
 }
 displacement_map = ExtResource( 3 )
 background_displacement = ExtResource( 2 )
-water_color = Color( 0.976562, 0.104129, 0.038147, 0 )
+water_color = Color( 0.038147, 0.448704, 0.976562, 0.342549 )
 displacement_effect = 0.08
-amplitudo = 0.3
+amplitudo = 0.11
 speed = 2.472
-uv_size = Vector2( 1, 1 )
 bubbles_frequency = 0.892
 bubbles_randomness = 0.918
 
-[node name="AffectedArea" type="Area2D" parent="." index="0"]
-
+[node name="AffectedArea" type="Area2D" parent="."]
 visible = false
 material = SubResource( 2 )
 position = Vector2( -3.30811, 11.9956 )
@@ -126,23 +78,17 @@ input_pickable = false
 space_override = 1
 gravity_distance_scale = 1.0
 gravity_vec = Vector2( 0, -0.2 )
-gravity = 98.0
 linear_damp = 3.0
-angular_damp = 1.0
 priority = 1.0
 monitoring = false
 monitorable = false
-audio_bus_override = false
-audio_bus_name = "Master"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AffectedArea" index="0"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AffectedArea"]
 position = Vector2( -0.0219811, 0.0412436 )
 scale = Vector2( 3.1428, 3.04009 )
 shape = SubResource( 3 )
 
-[node name="bubbles" type="Particles2D" parent="." index="1"]
-
+[node name="bubbles" type="Particles2D" parent="."]
 show_behind_parent = true
 use_parent_material = true
 position = Vector2( 223.776, 70.09 )
@@ -151,26 +97,10 @@ z_index = -1
 emitting = false
 amount = 15
 lifetime = 12.0
-one_shot = false
-preprocess = 0.0
-speed_scale = 1.0
-explosiveness = 0.0
 randomness = 0.75
-fixed_fps = 0
-fract_delta = true
-visibility_rect = Rect2( -100, -100, 200, 200 )
-local_coords = true
-draw_order = 0
 process_material = SubResource( 8 )
 texture = ExtResource( 7 )
-normal_map = null
-h_frames = 1
-v_frames = 1
-_sections_unfolded = [ "Drawing", "Material", "Process Material", "Textures", "Time", "Transform", "Z Index" ]
 
-[node name="BubblesContainer" type="Node2D" parent="." index="2"]
-
+[node name="BubblesContainer" type="Node2D" parent="."]
 z_index = -4
-_sections_unfolded = [ "Z Index" ]
-
 

@@ -104,8 +104,8 @@ func draw_border(point_array, thickness, position, sections, left_overflow = 0.0
 		else:
 			points[0] = points[3]
 			points[1] = points[2]
-		uvs[0] = Vector2(u, 1)
-		uvs[1] = Vector2(u, 0)
+		uvs[0] = Vector2(u, 0)
+		uvs[1] = Vector2(u, 1)
 		var length = (point_array[i+1] - point_array[i]).length()
 		var next_u = u + length * scale
 		if next_u >= limit:
@@ -114,8 +114,8 @@ func draw_border(point_array, thickness, position, sections, left_overflow = 0.0
 			var n = (normal[i] + r * (normal[i+1] - normal[i])).normalized() * thickness
 			points[2] = p - n * (1-position)
 			points[3] = p + n * position
-			uvs[2] = Vector2(limit, 0)
-			uvs[3] = Vector2(limit, 1)
+			uvs[2] = Vector2(limit, 1)
+			uvs[3] = Vector2(limit, 0)
 			draw_polygon(points, colors, uvs, texture, normalmap)
 			texture_index = texture_index + 1
 			if texture_index >= sections.size():
@@ -127,19 +127,19 @@ func draw_border(point_array, thickness, position, sections, left_overflow = 0.0
 			normalmap   = sections[texture_index].normalmap
 			points[0] = points[3]
 			points[1] = points[2]
-			uvs[0] = Vector2(0, 1)
-			uvs[1] = Vector2(0, 0)
+			uvs[0] = Vector2(0, 0)
+			uvs[1] = Vector2(0, 1)
 			u = length * (1 - r) * scale
 			points[2] = point_array[i+1] - normal[i+1] * (1-position)
 			points[3] = point_array[i+1] + normal[i+1] * position
-			uvs[2] = Vector2(u, 0)
-			uvs[3] = Vector2(u, 1)
+			uvs[2] = Vector2(u, 1)
+			uvs[3] = Vector2(u, 0)
 			draw_polygon(points, colors, uvs, texture, normalmap)
 		else:
 			points[2] = point_array[i+1] - normal[i+1] * (1-position)
 			points[3] = point_array[i+1] + normal[i+1] * position
-			uvs[2] = Vector2(next_u, 0)
-			uvs[3] = Vector2(next_u, 1)
+			uvs[2] = Vector2(next_u, 1)
+			uvs[3] = Vector2(next_u, 0)
 			draw_polygon(points, colors, uvs, texture, normalmap)
 			u = next_u
 	if u < limit:

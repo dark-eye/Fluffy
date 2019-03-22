@@ -1,29 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Graphics/Environment/scenery.jpg" type="Texture" id=1]
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
-
-layer = -1
 offset = Vector2( -256, -356 )
-rotation = 0.0
 scale = Vector2( 2, 2 )
-scroll_offset = Vector2( 0, 0 )
-scroll_base_offset = Vector2( 0, 0 )
-scroll_base_scale = Vector2( 1, 1 )
-scroll_limit_begin = Vector2( 0, 0 )
-scroll_limit_end = Vector2( 0, 0 )
+transform = Transform2D( 2, 0, 0, 2, -256, -356 )
 scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-
 z_index = -2
 motion_scale = Vector2( 0.1, 0.1 )
-motion_offset = Vector2( 0, 0 )
-motion_mirroring = Vector2( 0, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxLayer"]
-
 position = Vector2( 505.344, 284.945 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
+

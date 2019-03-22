@@ -4,7 +4,7 @@ extends RigidBody2D
 export(NodePath) var spriteContainerPath = './Boing'; 
 export(NodePath) var soundPlayer = './SamplePlayer2D'; 
 
-var state = Dictionary() setget get_state,set_state; 
+var state = Dictionary() setget set_state,get_state; 
 var acceleration = 2;
 var maxSpeed=20;
 var heavyScale = 9.8;
@@ -44,7 +44,7 @@ func _physics_process(delta):
 		lastContact = null;
 
 func on_contact(body):
-	if(body != lastContact): 
+	if(body != lastContact && body): 
 		self.get_node(soundPlayer).play();
 		lastContact = body;
 		

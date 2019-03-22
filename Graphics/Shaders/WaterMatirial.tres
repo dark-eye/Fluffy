@@ -1,7 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
 [sub_resource type="Shader" id=1]
-
 code = "shader_type canvas_item;
 
 uniform float amplitode = 0.1;
@@ -14,11 +13,9 @@ uniform vec4 tintColor = vec4(0.2,0.2,1,0.2);
 "
 
 [resource]
-
-render_priority = 0
 shader = SubResource( 1 )
-shader_param/amplitode = null
-shader_param/randomness = null
-shader_param/bounderyColor = null
-shader_param/tintColor = null
+shader_param/amplitode = 0.1
+shader_param/randomness = 0.5
+shader_param/bounderyColor = Plane( 1, 1, 1, 0.5 )
+shader_param/tintColor = Plane( 0.2, 0.2, 1, 0.2 )
 

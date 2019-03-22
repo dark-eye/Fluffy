@@ -298,5 +298,5 @@ func forward_canvas_gui_input(event):
 func forward_gui_input(event):
 	if editor == null:
 		return false
-	return forward_canvas_gui_input(editor.get_viewport().get_global_canvas_transform(), event)
+	return forward_canvas_gui_input(event)
 

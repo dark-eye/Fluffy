@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Characters/Boing.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sounds/boing.ogg" type="AudioStream" id=2]
@@ -6,12 +6,11 @@
 [ext_resource path="res://Graphics/Charcters/hairy_ball_righteye.tex" type="Texture" id=4]
 [ext_resource path="res://Scripts/Characters/BoingEye.gd" type="Script" id=5]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.25
 
-resource_name = "coming_back"
+[sub_resource type="Animation" id=2]
 length = 0.5
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
@@ -25,11 +24,8 @@ tracks/0/keys = {
 "values": [ Vector2( 0.1, 0.1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-
+[sub_resource type="Animation" id=3]
 length = 3.0
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
@@ -55,109 +51,64 @@ tracks/1/keys = {
 "values": [ 0.0, 0.0 ]
 }
 
-[sub_resource type="CircleShape2D" id=3]
-
-custom_solver_bias = 0.0
+[sub_resource type="CircleShape2D" id=4]
 radius = 9.21783
 
-[sub_resource type="OccluderPolygon2D" id=4]
-
-closed = true
+[sub_resource type="OccluderPolygon2D" id=5]
 cull_mode = 1
 polygon = PoolVector2Array( -0.0538123, 0.195219, -0.0405843, 0.23595, -0.0116187, 0.265266, 0.0208649, 0.271351, 0.0478025, 0.265266, 0.0771169, 0.232304, 0.088605, 0.183622, 0.0806822, 0.140012, 0.0520121, 0.103688, 0.0141155, 0.0963651, -0.0266411, 0.115129, -0.0505947, 0.148996 )
 
-[node name="Boing" type="RigidBody2D" index="0" groups=[
+[node name="Boing" type="RigidBody2D" groups=[
 "Player",
 ]]
-
 input_pickable = true
-collision_layer = 1
-collision_mask = 1
 mode = 2
-mass = 1.0
-friction = 1.0
-bounce = 0.25
+physics_material_override = SubResource( 1 )
 gravity_scale = 9.8
-custom_integrator = false
 continuous_cd = 2
 contacts_reported = 5
 contact_monitor = true
-sleeping = false
 can_sleep = false
-linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
-angular_velocity = 0.0
-angular_damp = -1.0
 script = ExtResource( 1 )
-spriteContainerPath = NodePath("./Boing")
 soundPlayer = NodePath("SamplePlayer2D")
 
-[node name="Tween" type="Tween" parent="." index="0"]
+[node name="Tween" type="Tween" parent="."]
 
-repeat = false
-playback_process_mode = 1
-playback_speed = 1.0
-playback/active = false
-playback/repeat = false
-playback/speed = 1.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/coming_back = SubResource( 2 )
+anims/going_away = SubResource( 3 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
-anims/coming_back = SubResource( 1 )
-anims/going_away = SubResource( 2 )
-blend_times = [  ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.381989, -0.0359344 )
 scale = Vector2( 3.05517, 2.9637 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
-[node name="SamplePlayer2D" type="AudioStreamPlayer2D" parent="." index="3"]
-
+[node name="SamplePlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
 
-[node name="Boing" type="Node2D" parent="." index="4"]
+[node name="Boing" type="Node2D" parent="."]
 
-[node name="body" type="Sprite" parent="Boing" index="0"]
-
+[node name="body" type="Sprite" parent="Boing"]
 position = Vector2( 0.902466, 0 )
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 64, 65 )
 
-[node name="eye right" type="Sprite" parent="Boing" index="1"]
-
+[node name="eye right" type="Sprite" parent="Boing"]
 position = Vector2( 8.70303, -7.90561 )
 rotation = 0.00160734
 texture = ExtResource( 4 )
 script = ExtResource( 5 )
 
-[node name="eye left" type="Sprite" parent="Boing" index="2"]
-
+[node name="eye left" type="Sprite" parent="Boing"]
 position = Vector2( -11.297, -7.90561 )
 rotation = 0.00160734
 texture = ExtResource( 4 )
 script = ExtResource( 5 )
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Boing" index="3"]
-
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Boing"]
 modulate = Color( 1, 1, 1, 0.5 )
 self_modulate = Color( 1, 1, 1, 0 )
 position = Vector2( -6.34595, -57.3992 )
 scale = Vector2( 398.294, 311.141 )
-occluder = SubResource( 4 )
-light_mask = 1
-
+occluder = SubResource( 5 )
 

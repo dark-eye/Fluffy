@@ -11,5 +11,5 @@ dest_files=[ "res://.import/boing.ogg-92a250e35ff64db203ace2a5c3e26366.oggstr" ]
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/switch_top.png-e4b83d9ea51f3e5cf848ffcbd4d58533.stex"
+path="res://.import/whiteLight.png-3c710fc59883df7a9d6097ffc1f7a7ad.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/GameObjects/Switch/switch_top.png"
-dest_files=[ "res://.import/switch_top.png-e4b83d9ea51f3e5cf848ffcbd4d58533.stex" ]
+source_file="res://Graphics/Environment/whiteLight.png"
+dest_files=[ "res://.import/whiteLight.png-3c710fc59883df7a9d6097ffc1f7a7ad.stex" ]
 
 [params]
 
