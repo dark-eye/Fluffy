@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Control/Main.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Control/LevelController.gd" type="Script" id=2]
@@ -6,10 +6,7 @@
 [ext_resource path="res://Scenes/Partials/Characters/Boing.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Partials/General/Camera2D.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Partials/UI/Timer.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scripts/Control/InputControls.gd" type="Script" id=7]
-[ext_resource path="res://Graphics/Temporary/UI/rotate_left.png" type="Texture" id=8]
-[ext_resource path="res://Graphics/Temporary/UI/rotate_right.png" type="Texture" id=9]
-[ext_resource path="res://Graphics/Temporary/UI/up.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/Partials/UI/InputControls.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -72,57 +69,5 @@ margin_bottom = -560.0
 
 [node name="Clock" parent="UI/Container" instance=ExtResource( 6 )]
 
-[node name="InputControls" type="Container" parent="UI/Container"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 9.0
-margin_top = 423.0
-margin_right = 984.0
-margin_bottom = 537.0
-size_flags_horizontal = 3
-script = ExtResource( 7 )
-jumpPath = NodePath("LeftButtonGroup/Jump")
-leftPath = NodePath("RightButtonGroup/RollLeft")
-rightPath = NodePath("RightButtonGroup/RollRight")
-characterControllerPath = NodePath("../../../Charcter Control")
-
-[node name="RightButtonGroup" type="MarginContainer" parent="UI/Container/InputControls"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -1015.0
-margin_top = -154.0
-margin_right = -17.0
-margin_bottom = -10.0
-rect_min_size = Vector2( 150, 50 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 15.0
-
-[node name="RollLeft" type="TouchScreenButton" parent="UI/Container/InputControls/RightButtonGroup"]
-position = Vector2( 729.994, 16.4043 )
-scale = Vector2( 0.25, 0.25 )
-normal = ExtResource( 8 )
-passby_press = true
-
-[node name="RollRight" type="TouchScreenButton" parent="UI/Container/InputControls/RightButtonGroup"]
-position = Vector2( 864.146, 16.4044 )
-scale = Vector2( 0.25, 0.25 )
-normal = ExtResource( 9 )
-passby_press = true
-
-[node name="LeftButtonGroup" type="MarginContainer" parent="UI/Container/InputControls"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 30.0
-margin_top = -154.0
-margin_right = -893.0
-
-[node name="Jump" type="TouchScreenButton" parent="UI/Container/InputControls/LeftButtonGroup"]
-position = Vector2( -6.15167, 16.4044 )
-scale = Vector2( 0.12, 0.12 )
-normal = ExtResource( 10 )
-passby_press = true
+[node name="InputControls" parent="UI/Container" instance=ExtResource( 7 )]
 

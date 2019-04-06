@@ -1,18 +1,32 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Graphics/Environment/scenery.jpg" type="Texture" id=1]
+[ext_resource path="res://Graphics/Environment/scenery_front.png" type="Texture" id=1]
+[ext_resource path="res://Graphics/Environment/scenery.jpg" type="Texture" id=2]
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
-offset = Vector2( -256, -356 )
+offset = Vector2( -128, -256 )
+transform = Transform2D( 1, 0, 0, 1, -128, -256 )
+scroll_base_scale = Vector2( 1, 0 )
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+z_index = -1
+motion_scale = Vector2( 0.5, 0.2 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer2"]
+position = Vector2( 506.636, 418.057 )
 scale = Vector2( 2, 2 )
-transform = Transform2D( 2, 0, 0, 2, -256, -356 )
+texture = ExtResource( 1 )
+flip_h = true
+region_enabled = true
+region_rect = Rect2( 0, 0, 2048, 256 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 z_index = -2
-motion_scale = Vector2( 0.1, 0.1 )
+motion_scale = Vector2( 0.2, 0.2 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxLayer"]
 position = Vector2( 505.344, 284.945 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 1 )
+scale = Vector2( 5, 3 )
+texture = ExtResource( 2 )
 

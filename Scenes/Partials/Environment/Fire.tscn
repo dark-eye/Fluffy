@@ -1,67 +1,102 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Graphics/Environment/fire.jpeg" type="Texture" id=1]
-[ext_resource path="res://Graphics/Environment/whiteLight.png" type="Texture" id=2]
+[ext_resource path="res://Graphics/Transparent.png" type="Texture" id=1]
+[ext_resource path="res://Graphics/Environment/fire_particale.png" type="Texture" id=2]
+[ext_resource path="res://Graphics/Environment/whiteLight.png" type="Texture" id=3]
 
-[sub_resource type="GDScript" id=12]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
+export(float,0,0.99) var flameFrequency = 0.75 setget _set_bubbles_frequency;
+
+onready var flame = $Flame;
+onready var flameContainer = $FlamesContainer;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+	
+	
+func _enter_tree():
+	flame = self.find_node( 'Flame' );
+	flameContainer = self.find_node( 'FlamesContainer' );
+	span_fire(flame);
+	
+func span_fire(flameInstance):
+	if(!flameInstance):
+		return;
+		
+	var mysize = Vector2(1.0,1.0); #self.get_scale();
+	var width = self.texture.get_size().x / mysize.x;
+	var height = self.texture.get_size().y / mysize.y / 2;
+	var padding = (mysize.x*0.05);
+	var i=padding;
+	var halfStart = -(width/2) ;
+	while( i < mysize.x - padding && flameFrequency > 0 && flameFrequency < 0.99):
+		i += mysize.x*(1-flameFrequency);
+		if(i < mysize.x - padding):
+			var newFlame = flameInstance.duplicate();
+			flameContainer.add_child(newFlame);
+			newFlame.set_position( Vector2(halfStart+i*width,height));
+			#newFlame.find_node('Fire').set_emitting(true);
+			#newFlame.find_node('Smoke').set_emitting(true);
+			#newFlame.find_node('Light').set_enabled(true);
+			newFlame.visible = true;
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-"
 
-[sub_resource type="Gradient" id=1]
+func _set_bubbles_frequency(newValue):
+	flameFrequency = newValue;
+	flame = self.find_node( 'Flame' );
+	flameContainer = self.find_node( 'FlamesContainer' );
+	span_fire(flame);
+	"
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 1, 1, 0.0627451, 0.605469, 0.0733185, 0.0733185, 0.0313726 )
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=5]
 _data = [ Vector2( 0.00228526, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.121075, 0.7552 ), 4.71964, 4.71964, 0, 0, Vector2( 0.412787, 0.8168 ), -1.49711, -1.49711, 0, 0, Vector2( 0.996211, 0.0072 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=7]
 emission_shape = 1
 emission_sphere_radius = 9.72
 flag_disable_z = true
 spread = 15.0
 gravity = Vector3( 0, -98, 0 )
-angular_velocity = 360.0
+angular_velocity = 45.0
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.2
 scale_random = 0.42
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 2 )
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0, 0.758887, 1 )
-colors = PoolColorArray( 0.546875, 0.108948, 0.108948, 0.0627451, 0.131859, 0.0262687, 0.0262687, 0.0389369, 0, 0, 0, 0 )
+colors = PoolColorArray( 0.545098, 0.109804, 0.109804, 0.0313726, 0.131859, 0.0262687, 0.0262687, 0.0389369, 0, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=7]
-gradient = SubResource( 6 )
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
 
-[sub_resource type="Curve" id=8]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.657885, 0.4824 ), 1.56063, 1.56063, 0, 0, Vector2( 1, 0.5616 ), -1.18675, 0.0, 0, 0 ]
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0, 0.148 ), 0.0, 0.0, 0, 0, Vector2( 0.631455, 0.412 ), 0.344758, 0.344758, 0, 0, Vector2( 1, 0.0951999 ), 0.399094, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=9]
-curve = SubResource( 8 )
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=12]
 emission_shape = 1
-emission_sphere_radius = 5.0
+emission_sphere_radius = 20.0
 flag_disable_z = true
 spread = 15.0
 gravity = Vector3( 0, -45, 0 )
@@ -69,42 +104,53 @@ angular_velocity = 45.0
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+scale = 0.75
 scale_random = 0.08
-scale_curve = SubResource( 9 )
-color_ramp = SubResource( 7 )
+scale_curve = SubResource( 11 )
+color_ramp = SubResource( 9 )
 
-[sub_resource type="StreamTexture" id=11]
+[sub_resource type="StreamTexture" id=13]
 flags = 7
 load_path = "res://.import/fire.jpeg-f59d34758a349c5eb6d7881b8667a0fe.stex"
 
-[node name="Fire" type="Node2D"]
-script = SubResource( 12 )
+[node name="Fire" type="Sprite"]
+texture = ExtResource( 1 )
+script = SubResource( 1 )
+flameFrequency = 0.925
 
-[node name="Fire" type="Particles2D" parent="."]
+[node name="Flame" type="Node2D" parent="."]
+visible = false
+
+[node name="Fire" type="Particles2D" parent="Flame"]
+material = SubResource( 2 )
 z_index = 1
-amount = 25
+amount = 15
 lifetime = 2.0
 preprocess = 25.0
 randomness = 0.18
 local_coords = false
 draw_order = 1
-process_material = SubResource( 5 )
-texture = ExtResource( 1 )
+process_material = SubResource( 7 )
+texture = ExtResource( 2 )
 
-[node name="Smoke" type="Particles2D" parent="."]
-position = Vector2( -0.966369, -133.163 )
-rotation = 1.55646
-amount = 25
-lifetime = 4.0
+[node name="Smoke" type="Particles2D" parent="Flame"]
+position = Vector2( -0.503082, -56.7201 )
+rotation = 3.13276
+z_index = -1
+amount = 15
+lifetime = 3.0
 randomness = 0.18
 local_coords = false
 draw_order = 1
-process_material = SubResource( 10 )
-texture = SubResource( 11 )
+process_material = SubResource( 12 )
+texture = SubResource( 13 )
 
-[node name="Light2D" type="Light2D" parent="."]
+[node name="FlamesContainer" type="Node2D" parent="."]
+
+[node name="Light" type="Light2D" parent="."]
 position = Vector2( 0, -15 )
 z_index = -1
-texture = ExtResource( 2 )
+enabled = false
+texture = ExtResource( 3 )
 energy = 0.5
 

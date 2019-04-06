@@ -1,8 +1,8 @@
 tool
 extends Sprite
 
-export(ImageTexture) var displacement_map setget _set_dispmap;
-export(ImageTexture) var background_displacement setget _set_background_displacement;
+export(StreamTexture) var displacement_map setget _set_dispmap;
+export(StreamTexture) var background_displacement setget _set_background_displacement;
 export(Color) var water_color setget _set_water_color;
 export(float,0,1) var displacement_effect = 0.02 setget _set_dispeffect;
 export(float,0,1) var amplitudo = 0.005 setget _set_amplitudo;
@@ -39,13 +39,13 @@ func update_water():
 
 func add_bubbles(bubbles_instance):
 	
-	var mysize = self.get_scale();
+	var mysize = Vector2(1.0,1.0); #self.get_scale();
 	var width = self.texture.get_size().x / mysize.x;
 	var height = self.texture.get_size().y / mysize.y / 2;
 	var padding = (mysize.x*0.05);
 	var i=padding;
 	var halfStart = -(width/2) ;
-	while( i < mysize.x - padding && bubbles_frequency > 0):
+	while( i < mysize.x - padding && bubbles_frequency > 0 && bubbles_frequency < 0.99):
 		i += mysize.x*((1-bubbles_frequency)+(((bubbles_randomness/2) - randf()*bubbles_randomness))/10);
 		if(i < mysize.x - padding):
 			var new_bubs = bubbles.duplicate();
