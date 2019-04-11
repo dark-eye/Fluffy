@@ -5,7 +5,7 @@ export(NodePath) var spriteContainerPath = './Boing';
 export(NodePath) var soundPlayer = './SamplePlayer2D'; 
 
 var state = Dictionary() setget set_state,get_state; 
-var acceleration = 2;
+var acceleration = 2.5;
 var maxSpeed=20;
 var heavyScale = 9.8;
 var floatScale = -3.5;
@@ -21,6 +21,9 @@ func _ready():
 	
 	
 func _process(delta):
+	if(state.has('rollForce') && state.rollForce):
+			self.set_angular_velocity( max(min(self.get_angular_velocity() + state.rollForce * acceleration ,maxSpeed),-maxSpeed));
+
 	if(state.has('left') && state.left):
 		self.set_angular_velocity( max(self.get_angular_velocity() - acceleration ,-maxSpeed));
 		#self.apply_impulse( Vector2(0,0), Vector2(-2,0) );

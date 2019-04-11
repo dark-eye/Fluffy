@@ -33,3 +33,6 @@ func _ready():
 	self.right.connect("released", self.characterController,"rollRight", [false]);
 	self.jump.connect("released", self.characterController,"floatUp", [false]);
 
+func analog_force_change(force,inputName):
+	if(inputName == "Player") :
+		self.characterController.roll(force.x);

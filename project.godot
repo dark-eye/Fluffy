@@ -20,9 +20,15 @@ _global_script_class_icons={
 
 [application]
 
-config/name="boing"
+config/name="Fluffy"
 run/main_scene="res://boing.scn"
+run/low_processor_mode=true
 config/icon="res://icon.png"
+
+[debug]
+
+settings/fps/force_fps=30
+settings/stdout/print_fps=true
 
 [display]
 
@@ -34,7 +40,11 @@ driver="GLES2"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "khairul169.2dwater", "platform2d" )
+enabled=PoolStringArray( "khairul169.2dwater", "paulloz.colorblindness", "platform2d" )
+
+[gui]
+
+theme/use_hidpi=true
 
 [importer_defaults]
 

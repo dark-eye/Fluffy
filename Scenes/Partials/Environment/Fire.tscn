@@ -12,6 +12,8 @@ export(float,0,0.99) var flameFrequency = 0.75 setget _set_bubbles_frequency;
 onready var flame = $Flame;
 onready var flameContainer = $FlamesContainer;
 
+var lightToFlameRatio = 0.05;
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -25,7 +27,8 @@ func _enter_tree():
 func span_fire(flameInstance):
 	if(!flameInstance):
 		return;
-		
+	var lightInstance = self.find_node( 'Light' );
+	
 	var mysize = Vector2(1.0,1.0); #self.get_scale();
 	var width = self.texture.get_size().x / mysize.x;
 	var height = self.texture.get_size().y / mysize.y / 2;
@@ -38,10 +41,12 @@ func span_fire(flameInstance):
 			var newFlame = flameInstance.duplicate();
 			flameContainer.add_child(newFlame);
 			newFlame.set_position( Vector2(halfStart+i*width,height));
-			#newFlame.find_node('Fire').set_emitting(true);
-			#newFlame.find_node('Smoke').set_emitting(true);
-			#newFlame.find_node('Light').set_enabled(true);
 			newFlame.visible = true;
+			if( fmod(i*width,(mysize.x*(1-flameFrequency)*lightToFlameRatio)) == 0):
+				var newLight = lightInstance.duplicate();
+				flameContainer.add_child(newLight);
+				newLight.set_position( Vector2(halfStart+i*width,height));
+				newLight.visible = true;
 
 
 func _set_bubbles_frequency(newValue):
@@ -145,12 +150,18 @@ draw_order = 1
 process_material = SubResource( 12 )
 texture = SubResource( 13 )
 
-[node name="FlamesContainer" type="Node2D" parent="."]
-
 [node name="Light" type="Light2D" parent="."]
+visible = false
 position = Vector2( 0, -15 )
 z_index = -1
-enabled = false
 texture = ExtResource( 3 )
-energy = 0.5
+texture_scale = 5.0
+color = Color( 1, 0.447059, 0, 1 )
+energy = 0.15
+range_height = 50.0
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 0.498039 )
+shadow_gradient_length = 4.0
+
+[node name="FlamesContainer" type="Node2D" parent="."]
 

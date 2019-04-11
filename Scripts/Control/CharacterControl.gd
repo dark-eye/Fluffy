@@ -43,6 +43,11 @@ func rollLeft(value):
 	state.left = value;
 	self.getPlayer().set_state(state);
 
+func roll(value):
+	var state = self.getPlayer().get_state();
+	state.rollForce = value;
+	self.getPlayer().set_state(state);	
+
 func floatUp(value):
 	var state = self.getPlayer().get_state();
 	state.floating = value;
