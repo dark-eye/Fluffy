@@ -4,6 +4,8 @@ extends RigidBody2D
 export(NodePath) var spriteContainerPath = './Boing'; 
 export(NodePath) var soundPlayer = './SamplePlayer2D'; 
 
+onready var TweenNode = $Tween
+
 var state = Dictionary() setget set_state,get_state; 
 var acceleration = 2.5;
 var maxSpeed=20;
@@ -11,8 +13,10 @@ var heavyScale = 9.8;
 var floatScale = -3.5;
 var lastContact = null;
 var lastContactCountAvg = 0.0;
+var spriteContainer = null;
 
 func _ready():
+	self.spriteContainer = self.get_node(spriteContainerPath);
 	self.set_process(true);
 	self.set_physics_process(true);
 	self.set_contact_monitor(true);
@@ -34,12 +38,8 @@ func _process(delta):
 	
 	if(state.has('floating') && state.floating):
 		self.set_gravity_scale( floatScale );
-		#self.apply_impulse( Vector2(0,0), Vector2(0,-20) );
-		self.get_node(spriteContainerPath).set_scale( Vector2(1.2,1.2));
 	else:
 		self.set_gravity_scale( heavyScale );
-		self.get_node(spriteContainerPath).set_scale( Vector2(1,1));
-	
 
 func _physics_process(delta):
 	lastContactCountAvg = lastContactCountAvg + (float(self.get_colliding_bodies().size())/2) - (lastContactCountAvg / 35)
@@ -60,6 +60,21 @@ func on_body_exit(body):
 	pass
 
 
+func update_view():
+	if(state.has('floating') && state.floating):
+		TweenNode.interpolate_property(	self.spriteContainer,
+										"scale",
+										self.spriteContainer.get_scale(),Vector2(1.5,1.5),
+										0.5,Tween.TRANS_ELASTIC,Tween.EASE_OUT);
+		TweenNode.start()
+	else:
+		TweenNode.interpolate_property(	self.spriteContainer,
+										"scale",
+										self.spriteContainer.get_scale(),Vector2(1.0,1.0),
+										0.5,Tween.TRANS_ELASTIC,Tween.EASE_OUT);
+		TweenNode.start()
+
+
 #########################################
 
 func resetTo(x,y):
@@ -76,6 +91,8 @@ func get_state():
 
 func set_state(newState):
 	state = newState;
+	update_view();
+	
 
 
 

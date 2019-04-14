@@ -43,6 +43,7 @@ func player_at_end_gate():
 		get_player_controller().getPlayer().find_node('AnimationPlayer').play('going_away');
 		getCamera().find_node('CameraAnimation').play('end_level');
 		self.find_node("Clock",true).pause();
+		
 
 func level_loaded(idx,levelScene):
 	

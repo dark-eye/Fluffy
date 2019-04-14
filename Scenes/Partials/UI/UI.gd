@@ -11,8 +11,12 @@ func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+#warning-ignore:unused_argument
 func _process(delta):
-	uiContainer.rect_scale =  self.get_viewport().size / Vector2(1024,600);
-	uiContainer.rect_size =  self.get_viewport().size / (uiContainer.rect_scale*30);
+	#TODO move this to viewport size_changed signal
+	var rescale = self.get_viewport().size / Vector2(1024,600);
+	uiContainer.rect_scale =   Vector2(rescale.x,rescale.x) if rescale.x < rescale.y  else  Vector2(rescale.y,rescale.y);
+	uiContainer.rect_size =   self.get_viewport().size / (uiContainer.rect_scale);
+	#uiContainer.rect_position = (self.get_viewport().size - uiContainer.rect_size)/2
 	
 
