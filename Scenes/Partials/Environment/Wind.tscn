@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Graphics/Environment/fire.jpeg" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "tool
+extends Node2D
+
+export(Vector2) var windVector = Vector2(0.5,0) setget set_wind_vector;
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func _enter_tree():
+	if !self.find_node(\"WindAreaPolygon\"):
+		var placeholderPoly = $Placeholders.PlaceholderPolygon.duplicate();
+		placeholderPoly.name = \"WindAreaPolygon\";
+		placeholderPoly.visible = true;
+		placeholderPoly.material.set_shader_param('windVector',windVector);
+		self.add_child(placeholderPoly);
+		
+
+func set_wind_vector(value):
+	self.windVector = value;
+	if self.find_node(\"WindAreaPolygon\"):
+		self.find_node(\"WindAreaPolygon\").material.set_shader_param('windVector',windVector);"
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+render_mode blend_add;
+
+uniform sampler2D windTex;
+uniform sampler2D gustTex;
+uniform vec4 baseColor : hint_color = vec4(0,0,0,0.1);
+uniform vec2 windVector = vec2(1,0);
+
+void fragment() {
+	vec2 timedVector = windVector * TIME;
+	COLOR =  baseColor * texture(windTex,SCREEN_UV + timedVector);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/baseColor = Color( 0, 0.392157, 1, 0.168627 )
+shader_param/windVector = Vector2( 1, 0 )
+shader_param/windTex = ExtResource( 1 )
+
+[node name="Wind" type="Area2D"]
+script = SubResource( 1 )
+windVector = Vector2( 1, 0 )
+
+[node name="Placeholders" type="Node" parent="."]
+
+[node name="PlaceholderPolygon" type="CollisionPolygon2D" parent="Placeholders"]
+material = SubResource( 3 )
+polygon = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
+

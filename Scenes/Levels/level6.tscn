@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://addons/platform2d/thin_platform.gd" type="Script" id=1]
 [ext_resource path="res://addons/platform2d/thin_platform_icon.png" type="Texture" id=2]
@@ -9,62 +9,41 @@
 [ext_resource path="res://addons/platform2d/textures/simple_rock_top.png" type="Texture" id=7]
 [ext_resource path="res://addons/platform2d/textures/simple_rock_topright.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/Partials/GameObjects/EndGate.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Partials/ParallaxBackground.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Partials/Environment/Wind.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Curve2D" id=1]
-
 bake_interval = 50.0
 _data = {
 "points": PoolVector2Array( 0, 0, 1193.86, 2619.46, 796.763, 968.526, -1566.06, 2682.67, 424.932, 483.638, 4603.06, 961.503 )
 }
 
 [sub_resource type="Curve2D" id=2]
-
 bake_interval = 50.0
 _data = {
 "points": PoolVector2Array( 0, 0, 147.846, -451.32, -564.399, 137.352, -443.959, 5.1626, 424.932, 483.638, 571.068, -203.103 )
 }
 
 [sub_resource type="Curve2D" id=3]
-
 bake_interval = 50.0
 _data = {
 "points": PoolVector2Array( 0, 0, 120.253, -91.8602, -497.727, -98.5362, -212.492, 24.3536, 212.492, -24.3536, -65.4639, -236.19, 0, 0, 424.932, 483.638, 560.953, -267.103 )
 }
 
-[node name="level_name" type="Node2D" index="0"]
+[node name="level_name" type="Node2D"]
 
-[node name="SpawnPoint" type="Node2D" parent="." index="0"]
-
+[node name="SpawnPoint" type="Node2D" parent="."]
 position = Vector2( 398.512, 479.623 )
 
-[node name="Bounds" type="Container" parent="." index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Bounds" type="Container" parent="."]
 margin_left = -6.0
 margin_right = 4842.0
 margin_bottom = 3368.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 
-[node name="Environment" type="Node2D" parent="." index="2"]
+[node name="Environment" type="Node2D" parent="."]
 
-[node name="ThinPlatform" type="StaticBody2D" parent="Environment" index="0"]
-
+[node name="ThinPlatform" type="StaticBody2D" parent="Environment"]
 position = Vector2( -807.601, -158.449 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
@@ -83,21 +62,11 @@ RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/ThinPlatform" index="0"]
-
-build_mode = 0
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/ThinPlatform"]
 polygon = PoolVector2Array( 796.763, 968.526, 817.384, 1013.55, 1129.54, 1638.14, 1153.39, 1681.3, 1358.19, 2023.6, 1385.63, 2065.56, 1529.13, 2269.51, 1559.58, 2309.42, 1687.52, 2464.05, 1721.06, 2501.07, 1790.57, 2573.13, 1826.56, 2607.96, 1901.36, 2674.94, 1939.85, 2706.56, 1979.42, 2737.04, 2019.74, 2766, 2061.5, 2793.76, 2104.37, 2819.91, 2148.02, 2844.09, 2192.81, 2866.34, 2238.76, 2886.5, 2285.53, 2904.26, 2333.14, 2919.48, 2381.25, 2931.97, 2430.23, 2941.73, 2480.1, 2948.61, 2529.81, 2952.44, 2580.08, 2953.28, 2630.21, 2951.1, 2679.84, 2946.03, 2729.35, 2938.1, 2777.99, 2927.56, 2826.51, 2914.38, 2874.17, 2898.87, 2920.6, 2881.35, 2966.88, 2861.56, 3012.29, 2839.92, 3056.42, 2816.8, 3099.66, 2792.2, 3184.13, 2738.67, 3224.96, 2710.24, 3304.94, 2649.9, 3382.21, 2585.88, 3493.05, 2484.58, 3564.26, 2413.83, 3732.83, 2229.53, 3828.75, 2114.65, 4099.49, 1754.37, 4238.95, 1549.67, 4581.68, 998.02, 4603.06, 961.503, 4603.06, 1041.5, 4581.68, 1078.02, 4238.95, 1629.67, 4099.49, 1834.37, 3828.75, 2194.65, 3732.83, 2309.53, 3564.26, 2493.83, 3493.05, 2564.58, 3382.21, 2665.88, 3304.94, 2729.9, 3224.96, 2790.24, 3184.13, 2818.67, 3099.66, 2872.2, 3056.42, 2896.8, 3012.29, 2919.92, 2966.88, 2941.56, 2920.6, 2961.35, 2874.17, 2978.87, 2826.51, 2994.38, 2777.99, 3007.56, 2729.35, 3018.1, 2679.84, 3026.03, 2630.21, 3031.1, 2580.08, 3033.28, 2529.81, 3032.44, 2480.1, 3028.61, 2430.23, 3021.73, 2381.25, 3011.97, 2333.14, 2999.48, 2285.53, 2984.26, 2238.76, 2966.5, 2192.81, 2946.34, 2148.02, 2924.09, 2104.37, 2899.91, 2061.5, 2873.76, 2019.74, 2846, 1979.42, 2817.04, 1939.85, 2786.56, 1901.36, 2754.94, 1826.56, 2687.96, 1790.57, 2653.13, 1721.06, 2581.07, 1687.52, 2544.05, 1559.58, 2389.42, 1529.13, 2349.51, 1385.63, 2145.56, 1358.19, 2103.6, 1153.39, 1761.3, 1129.54, 1718.14, 817.384, 1093.55, 796.763, 1048.53 )
 
-[node name="ThinPlatform 3" type="StaticBody2D" parent="Environment" index="1"]
-
+[node name="ThinPlatform 3" type="StaticBody2D" parent="Environment"]
 position = Vector2( 3899.98, 487.913 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
@@ -116,21 +85,11 @@ RightOverflow = 0.0
 Thickness = 60.0
 Position = 0.5
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/ThinPlatform 3" index="0"]
-
-build_mode = 0
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/ThinPlatform 3"]
 polygon = PoolVector2Array( -564.399, 137.352, -546.794, 90.4989, -524.932, 45.5768, -498.482, 3.16702, -467.349, -36.0002, -431.738, -71.2352, -392.227, -101.995, -349.526, -128.121, -304.515, -149.701, -257.657, -167.199, -209.53, -181.05, -160.604, -191.729, -111.209, -199.711, -61.6471, -205.425, 38.2307, -211.609, 538.431, -202.932, 571.068, -203.103, 571.068, -143.103, 538.431, -142.932, 38.2307, -151.609, -61.6471, -145.425, -111.209, -139.711, -160.604, -131.729, -209.53, -121.05, -257.657, -107.199, -304.515, -89.7012, -349.526, -68.1213, -392.227, -41.9951, -431.738, -11.2352, -467.349, 23.9998, -498.482, 63.167, -524.932, 105.577, -546.794, 150.499, -564.399, 197.352 )
 
-[node name="ThinPlatform 2" type="StaticBody2D" parent="Environment" index="2"]
-
+[node name="ThinPlatform 2" type="StaticBody2D" parent="Environment"]
 position = Vector2( 4293.45, 908.061 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
@@ -149,17 +108,16 @@ RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/ThinPlatform 2" index="0"]
-
-build_mode = 0
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/ThinPlatform 2"]
 polygon = PoolVector2Array( -497.727, -98.5362, -456.948, -127.487, -413.919, -152.97, -368.684, -174.196, -321.631, -191.022, -273.31, -204.016, -224.296, -214.093, -65.4639, -236.19, 84.0358, -248.938, 533.798, -266.596, 560.953, -267.103, 560.953, -187.103, 533.798, -186.596, 84.0358, -168.938, -65.4639, -156.19, -224.296, -134.093, -273.31, -124.016, -321.631, -111.022, -368.684, -94.196, -413.919, -72.9701, -456.948, -47.4872, -497.727, -18.5362 )
 
-[node name="EndGate" parent="Environment" index="3" instance=ExtResource( 9 )]
-
+[node name="EndGate" parent="Environment" instance=ExtResource( 9 )]
 position = Vector2( 4540.71, 573.162 )
 scale = Vector2( 1, 1 )
-audio_bus_override = false
-audio_bus_name = "Master"
 isopen = true
 
+[node name="ParallaxBackground" parent="Environment" instance=ExtResource( 10 )]
+
+[node name="Wind" parent="." instance=ExtResource( 11 )]
+position = Vector2( -1646.53, 1510.52 )
 

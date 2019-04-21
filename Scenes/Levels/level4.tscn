@@ -68,10 +68,17 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
+MovingPlatform = false
 curve = SubResource( 1 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 4 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 5 )
+MidTextureNormal = null
 RightTexture = ExtResource( 6 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 60.0
 Position = 0.0
 
@@ -87,9 +94,15 @@ __meta__ = {
 }
 MovingPlatform = true
 curve = SubResource( 2 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 7 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 8 )
+MidTextureNormal = null
 RightTexture = ExtResource( 9 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
@@ -103,10 +116,17 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
+MovingPlatform = false
 curve = SubResource( 3 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 4 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 5 )
+MidTextureNormal = null
 RightTexture = ExtResource( 6 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 60.0
 Position = 0.0
 
@@ -120,10 +140,17 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
+MovingPlatform = false
 curve = SubResource( 4 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 7 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 8 )
+MidTextureNormal = null
 RightTexture = ExtResource( 9 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
@@ -137,10 +164,17 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
+MovingPlatform = false
 curve = SubResource( 5 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 7 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 8 )
+MidTextureNormal = null
 RightTexture = ExtResource( 9 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
@@ -153,11 +187,12 @@ polygon = PoolVector2Array( -584.278, -203.103, -534.478, -198.033, -335.296, -1
 [node name="Fire" parent="." instance=ExtResource( 11 )]
 position = Vector2( 1456.21, 530.148 )
 scale = Vector2( 1.69631, 0.467403 )
-flameFrequency = 0.88
-lightToFlameRatio = 1.0
+flameFrequency = 0.851
+lightToFlameRatio = 0.0
 
 [node name="Fire2" parent="." instance=ExtResource( 11 )]
 position = Vector2( 3447.55, 507.122 )
 scale = Vector2( 1.47645, 0.447735 )
-flameFrequency = 0.9
+flameFrequency = 0.89
+lightToFlameRatio = 0.0
 
