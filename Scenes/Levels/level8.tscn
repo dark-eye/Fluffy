@@ -1,0 +1,117 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://addons/platform2d/thin_platform.gd" type="Script" id=1]
+[ext_resource path="res://addons/platform2d/thin_platform_icon.png" type="Texture" id=2]
+[ext_resource path="res://addons/platform2d/textures/simple_rock_topleft.png" type="Texture" id=3]
+[ext_resource path="res://addons/platform2d/textures/simple_rock_top.png" type="Texture" id=4]
+[ext_resource path="res://addons/platform2d/textures/simple_rock_topright.png" type="Texture" id=5]
+[ext_resource path="res://addons/platform2d/textures/simple_grass_thinleft.png" type="Texture" id=6]
+[ext_resource path="res://addons/platform2d/textures/simple_grass_thin.png" type="Texture" id=7]
+[ext_resource path="res://addons/platform2d/textures/simple_grass_thinright.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Partials/GameObjects/EndGate.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Partials/ParallaxBackground.tscn" type="PackedScene" id=10]
+
+[sub_resource type="Curve2D" id=1]
+bake_interval = 50.0
+_data = {
+"points": PoolVector2Array( 0, 0, 206.575, -70.3235, -559.837, -156.914, -181.614, -37.8897, 68.769, 14.1701, -5.93768, -230.815, -62.921, 5.55188, 90.6802, 7.40247, 353.684, -164.584, -36.0238, 12.6103, 424.932, 483.638, 573.907, -225.654 )
+}
+
+[sub_resource type="Curve2D" id=2]
+bake_interval = 50.0
+_data = {
+"points": PoolVector2Array( 0, 0, 277, 153.982, -459.626, -281.738, -462.832, 102.448, 424.932, 483.638, 571.068, -203.103 )
+}
+
+[sub_resource type="Curve2D" id=3]
+bake_interval = 50.0
+_data = {
+"points": PoolVector2Array( 0, 0, 449.121, 0, -384.475, -227.651, -432.48, 0.0563049, 424.932, 483.638, 301.918, -219.017 )
+}
+
+[node name="level_name" type="Node2D"]
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2( 481.937, 360.504 )
+
+[node name="Bounds" type="Container" parent="."]
+margin_right = 3237.0
+margin_bottom = 939.0
+
+[node name="Environment" type="Node2D" parent="."]
+position = Vector2( 481.937, 360.504 )
+
+[node name="ThinPlatform2" type="StaticBody2D" parent="Environment"]
+position = Vector2( 1220.85, 212.358 )
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+curve = SubResource( 1 )
+LeftTexture = ExtResource( 3 )
+MidTexture = ExtResource( 4 )
+RightTexture = ExtResource( 5 )
+Thickness = 60.0
+Position = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/ThinPlatform2"]
+visible = false
+polygon = PoolVector2Array( -559.837, -156.914, -512.436, -172.748, -416.744, -202.041, -368.364, -214.866, -319.579, -225.975, -270.339, -234.95, -220.76, -241.336, -170.859, -244.717, -120.886, -244.732, -70.9755, -241.141, -21.4895, -233.874, 238.349, -177.865, 287.622, -169.54, 337.355, -164.338, 353.684, -164.584, 403.674, -166.263, 452.516, -176.974, 499.669, -193.592, 545.502, -213.581, 573.907, -225.654, 573.907, -165.654, 545.502, -153.581, 499.669, -133.592, 452.516, -116.974, 403.674, -106.263, 353.684, -104.584, 337.355, -104.338, 287.622, -109.54, 238.349, -117.865, -21.4895, -173.874, -70.9755, -181.141, -120.886, -184.732, -170.859, -184.717, -220.76, -181.336, -270.339, -174.95, -319.579, -165.975, -368.364, -154.866, -416.744, -142.041, -512.436, -112.748, -559.837, -96.9142 )
+
+[node name="ThinPlatform" type="StaticBody2D" parent="Environment"]
+position = Vector2( 158.228, 567.862 )
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+curve = SubResource( 2 )
+LeftTexture = ExtResource( 6 )
+MidTexture = ExtResource( 7 )
+RightTexture = ExtResource( 8 )
+Thickness = 80.0
+Position = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/ThinPlatform"]
+visible = false
+polygon = PoolVector2Array( -459.626, -281.738, -415.42, -258.313, -370.219, -236.753, -324.151, -217.264, -277.22, -199.958, -229.615, -184.959, -181.282, -172.269, -132.363, -161.904, -83.0328, -153.834, -33.4107, -147.974, 16.448, -144.203, 66.4624, -142.391, 116.526, -142.394, 216.349, -147.229, 266.113, -151.768, 414.749, -172.345, 513.062, -190.76, 561.949, -201.096, 571.068, -203.103, 571.068, -123.103, 561.949, -121.096, 513.062, -110.76, 414.749, -92.3454, 266.113, -71.7682, 216.349, -67.2289, 116.526, -62.3941, 66.4624, -62.3912, 16.448, -64.2033, -33.4107, -67.9737, -83.0328, -73.8342, -132.363, -81.9043, -181.282, -92.2693, -229.615, -104.959, -277.22, -119.958, -324.151, -137.264, -370.219, -156.753, -415.42, -178.313, -459.626, -201.738 )
+
+[node name="ThinPlatform4" type="StaticBody2D" parent="Environment"]
+position = Vector2( 2304.7, 474.004 )
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+curve = SubResource( 3 )
+LeftTexture = ExtResource( 6 )
+MidTexture = ExtResource( 7 )
+RightTexture = ExtResource( 8 )
+Thickness = 80.0
+Position = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/ThinPlatform4"]
+visible = false
+polygon = PoolVector2Array( -384.475, -227.651, -334.366, -227.612, 265.377, -219.034, 301.918, -219.017, 301.918, -139.017, 265.377, -139.034, -334.366, -147.612, -384.475, -147.651 )
+
+[node name="EndGate" parent="Environment" instance=ExtResource( 9 )]
+position = Vector2( 2388.06, 185.136 )
+scale = Vector2( 1, 1 )
+isopen = true
+
+[node name="ThinPlatform3" type="StaticBody2D" parent="Environment"]
+position = Vector2( 1329.11, 351.617 )
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+curve = SubResource( 1 )
+LeftTexture = ExtResource( 3 )
+MidTexture = ExtResource( 4 )
+RightTexture = ExtResource( 5 )
+Thickness = 60.0
+Position = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/ThinPlatform3"]
+visible = false
+polygon = PoolVector2Array( -559.837, -156.914, -512.436, -172.748, -416.744, -202.041, -368.364, -214.866, -319.579, -225.975, -270.339, -234.95, -220.76, -241.336, -170.859, -244.717, -120.886, -244.732, -70.9755, -241.141, -21.4895, -233.874, 238.349, -177.865, 287.622, -169.54, 337.355, -164.338, 353.684, -164.584, 403.674, -166.263, 452.516, -176.974, 499.669, -193.592, 545.502, -213.581, 573.907, -225.654, 573.907, -165.654, 545.502, -153.581, 499.669, -133.592, 452.516, -116.974, 403.674, -106.263, 353.684, -104.584, 337.355, -104.338, 287.622, -109.54, 238.349, -117.865, -21.4895, -173.874, -70.9755, -181.141, -120.886, -184.732, -170.859, -184.717, -220.76, -181.336, -270.339, -174.95, -319.579, -165.975, -368.364, -154.866, -416.744, -142.041, -512.436, -112.748, -559.837, -96.9142 )
+
+[node name="ParallaxBackground" parent="Environment" instance=ExtResource( 10 )]

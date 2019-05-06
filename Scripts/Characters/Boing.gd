@@ -67,12 +67,14 @@ func update_view():
 										self.spriteContainer.get_scale(),Vector2(1.5,1.5),
 										0.5,Tween.TRANS_ELASTIC,Tween.EASE_OUT);
 		TweenNode.start()
+		$CollisionShape2D.scale = Vector2(1.5,1.5);
 	else:
 		TweenNode.interpolate_property(	self.spriteContainer,
 										"scale",
 										self.spriteContainer.get_scale(),Vector2(1.0,1.0),
 										0.5,Tween.TRANS_ELASTIC,Tween.EASE_OUT);
 		TweenNode.start()
+		$CollisionShape2D.scale = Vector2(1.0,1.0);
 
 
 #########################################

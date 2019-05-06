@@ -1,13 +1,16 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Partials/ParallaxBackground.tscn" type="PackedScene" id=1]
 
 [node name="level_name" type="Node2D"]
 
 [node name="SpawnPoint" type="Node2D" parent="."]
 
 [node name="Bounds" type="Container" parent="."]
+margin_right = 128.0
+margin_bottom = 128.0
+rect_scale = Vector2( 3.24, 2.84 )
 
 [node name="Environment" type="Node2D" parent="."]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="Environment"]
-scroll_ignore_camera_zoom = true
-
+[node name="ParallaxBackground" parent="Environment" instance=ExtResource( 1 )]

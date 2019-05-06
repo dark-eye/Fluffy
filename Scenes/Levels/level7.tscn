@@ -97,4 +97,3 @@ polygon = PoolVector2Array( -202.886, -151.161, -152.899, -149.693, 347.028, -15
 position = Vector2( 845.393, 352.121 )
 scale = Vector2( 1, 1 )
 isopen = true
-

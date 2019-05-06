@@ -52,7 +52,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 9.21783
+radius = 25.9912
 
 [sub_resource type="OccluderPolygon2D" id=5]
 cull_mode = 1
@@ -79,8 +79,6 @@ anims/coming_back = SubResource( 2 )
 anims/going_away = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.381989, -0.0359344 )
-scale = Vector2( 3.05517, 2.9637 )
 shape = SubResource( 4 )
 
 [node name="SamplePlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -111,4 +109,3 @@ self_modulate = Color( 1, 1, 1, 0 )
 position = Vector2( -6.34595, -57.3992 )
 scale = Vector2( 398.294, 311.141 )
 occluder = SubResource( 5 )
-
