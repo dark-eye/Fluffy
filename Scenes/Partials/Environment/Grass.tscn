@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Graphics/Environment/billboard-grass.png" type="Texture" id=1]
+
+[node name="Grass" type="Node2D"]
+
+[node name="Polygon" type="Polygon2D" parent="."]
+position = Vector2( -0.502319, -0.500709 )
+scale = Vector2( 0.1, 0.1 )
+offset = Vector2( -512, -512 )
+texture = ExtResource( 1 )
+skeleton = NodePath("../Skeleton2D")
+polygon = PoolVector2Array( 195.349, 1024, 176.744, 837.953, 30.2326, 586.791, 16.2791, 230.977, 100, 386.791, 155.814, 584.465, 165.116, 361.209, 230.233, 272.837, 369.767, 230.977, 569.767, 307.721, 611.628, 212.372, 665.116, 217.023, 686.047, 363.535, 795.349, 263.535, 820.93, 419.349, 904.651, 279.814, 1006.98, 310.047, 927.907, 498.419, 990.698, 568.186, 848.837, 747.256, 797.674, 1028.65 )
+uv = PoolVector2Array( 195.349, 1024, 176.744, 837.953, 30.2326, 586.791, 16.2791, 230.977, 100, 386.791, 155.814, 584.465, 165.116, 361.209, 230.233, 272.837, 369.767, 230.977, 569.767, 307.721, 611.628, 212.372, 665.116, 217.023, 686.047, 363.535, 795.349, 263.535, 820.93, 419.349, 904.651, 279.814, 1006.98, 310.047, 927.907, 498.419, 990.698, 568.186, 848.837, 747.256, 797.674, 1028.65 )
+polygons = [ PoolIntArray( 17, 5, 2, 1, 19, 18 ), PoolIntArray( 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 17 ), PoolIntArray( 5, 4, 3, 2 ), PoolIntArray( 1, 0, 20, 19 ) ]
+bones = [ NodePath("Bone2D"), PoolRealArray( 1, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 1 ), NodePath("Bone2D/Bone2D"), PoolRealArray( 0, 0.5, 1, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0.5, 0 ), NodePath("Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0.5, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 0, 0, 0 ) ]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+scale = Vector2( 0.1, 0.1 )
+
+[node name="Bone2D" type="Bone2D" parent="Skeleton2D"]
+position = Vector2( -3.05176e-05, 498.25 )
+rotation = -1.59439
+scale = Vector2( 13.8975, 0.183932 )
+rest = Transform2D( 3.08701e-05, -13.8975, 0.183932, 4.08561e-07, -3.05176e-05, 498.25 )
+__meta__ = {
+"_edit_ik_": true
+}
+
+[node name="Bone2D" type="Bone2D" parent="Skeleton2D/Bone2D"]
+position = Vector2( 12.1896, -9.03174 )
+rotation = 0.0011304
+rest = Transform2D( 1, 0, 0, 1, 12.1896, -9.03174 )
+
+[node name="Bone2D" type="Bone2D" parent="Skeleton2D/Bone2D/Bone2D"]
+position = Vector2( 17.8064, 9.02673 )
+rotation = -0.00393728
+rest = Transform2D( 1, 0, 0, 1, 17.8064, 9.02673 )
+__meta__ = {
+"_edit_bone_": true
+}

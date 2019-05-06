@@ -9,12 +9,14 @@ script/source = "tool
 extends Node2D
 
 export(float,0,1) var flameFrequency = 0.75 setget _set_flames_frequency;
+export(float,0.0,1) var lightToFlameRatio = 0.05 setget _set_lights_ratio;
+export(bool) var hasLights = true
 
 onready var flame = $Flame;
 onready var flameContainer = $FlamesContainer;
 onready var lightInstance = $Light;
 
-export(float,0.0,1) var lightToFlameRatio = 0.05 setget _set_lights_ratio;
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -48,7 +50,7 @@ func span_fire(flameInstance):
 			newFlame.set_position( Vector2(halfStart+i*width,height));
 			newFlame.visible = true;
 			#add Lights
-			if( abs( fmod(i,1-affectiveLightToFlameRatio)) < 0.1):
+			if( hasLights && abs( fmod(i,1-affectiveLightToFlameRatio)) < 0.1):
 				var newLight = lightInstance.duplicate();
 				flameContainer.add_child(newLight);
 				newLight.set_position( Vector2(halfStart+i*width,height));

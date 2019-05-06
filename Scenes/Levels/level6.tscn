@@ -48,17 +48,10 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
-MovingPlatform = false
 curve = SubResource( 1 )
-BakeInterval = 50.0
 LeftTexture = ExtResource( 3 )
-LeftTextureNormal = null
 MidTexture = ExtResource( 4 )
-MidTextureNormal = null
 RightTexture = ExtResource( 5 )
-RightTextureNormal = null
-LeftOverflow = 0.0
-RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
@@ -71,19 +64,11 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
-MovingPlatform = false
 curve = SubResource( 2 )
-BakeInterval = 50.0
 LeftTexture = ExtResource( 6 )
-LeftTextureNormal = null
 MidTexture = ExtResource( 7 )
-MidTextureNormal = null
 RightTexture = ExtResource( 8 )
-RightTextureNormal = null
-LeftOverflow = 0.0
-RightOverflow = 0.0
 Thickness = 60.0
-Position = 0.5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/ThinPlatform 3"]
 polygon = PoolVector2Array( -564.399, 137.352, -546.794, 90.4989, -524.932, 45.5768, -498.482, 3.16702, -467.349, -36.0002, -431.738, -71.2352, -392.227, -101.995, -349.526, -128.121, -304.515, -149.701, -257.657, -167.199, -209.53, -181.05, -160.604, -191.729, -111.209, -199.711, -61.6471, -205.425, 38.2307, -211.609, 538.431, -202.932, 571.068, -203.103, 571.068, -143.103, 538.431, -142.932, 38.2307, -151.609, -61.6471, -145.425, -111.209, -139.711, -160.604, -131.729, -209.53, -121.05, -257.657, -107.199, -304.515, -89.7012, -349.526, -68.1213, -392.227, -41.9951, -431.738, -11.2352, -467.349, 23.9998, -498.482, 63.167, -524.932, 105.577, -546.794, 150.499, -564.399, 197.352 )
@@ -94,17 +79,10 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
-MovingPlatform = false
 curve = SubResource( 3 )
-BakeInterval = 50.0
 LeftTexture = ExtResource( 3 )
-LeftTextureNormal = null
 MidTexture = ExtResource( 4 )
-MidTextureNormal = null
 RightTexture = ExtResource( 5 )
-RightTextureNormal = null
-LeftOverflow = 0.0
-RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
@@ -118,6 +96,7 @@ isopen = true
 
 [node name="ParallaxBackground" parent="Environment" instance=ExtResource( 10 )]
 
-[node name="Wind" parent="." instance=ExtResource( 11 )]
-position = Vector2( -1646.53, 1510.52 )
+[node name="Wind" parent="Environment" instance=ExtResource( 11 )]
+position = Vector2( 270.628, 993.387 )
+windVector = Vector2( 0, 1 )
 
