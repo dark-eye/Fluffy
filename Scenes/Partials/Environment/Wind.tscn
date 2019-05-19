@@ -26,8 +26,8 @@ func update_wind():
 	placeholderPoly.set_position( Vector2(0,0) );
 	self.add_child(placeholderPoly);
 	
-	if is_inside_tree() && Engine.is_editor_hint():
-		placeholderPoly.set_owner(self.get_owner())
+	#if is_inside_tree() && Engine.is_editor_hint():
+	placeholderPoly.set_owner(self.get_owner())
 		
 	update()
 
@@ -49,7 +49,7 @@ uniform vec2 windVector = vec2(1,0);
 
 
 void fragment() {
-	vec2 timedVector = windVector * 0.1 * TIME;
+	vec2 timedVector = windVector * -0.1 * TIME;
 	COLOR =  baseColor * texture(windTex,SCREEN_UV + timedVector);
 }
 "
@@ -72,4 +72,3 @@ script = SubResource( 1 )
 visible = false
 material = SubResource( 3 )
 polygon = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
-
