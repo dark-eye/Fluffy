@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Control/LevelEndingScreen.gd" type="Script" id=1]
 [ext_resource path="res://Graphics/Temporary/Effects/square.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Partials/UI/Score.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Partials/UI/Timer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Graphics/Shaders/Blur.shader" type="Shader" id=5]
 
 [sub_resource type="Curve" id=1]
 min_value = -360.0
@@ -27,6 +28,16 @@ orbit_velocity_random = 0.0
 color = Color( 1, 1, 1, 0.768627 )
 hue_variation = 0.14
 hue_variation_random = 1.0
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 5 )
+shader_param/radiusX = 10.0
+shader_param/radiusY = 10.0
+shader_param/blurStrengh = 0.012
+shader_param/blurfragment = 0.005
+
+[sub_resource type="ImageTexture" id=5]
+size = Vector2( 16, 16 )
 
 [node name="LevelEndingOverlay" type="Control"]
 anchor_right = 1.0
@@ -103,7 +114,12 @@ margin_bottom = 314.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 200, 30 )
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
 custom_constants/separation = 50
+alignment = 1
 
 [node name="Score" parent="Container/CenterContainer/HBoxContainer" instance=ExtResource( 3 )]
 margin_right = 75.0
@@ -118,3 +134,9 @@ margin_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Background" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 517.277, 304.418 )
+scale = Vector2( 65.0765, 38.0317 )
+z_index = -1
+texture = SubResource( 5 )

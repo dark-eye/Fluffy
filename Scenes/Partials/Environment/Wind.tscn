@@ -1,6 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Graphics/Environment/fire.jpeg" type="Texture" id=1]
+[ext_resource path="res://Scenes/Partials/Environment/Wind.shader" type="Shader" id=1]
+[ext_resource path="res://Graphics/Environment/fire.jpeg" type="Texture" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "tool
@@ -25,10 +26,10 @@ func update_wind():
 	placeholderPoly.material.set_shader_param('windVector',windVector);
 	placeholderPoly.set_position( Vector2(0,0) );
 	self.add_child(placeholderPoly);
-	
+
 	#if is_inside_tree() && Engine.is_editor_hint():
 	placeholderPoly.set_owner(self.get_owner())
-		
+
 	update()
 
 func set_wind_vector(value):
@@ -37,30 +38,15 @@ func set_wind_vector(value):
 		self.find_node(\"WindAreaPolygon\").material.set_shader_param('windVector',windVector);
 	self.gravity_vec = windVector;"
 
-[sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
-render_mode blend_add;
-
-uniform sampler2D windTex;
-uniform sampler2D gustTex;
-uniform vec4 baseColor : hint_color = vec4(0,0,0,0.1);
-uniform vec2 windVector = vec2(1,0);
-
-
-
-void fragment() {
-	vec2 timedVector = windVector * -0.1 * TIME;
-	COLOR =  baseColor * texture(windTex,SCREEN_UV + timedVector);
-}
-"
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
 shader_param/baseColor = Color( 0, 0.0431373, 1, 1 )
 shader_param/windVector = Vector2( 0.5, 0 )
-shader_param/windTex = ExtResource( 1 )
+shader_param/windTex = ExtResource( 2 )
 
 [node name="Wind" type="Area2D"]
+z_index = 1
+z_as_relative = false
 space_override = 1
 gravity_vec = Vector2( 0.5, 0 )
 gravity = 1.0
@@ -70,5 +56,5 @@ script = SubResource( 1 )
 
 [node name="PlaceholderPolygon" type="CollisionPolygon2D" parent="Placeholders"]
 visible = false
-material = SubResource( 3 )
+material = SubResource( 2 )
 polygon = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
