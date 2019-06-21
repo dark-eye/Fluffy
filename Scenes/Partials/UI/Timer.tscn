@@ -7,7 +7,7 @@ script/source = "extends Panel
 # var a = 2
 # var b = \"textvar\"
 export(int) var timePassed = 0;
-var isRunning = true;
+export(bool) var isRunning = true;
 var clock = null;
 
 func _ready():
@@ -44,13 +44,23 @@ func reset():
 modulate = Color( 1, 1, 1, 0.75 )
 margin_right = 64.0
 margin_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = SubResource( 1 )
 
 [node name="ClockDisplay" type="Label" parent="."]
-margin_right = 64.0
-margin_bottom = 32.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = -16.0
+margin_right = 32.0
+margin_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0.752449, 0.785156, 0.187088, 1 )

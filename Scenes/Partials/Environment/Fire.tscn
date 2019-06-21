@@ -146,7 +146,7 @@ load_path = "res://.import/fire.jpeg-f59d34758a349c5eb6d7881b8667a0fe.stex"
 texture = ExtResource( 1 )
 script = SubResource( 1 )
 flameFrequency = 0.771
-lightToFlameRatio = 0.11
+lightToFlameRatio = 0.01
 
 [node name="Flame" type="Node2D" parent="."]
 visible = false
@@ -179,12 +179,16 @@ texture = SubResource( 13 )
 visible = false
 position = Vector2( 0, -15 )
 z_index = -1
+enabled = false
 texture = ExtResource( 3 )
-texture_scale = 5.0
+texture_scale = 2.0
 color = Color( 1, 0.447059, 0, 1 )
 energy = 0.2
 range_height = 50.0
+range_z_min = -16
+range_z_max = 16
 shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 1 )
+shadow_buffer_size = 32
 
 [node name="FlamesContainer" type="Node2D" parent="."]

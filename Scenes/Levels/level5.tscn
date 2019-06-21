@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Partials/ParallaxBackground.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/platform2d/thin_platform.gd" type="Script" id=2]
@@ -11,25 +11,31 @@
 [ext_resource path="res://addons/platform2d/textures/simple_rock_topright.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Partials/GameObjects/EndGate.tscn" type="PackedScene" id=10]
 
-[sub_resource type="Curve2D" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+export(float) var cameraOverviewZoomout = 2;"
+
+[sub_resource type="Curve2D" id=2]
 bake_interval = 50.0
 _data = {
 "points": PoolVector2Array( 0, 0, 300.896, 407.574, -584.278, -203.103, -297.374, 206.123, 424.932, 483.638, 466.844, 78.5942 )
 }
 
-[sub_resource type="Curve2D" id=2]
+[sub_resource type="Curve2D" id=3]
 bake_interval = 50.0
 _data = {
 "points": PoolVector2Array( 0, 0, 389.144, -297.61, -632.569, 13.5597, -428.628, -344.766, 424.932, 483.638, 460.084, -27.8057 )
 }
 
-[sub_resource type="Curve2D" id=3]
+[sub_resource type="Curve2D" id=4]
 bake_interval = 50.0
 _data = {
 "points": PoolVector2Array( 0, 0, 48.8031, 270.044, -531.905, -215.079, -423.969, 13.272, 335.448, -0.704834, 39.7281, 281.233, 0, 0, 424.932, 483.638, 571.068, -203.103 )
 }
 
 [node name="level_name" type="Node2D"]
+script = SubResource( 1 )
 
 [node name="SpawnPoint" type="Node2D" parent="."]
 position = Vector2( 177.457, 118.228 )
@@ -54,10 +60,17 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-curve = SubResource( 1 )
+MovingPlatform = false
+curve = SubResource( 2 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 4 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 5 )
+MidTextureNormal = null
 RightTexture = ExtResource( 6 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
@@ -71,11 +84,19 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-curve = SubResource( 2 )
+MovingPlatform = false
+curve = SubResource( 3 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 7 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 8 )
+MidTextureNormal = null
 RightTexture = ExtResource( 9 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 60.0
+Position = 0.5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/ThinPlatform 2"]
 visible = false
@@ -88,10 +109,17 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-curve = SubResource( 3 )
+MovingPlatform = false
+curve = SubResource( 4 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 7 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 8 )
+MidTextureNormal = null
 RightTexture = ExtResource( 9 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 60.0
 Position = 0.0
 
@@ -103,4 +131,3 @@ polygon = PoolVector2Array( -531.905, -215.079, -522.347, -166.024, -511.133, -1
 position = Vector2( 1778.25, 1071.27 )
 scale = Vector2( 1, 1 )
 isopen = true
-

@@ -27,11 +27,12 @@ func next_level():
 
 func reset():
 	endGameTimer.stop();
+	var lvlctrl = get_level_controller();
 	get_level_controller().reset();
-	var spawnPoint = get_level_controller().getSpawnPoint();
+	var spawnPoint =lvlctrl.getSpawnPoint();
 	get_player_controller().setSpawnPoint(spawnPoint);
 	get_player_controller().spawn();
-	getCamera().find_node('CameraAnimation').play('start_level');
+	getCamera().startLevelTween(lvlctrl.currentScene.cameraOverviewZoomout);
 	self.find_node("Clock",true).reset()
 
 #-------------- Signals --------------
@@ -41,7 +42,8 @@ func player_at_end_gate():
 		endGameTimer.set_wait_time(2)
 		endGameTimer.start();
 		get_player_controller().getPlayer().find_node('AnimationPlayer').play('going_away');
-		getCamera().find_node('CameraAnimation').play('end_level');
+		var lvlctrl = get_level_controller();
+		getCamera().endLevelTween(lvlctrl.currentScene.cameraOverviewZoomout);
 		self.find_node("Clock",true).pause();
 		
 

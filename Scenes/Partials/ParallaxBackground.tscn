@@ -1,49 +1,55 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Partials/ParallaxBackground.gd" type="Script" id=1]
-[ext_resource path="res://Graphics/Environment/scenery_front.png" type="Texture" id=2]
-[ext_resource path="res://Graphics/Environment/scenery.jpg" type="Texture" id=3]
-[ext_resource path="res://addons/platform2d/textures/parallax_clouds2.png" type="Texture" id=4]
+[ext_resource path="res://Graphics/Environment/Background/trees.png" type="Texture" id=2]
+[ext_resource path="res://Graphics/Environment/scenery_front.png" type="Texture" id=3]
+[ext_resource path="res://Graphics/Environment/scenery.jpg" type="Texture" id=4]
+[ext_resource path="res://addons/platform2d/textures/parallax_clouds2.png" type="Texture" id=5]
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
-offset = Vector2( -128, -256 )
-transform = Transform2D( 1, 0, 0, 1, -128, -256 )
 scroll_base_scale = Vector2( 1, 0 )
 scroll_ignore_camera_zoom = true
 script = ExtResource( 1 )
 rollingLayers = [ NodePath("Clouds") ]
-rollingSpeed = 5.0
+rollingSpeed = 10.0
+
+[node name="trees" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.75, 0 )
+
+[node name="Sprite" type="Sprite" parent="trees"]
+position = Vector2( 493.037, 365.817 )
+texture = ExtResource( 2 )
+offset = Vector2( 500, 0 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
 z_index = -1
-motion_scale = Vector2( 0.5, 0.2 )
+motion_scale = Vector2( 0.5, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxLayer2"]
 position = Vector2( 506.636, 418.057 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 flip_h = true
 region_enabled = true
 region_rect = Rect2( 0, 0, 2048, 256 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-visible = false
 z_index = -2
-motion_scale = Vector2( 0.2, 0.2 )
+motion_scale = Vector2( 0.2, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxLayer"]
 position = Vector2( 505.344, 284.945 )
 scale = Vector2( 5, 3 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="Clouds" type="ParallaxLayer" parent="."]
-position = Vector2( 111.067, 277.668 )
-z_index = -2
-motion_scale = Vector2( 0.2, 0.2 )
-motion_offset = Vector2( 100, 100 )
+position = Vector2( -4196, 0 )
+z_index = 1
+motion_scale = Vector2( 0.25, 0 )
+motion_offset = Vector2( 100, 0 )
 
 [node name="Sprite" type="Sprite" parent="Clouds"]
 scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 5122, 48 )
+region_rect = Rect2( 0, 0, 8192, 48 )

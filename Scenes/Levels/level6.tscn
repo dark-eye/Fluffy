@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://addons/platform2d/thin_platform.gd" type="Script" id=1]
 [ext_resource path="res://addons/platform2d/thin_platform_icon.png" type="Texture" id=2]
@@ -11,26 +11,40 @@
 [ext_resource path="res://Scenes/Partials/GameObjects/EndGate.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Partials/ParallaxBackground.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Partials/Environment/Wind.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Partials/Environment/Wind.shader" type="Shader" id=12]
+[ext_resource path="res://Graphics/Environment/fire.jpeg" type="Texture" id=13]
 
-[sub_resource type="Curve2D" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+export(float) var cameraOverviewZoomout = 2;"
+
+[sub_resource type="Curve2D" id=2]
 bake_interval = 50.0
 _data = {
 "points": PoolVector2Array( 0, 0, 1193.86, 2619.46, 796.763, 968.526, -1566.06, 2682.67, 424.932, 483.638, 4603.06, 961.503 )
 }
 
-[sub_resource type="Curve2D" id=2]
+[sub_resource type="Curve2D" id=3]
 bake_interval = 50.0
 _data = {
 "points": PoolVector2Array( 0, 0, 147.846, -451.32, -564.399, 137.352, -443.959, 5.1626, 424.932, 483.638, 571.068, -203.103 )
 }
 
-[sub_resource type="Curve2D" id=3]
+[sub_resource type="Curve2D" id=4]
 bake_interval = 50.0
 _data = {
 "points": PoolVector2Array( 0, 0, 120.253, -91.8602, -497.727, -98.5362, -212.492, 24.3536, 212.492, -24.3536, -65.4639, -236.19, 0, 0, 424.932, 483.638, 560.953, -267.103 )
 }
 
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 12 )
+shader_param/baseColor = Color( 0, 0.0431373, 1, 1 )
+shader_param/windVector = Vector2( 0, 1 )
+shader_param/windTex = ExtResource( 13 )
+
 [node name="level_name" type="Node2D"]
+script = SubResource( 1 )
 
 [node name="SpawnPoint" type="Node2D" parent="."]
 position = Vector2( 398.512, 479.623 )
@@ -48,10 +62,17 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
-curve = SubResource( 1 )
+MovingPlatform = false
+curve = SubResource( 2 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 3 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 4 )
+MidTextureNormal = null
 RightTexture = ExtResource( 5 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
@@ -64,11 +85,19 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
-curve = SubResource( 2 )
+MovingPlatform = false
+curve = SubResource( 3 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 6 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 7 )
+MidTextureNormal = null
 RightTexture = ExtResource( 8 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 60.0
+Position = 0.5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/ThinPlatform 3"]
 polygon = PoolVector2Array( -564.399, 137.352, -546.794, 90.4989, -524.932, 45.5768, -498.482, 3.16702, -467.349, -36.0002, -431.738, -71.2352, -392.227, -101.995, -349.526, -128.121, -304.515, -149.701, -257.657, -167.199, -209.53, -181.05, -160.604, -191.729, -111.209, -199.711, -61.6471, -205.425, 38.2307, -211.609, 538.431, -202.932, 571.068, -203.103, 571.068, -143.103, 538.431, -142.932, 38.2307, -151.609, -61.6471, -145.425, -111.209, -139.711, -160.604, -131.729, -209.53, -121.05, -257.657, -107.199, -304.515, -89.7012, -349.526, -68.1213, -392.227, -41.9951, -431.738, -11.2352, -467.349, 23.9998, -498.482, 63.167, -524.932, 105.577, -546.794, 150.499, -564.399, 197.352 )
@@ -79,10 +108,17 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
-curve = SubResource( 3 )
+MovingPlatform = false
+curve = SubResource( 4 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 3 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 4 )
+MidTextureNormal = null
 RightTexture = ExtResource( 5 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
@@ -98,5 +134,9 @@ isopen = true
 
 [node name="Wind" parent="Environment" instance=ExtResource( 11 )]
 position = Vector2( 270.628, 993.387 )
+gravity_vec = Vector2( 0, 1 )
 windVector = Vector2( 0, 1 )
 
+[node name="WindAreaPolygon" type="CollisionPolygon2D" parent="Environment/Wind"]
+material = SubResource( 5 )
+polygon = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )

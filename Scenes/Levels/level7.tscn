@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Partials/ParallaxBackground.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/platform2d/thin_platform.gd" type="Script" id=2]
@@ -11,25 +11,31 @@
 [ext_resource path="res://addons/platform2d/textures/simple_rock_topright.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Partials/GameObjects/EndGate.tscn" type="PackedScene" id=10]
 
-[sub_resource type="Curve2D" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+export(float) var cameraOverviewZoomout = 2.5;"
+
+[sub_resource type="Curve2D" id=2]
 bake_interval = 50.0
 _data = {
 "points": PoolVector2Array( 0, 0, 493.041, 813.404, -610.577, 75.0138, -270.377, 722.521, 424.932, 483.638, 741.309, 261.324 )
 }
 
-[sub_resource type="Curve2D" id=2]
+[sub_resource type="Curve2D" id=3]
 bake_interval = 50.0
 _data = {
 "points": PoolVector2Array( 0, 0, 245.384, -106.788, 287.554, -166.378, -168.134, -311.275, 424.932, 483.638, 885.111, 26.7489 )
 }
 
-[sub_resource type="Curve2D" id=3]
+[sub_resource type="Curve2D" id=4]
 bake_interval = 50.0
 _data = {
 "points": PoolVector2Array( 0, 0, 109.06, 4.54419, -202.886, -151.161, -118.148, 4.54419, 424.932, 483.638, 369.678, -151.161 )
 }
 
 [node name="level_name" type="Node2D"]
+script = SubResource( 1 )
 
 [node name="SpawnPoint" type="Node2D" parent="."]
 position = Vector2( 226.077, 196.724 )
@@ -51,10 +57,17 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-curve = SubResource( 1 )
+MovingPlatform = false
+curve = SubResource( 2 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 4 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 5 )
+MidTextureNormal = null
 RightTexture = ExtResource( 6 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
@@ -67,10 +80,17 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-curve = SubResource( 2 )
+MovingPlatform = false
+curve = SubResource( 3 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 7 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 8 )
+MidTextureNormal = null
 RightTexture = ExtResource( 9 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 60.0
 Position = 0.0
 
@@ -83,10 +103,17 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-curve = SubResource( 3 )
+MovingPlatform = false
+curve = SubResource( 4 )
+BakeInterval = 50.0
 LeftTexture = ExtResource( 4 )
+LeftTextureNormal = null
 MidTexture = ExtResource( 5 )
+MidTextureNormal = null
 RightTexture = ExtResource( 6 )
+RightTextureNormal = null
+LeftOverflow = 0.0
+RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 

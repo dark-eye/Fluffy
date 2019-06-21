@@ -25,4 +25,3 @@ void fragment() {
     COLOR = (mix(waterEffect, texture(SCREEN_TEXTURE,fract(mix(SCREEN_UV, displacmentMix.xy, displacementEffect ))) , reflectionsEffect) + albedo) * waterEffect.a;
 	NORMAL = backgroundDispMix.rgb * waterEffect.a;
 }"
-
