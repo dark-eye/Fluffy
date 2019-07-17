@@ -10,7 +10,7 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
-shader_param/albedo = Color( 0.038147, 0.448704, 0.976562, 0.342549 )
+shader_param/albedo = Color( 0.0392157, 0.447059, 0.976471, 0.556863 )
 shader_param/reflectionsEffect = 0.75
 shader_param/displacementEffect = 0.057
 shader_param/amplitude = 0.14
@@ -51,7 +51,7 @@ __meta__ = {
 }
 displacement_map = ExtResource( 3 )
 background_displacement = ExtResource( 2 )
-water_color = Color( 0.038147, 0.448704, 0.976562, 0.342549 )
+water_color = Color( 0.0392157, 0.447059, 0.976471, 0.556863 )
 displacement_effect = 0.057
 amplitudo = 0.14
 speed = 2.472

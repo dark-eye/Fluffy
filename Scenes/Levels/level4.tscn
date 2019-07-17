@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/Partials/GameObjects/EndGate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/platform2d/thin_platform.gd" type="Script" id=2]
@@ -9,8 +9,15 @@
 [ext_resource path="res://addons/platform2d/textures/simple_grass_thinleft.png" type="Texture" id=7]
 [ext_resource path="res://addons/platform2d/textures/simple_grass_thin.png" type="Texture" id=8]
 [ext_resource path="res://addons/platform2d/textures/simple_grass_thinright.png" type="Texture" id=9]
-[ext_resource path="res://Scenes/Partials/ParallaxBackground.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Partials/Environment/Fire.tscn" type="PackedScene" id=11]
+[ext_resource path="res://addons/platform2d/thick_platform.gd" type="Script" id=10]
+[ext_resource path="res://addons/platform2d/thick_platform_icon.png" type="Texture" id=11]
+[ext_resource path="res://addons/platform2d/textures/simple_dirt.png" type="Texture" id=12]
+[ext_resource path="res://addons/platform2d/textures/simple_grass_topleft.png" type="Texture" id=13]
+[ext_resource path="res://addons/platform2d/textures/simple_grass_top.png" type="Texture" id=14]
+[ext_resource path="res://addons/platform2d/textures/simple_grass_topright.png" type="Texture" id=15]
+[ext_resource path="res://addons/platform2d/textures/simple_dirt_border.png" type="Texture" id=16]
+[ext_resource path="res://Scenes/Partials/ParallaxBackground.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Partials/Environment/Fire.tscn" type="PackedScene" id=18]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -45,6 +52,12 @@ _data = {
 bake_interval = 50.0
 _data = {
 "points": PoolVector2Array( 0, 0, 240.895, 23.9328, -584.278, -203.103, -247.639, 40.9708, 177.202, 0.645325, -4.66927, -201.167, -90.984, 1.16409, 424.932, 483.638, 810.23, -186.76 )
+}
+
+[sub_resource type="Curve2D" id=7]
+bake_interval = 50.0
+_data = {
+"points": PoolVector2Array( 0, 0, -267.497, -229.283, -381.235, 319.765, -238.836, 229.283, 360.383, 33.1163, -432.587, -214.218, -391.552, 68.1807, -6.81812, 169.478, 714.796, -257.074, -110.016, 2.39166, 89.6871, 8.3708, 1058.13, -133.012, -125.409, 20.0011, 125.409, -20.0011, 1445.38, -132.705, -148.284, 89.5579, 143.88, 64.5991, 1615.97, -278.02, -296.569, 179.116, 129.198, 117.453, 2754.98, -267.776, -93.9624, 152.689, 217.288, 58.7266, 3583.02, -308.885, -346.486, -58.7265, 196.734, -29.3633, 4657.72, -288.33, -97.1421, -74.4224, 97.1416, 74.4224, 5007.14, -247.222, 69.9559, -7.17496, -406.97, 147.57, 4863.26, 301.871, 139.912, -14.3499, -310.044, 92.4729, 2772.95, 462.511, 279.824, -28.6998, -342.092, 44.3448, 1290.12, 539.044, 210.176, 219.729, 0, 0, -381.235, 319.765 )
 }
 
 [node name="level_name" type="Node2D"]
@@ -188,16 +201,50 @@ Position = 0.0
 visible = false
 polygon = PoolVector2Array( -584.278, -203.103, -534.478, -198.033, -335.296, -179.526, -285.376, -177.487, -235.399, -177.422, -185.455, -179.464, -135.585, -183.468, -36.367, -196.119, -4.66927, -201.167, 795.113, -186.698, 810.23, -186.76, 810.23, -106.76, 795.113, -106.698, -4.66927, -121.167, -36.367, -116.119, -135.585, -103.468, -185.455, -99.4642, -235.399, -97.4224, -285.376, -97.4866, -335.296, -99.5255, -534.478, -118.033, -584.278, -123.103 )
 
-[node name="ParallaxBackground" parent="Environment" instance=ExtResource( 10 )]
+[node name="ThickPlatform" type="StaticBody2D" parent="Environment/Platforms"]
+position = Vector2( 290.255, 802.584 )
+z_index = -1
+script = ExtResource( 10 )
+__meta__ = {
+"_editor_icon": ExtResource( 11 )
+}
+MovingPlatform = false
+Curve = SubResource( 7 )
+BakeInterval = 50.0
+FillTexture = ExtResource( 12 )
+FillSize = 4.0
+TopLeftTexture = ExtResource( 13 )
+TopLeftTextureNormal = null
+TopTexture = ExtResource( 14 )
+TopTextureNormal = null
+TopRightTexture = ExtResource( 15 )
+TopRightTextureNormal = null
+TopThickness = 80.0
+TopPosition = 0.823851
+TopLeftOverflow = 1.0
+TopRightOverflow = 0.968362
+SideTexture = ExtResource( 16 )
+SideTextureNormal = null
+SideThickness = 20.0
+SidePosition = 0.646636
+Angle = 0.5
 
-[node name="Fire" parent="." instance=ExtResource( 11 )]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Platforms/ThickPlatform"]
+visible = false
+polygon = PoolVector2Array( -381.235, 319.765, -419.023, 286.928, -456.131, 253.431, -492.229, 218.803, -526.586, 182.423, -557.773, 143.373, -583.031, 100.176, -596.86, 52.1487, -593.714, 2.22116, -575.682, -44.3867, -549.067, -86.6446, -517.925, -125.705, -484.218, -162.695, -449.098, -198.2, -432.587, -214.218, -382.852, -209.927, -33.4414, -195.272, 16.5626, -195.378, 316.005, -207.738, 365.774, -211.783, 663.563, -248.499, 712.844, -256.735, 714.796, -257.074, 721.374, -207.474, 749.646, -166.238, 793.38, -142.012, 842.075, -130.672, 891.937, -126.702, 941.94, -126.953, 1041.82, -132.432, 1058.13, -133.012, 1257.7, -121.891, 1307.69, -122.008, 1357.66, -123.789, 1407.54, -127.738, 1445.38, -132.705, 1493.75, -145.289, 1524.22, -184.921, 1550.52, -227.45, 1588.41, -260.022, 1615.97, -278.02, 1662.92, -260.835, 1710.94, -247.154, 1808.45, -224.876, 1906.83, -207.243, 2005.85, -193.42, 2105.34, -183.291, 2205.27, -177.073, 2255.24, -175.585, 2355.32, -176.308, 2405.29, -178.785, 2455.12, -182.902, 2504.83, -188.904, 2554.25, -197.087, 2602.99, -207.782, 2651.02, -221.517, 2697.85, -238.903, 2742.81, -260.719, 2754.98, -267.776, 2797.07, -240.779, 2843.77, -222.731, 2892.15, -209.869, 2941.28, -200.542, 2990.88, -193.887, 3040.61, -189.457, 3090.61, -186.96, 3140.58, -186.269, 3190.5, -187.323, 3240.51, -190.158, 3290.29, -194.868, 3339.92, -201.672, 3389.06, -210.883, 3437.49, -223.047, 3484.76, -239.108, 3529.85, -260.817, 3569.46, -291.373, 3583.02, -308.885, 3632.08, -298.844, 3681.84, -293.172, 3731.74, -290.266, 4381.27, -308.044, 4431.34, -307.435, 4531.2, -302.972, 4581.01, -298.658, 4630.62, -292.564, 4657.72, -288.33, 4756.78, -302.065, 4806.56, -306.809, 4856.55, -307.605, 4906.06, -300.601, 4952.73, -282.715, 4995.14, -256.167, 5007.14, -247.222, 5031.5, -203.531, 5036.28, -153.794, 5032.97, -103.885, 5025.13, -54.4779, 5014.24, -5.74201, 5000.92, 42.5128, 4985.52, 90.1602, 4968.14, 137.102, 4948.65, 183.154, 4926.54, 227.966, 4900.29, 270.488, 4863.26, 301.871, 4815.53, 317.092, 4767.01, 329.556, 4669.08, 349.375, 4421.12, 383.372, 2775.05, 462.306, 2772.95, 462.511, 2675.48, 484.379, 2626.16, 491.941, 2327.66, 516.419, 1378.24, 532.99, 1328.36, 535.812, 1040.56, 553.887, 990.706, 554.476, 541.259, 539.604, 491.338, 535.891, 193.202, 503.782, 143.816, 496.485, -3.90199, 470.013, -52.7903, 459.323, -101.466, 447.43, -149.687, 434.139, -197.329, 419.13, -244.346, 401.871, -290.007, 381.77, -333.805, 357.529, -373.65, 327.253, -381.235, 319.765 )
+
+[node name="ParallaxBackground" parent="Environment" instance=ExtResource( 17 )]
+offset = Vector2( 0, -300 )
+transform = Transform2D( 1, 0, 0, 1, 0, -300 )
+
+[node name="Fire" parent="." instance=ExtResource( 18 )]
 position = Vector2( 1456.21, 530.148 )
 scale = Vector2( 1.69631, 0.467403 )
 flameFrequency = 0.851
 lightToFlameRatio = 0.0
 hasLights = true
 
-[node name="Fire2" parent="." instance=ExtResource( 11 )]
+[node name="Fire2" parent="." instance=ExtResource( 18 )]
 position = Vector2( 3447.55, 507.122 )
 scale = Vector2( 1.47645, 0.447735 )
 flameFrequency = 0.89

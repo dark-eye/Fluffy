@@ -50,9 +50,8 @@ margin_bottom = 1337.0
 position = Vector2( 0, -2.51752 )
 
 [node name="ParallaxBackground" parent="Environment" instance=ExtResource( 1 )]
-offset = Vector2( -256, -356 )
-scale = Vector2( 2, 2 )
-transform = Transform2D( 2, 0, 0, 2, -256, -356 )
+offset = Vector2( 0, -300 )
+transform = Transform2D( 1, 0, 0, 1, 0, -300 )
 
 [node name="ThinPlatform" type="StaticBody2D" parent="Environment"]
 position = Vector2( 627.343, 548.657 )

@@ -26,6 +26,7 @@ func next_level():
 	self.reset();
 
 func reset():
+	get_player_controller().getPlayer().mode=RigidBody2D.MODE_STATIC;
 	endGameTimer.stop();
 	var lvlctrl = get_level_controller();
 	get_level_controller().reset();
@@ -34,18 +35,18 @@ func reset():
 	get_player_controller().spawn();
 	getCamera().startLevelTween(lvlctrl.currentScene.cameraOverviewZoomout);
 	self.find_node("Clock",true).reset()
+	get_player_controller().getPlayer().mode=RigidBody2D.MODE_CHARACTER;
 
 #-------------- Signals --------------
 
 func player_at_end_gate():
 	if(endGameTimer.is_stopped() ):
 		endGameTimer.set_wait_time(2)
-		endGameTimer.start();
+		endGameTimer.start(); 
 		get_player_controller().getPlayer().find_node('AnimationPlayer').play('going_away');
 		var lvlctrl = get_level_controller();
 		getCamera().endLevelTween(lvlctrl.currentScene.cameraOverviewZoomout);
 		self.find_node("Clock",true).pause();
-		
 
 func level_loaded(idx,levelScene):
 	
