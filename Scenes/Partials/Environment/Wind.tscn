@@ -1,13 +1,14 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Partials/Environment/Wind.shader" type="Shader" id=1]
-[ext_resource path="res://Graphics/Environment/fire.jpeg" type="Texture" id=2]
+[ext_resource path="res://Graphics/Environment/Water/water.jpg" type="Texture" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "tool
 extends Area2D
 
 export(Vector2) var windVector = Vector2(0.5,0) setget set_wind_vector;
+export(Color)  var baseColor = Color(0.054902, 0.270588, 0.458824, 0.286275) setget set_base_color
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,26 +23,32 @@ func update_wind():
 
 	var placeholderPoly = prevPoly if prevPoly else  $Placeholders.find_node(\"PlaceholderPolygon\").duplicate() ;
 	placeholderPoly.name = \"WindAreaPolygon\";
-	placeholderPoly.visible = true;
-	placeholderPoly.material.set_shader_param('windVector',windVector);
 	placeholderPoly.set_position( Vector2(0,0) );
 	self.add_child(placeholderPoly);
 
 	#if is_inside_tree() && Engine.is_editor_hint():
 	placeholderPoly.set_owner(self.get_owner())
+	$VisualPoly.polygon = placeholderPoly.polygon
 
 	update()
 
 func set_wind_vector(value):
 	windVector = value;
-	if self.find_node(\"WindAreaPolygon\"):
-		self.find_node(\"WindAreaPolygon\").material.set_shader_param('windVector',windVector);
-	self.gravity_vec = windVector;"
+	if self.find_node(\"VisualPoly\"):
+		self.find_node(\"VisualPoly\").material.set_shader_param('windVector',windVector);
+	self.gravity_vec = windVector;
+
+func set_base_color(value):
+	baseColor = value;
+	if self.find_node(\"VisualPoly\"):
+		self.find_node(\"VisualPoly\").material.set_shader_param('baseColor',baseColor);
+"
 
 [sub_resource type="ShaderMaterial" id=2]
+render_priority = 2
 shader = ExtResource( 1 )
-shader_param/baseColor = Color( 0, 0.0431373, 1, 1 )
-shader_param/windVector = Vector2( 0.5, 0 )
+shader_param/baseColor = Color( 0.764706, 0.886275, 1, 0.0941176 )
+shader_param/windVector = Vector2( 2, 0 )
 shader_param/windTex = ExtResource( 2 )
 
 [node name="Wind" type="Area2D"]
@@ -51,10 +58,15 @@ space_override = 1
 gravity_vec = Vector2( 0.5, 0 )
 gravity = 1.0
 script = SubResource( 1 )
+baseColor = Color( 0.054902, 0.270588, 0.458824, 0.286275 )
 
 [node name="Placeholders" type="Node" parent="."]
 
 [node name="PlaceholderPolygon" type="CollisionPolygon2D" parent="Placeholders"]
 visible = false
+polygon = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
+
+[node name="VisualPoly" type="Polygon2D" parent="."]
 material = SubResource( 2 )
+position = Vector2( 0, -1.43198 )
 polygon = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
