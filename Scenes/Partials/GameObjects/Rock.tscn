@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/GameObjects/rock.gd" type="Script" id=2]
 [ext_resource path="res://Graphics/GameObjects/rock.jpg" type="Texture" id=3]
+[ext_resource path="res://Graphics/Shaders/shadow_gradient.tres" type="Texture" id=4]
 
 [sub_resource type="VisualShaderNodeTextureUniform" id=1]
 uniform_name = "GradientTexture"
@@ -12,7 +13,6 @@ output_port_for_preview = 0
 input_name = "uv"
 
 [sub_resource type="VisualShaderNodeVectorCompose" id=3]
-output_port_for_preview = 0
 default_input_values = [ 0, 0.0, 1, 0.0, 2, 1.0 ]
 
 [sub_resource type="VisualShaderNodeInput" id=4]
@@ -32,26 +32,20 @@ void vertex() {
 }
 
 void fragment() {
-// Input:7
-	vec3 n_out7p0;
-	n_out7p0 = vec3(UV,0.0);
-
 // VectorDecompose:8
+	vec3 n_in8p0 = vec3(0.00000,0.00000,0.00000);
 	float n_out8p0;
 	float n_out8p1;
 	float n_out8p2;
-	n_out8p0 = n_out7p0.x;
-	n_out8p1 = n_out7p0.y;
-	n_out8p2 = n_out7p0.z;
-
-// Input:5
-	vec3 n_out5p0;
-	n_out5p0 = vec3(UV,0.0);
+	n_out8p0 = n_in8p0.x;
+	n_out8p1 = n_in8p0.y;
+	n_out8p2 = n_in8p0.z;
 
 // VectorCompose:6
+	float n_in6p1 = 0.00000;
 	float n_in6p2 = 1.00000;
 	vec3 n_out6p0;
-	n_out6p0 = vec3( n_out8p1 , dot(n_out5p0,vec3(0.333333,0.333333,0.333333)) , n_in6p2 );
+	n_out6p0 = vec3( n_out8p1 , n_in6p1 , n_in6p2 );
 
 // TextureUniform:4
 	vec3 n_out4p0;
@@ -64,7 +58,6 @@ void fragment() {
 
 // Output:0
 	ALBEDO = n_out4p0;
-	ALPHA = n_out4p1;
 
 }
 
@@ -73,7 +66,7 @@ void light() {
 
 }
 "
-graph_offset = Vector2( 71.7843, 520 )
+graph_offset = Vector2( -167.387, 445 )
 nodes/fragment/0/position = Vector2( 1080, 440 )
 nodes/fragment/4/node = SubResource( 1 )
 nodes/fragment/4/position = Vector2( 520, 600 )
@@ -85,7 +78,7 @@ nodes/fragment/7/node = SubResource( 4 )
 nodes/fragment/7/position = Vector2( 100, 660 )
 nodes/fragment/8/node = SubResource( 5 )
 nodes/fragment/8/position = Vector2( 260, 660 )
-nodes/fragment/connections = PoolIntArray( 4, 0, 0, 0, 4, 1, 0, 1, 6, 0, 4, 0, 7, 0, 8, 0, 5, 0, 6, 1, 8, 1, 6, 0 )
+nodes/fragment/connections = PoolIntArray( 6, 0, 4, 0, 8, 1, 6, 0, 4, 0, 0, 0 )
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = SubResource( 6 )
@@ -94,6 +87,151 @@ shader_param/GradientTexture = ExtResource( 1 )
 [sub_resource type="PhysicsMaterial" id=8]
 friction = 0.85
 rough = true
+
+[sub_resource type="VisualShaderNodeVectorOp" id=15]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 0.5, 0.5, 0 ) ]
+operator = 1
+
+[sub_resource type="VisualShaderNodeColorOp" id=16]
+operator = 8
+
+[sub_resource type="VisualShaderNodeTexture" id=9]
+output_port_for_preview = 0
+texture = ExtResource( 4 )
+
+[sub_resource type="VisualShaderNodeTexture" id=10]
+output_port_for_preview = 0
+source = 2
+
+[sub_resource type="VisualShaderNodeInput" id=11]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorOp" id=17]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 1, 1, 1 ) ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorLen" id=18]
+
+[sub_resource type="VisualShaderNodeVectorCompose" id=19]
+
+[sub_resource type="VisualShader" id=13]
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_2;
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:4
+	vec3 n_out4p0;
+	n_out4p0 = vec3(UV,0.0);
+
+// Texture:3
+	vec3 n_out3p0;
+	float n_out3p1;
+	{
+		vec4 _tex_read = texture( TEXTURE , n_out4p0.xy );
+		n_out3p0 = _tex_read.rgb;
+		n_out3p1 = _tex_read.a;
+	}
+
+// VectorOp:6
+	vec3 n_in6p1 = vec3(1.00000,1.00000,1.00000);
+	vec3 n_out6p0;
+	n_out6p0 = n_out4p0 * n_in6p1;
+
+// VectorOp:11
+	vec3 n_in11p1 = vec3(0.50000,0.50000,0.00000);
+	vec3 n_out11p0;
+	n_out11p0 = n_out6p0 - n_in11p1;
+
+// VectorLen:8
+	float n_out8p0;
+	n_out8p0 = length( n_out11p0 );
+
+// VectorCompose:9
+	float n_in9p2 = 0.00000;
+	vec3 n_out9p0;
+	n_out9p0 = vec3( n_out8p0 , n_out8p0 , n_in9p2 );
+
+// Texture:2
+	vec3 n_out2p0;
+	float n_out2p1;
+	vec4 tex_frg_2_read = texture( tex_frg_2 , n_out9p0.xy );
+	n_out2p0 = tex_frg_2_read.rgb;
+	n_out2p1 = tex_frg_2_read.a;
+
+// ColorOp:12
+	vec3 n_out12p0;
+	{
+		float base=n_out3p0.x;
+		float blend=n_out2p0.x;
+		if (base < 0.5) {
+			n_out12p0.x = (base * (2.0*blend));
+		} else {
+			n_out12p0.x = (1.0 - (1.0-base) * (1.0-2.0*(blend-0.5)));
+		}
+	}
+	{
+		float base=n_out3p0.y;
+		float blend=n_out2p0.y;
+		if (base < 0.5) {
+			n_out12p0.y = (base * (2.0*blend));
+		} else {
+			n_out12p0.y = (1.0 - (1.0-base) * (1.0-2.0*(blend-0.5)));
+		}
+	}
+	{
+		float base=n_out3p0.z;
+		float blend=n_out2p0.z;
+		if (base < 0.5) {
+			n_out12p0.z = (base * (2.0*blend));
+		} else {
+			n_out12p0.z = (1.0 - (1.0-base) * (1.0-2.0*(blend-0.5)));
+		}
+	}
+
+// Output:0
+	COLOR.rgb = n_out12p0;
+	COLOR.a = n_out3p1;
+	NORMAL = n_out3p0;
+	NORMALMAP = n_out3p0;
+	NORMALMAP_DEPTH = dot(n_out3p0,vec3(0.333333,0.333333,0.333333));
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -284.583, 12.1 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 940, 140 )
+nodes/fragment/2/node = SubResource( 9 )
+nodes/fragment/2/position = Vector2( 520, -80 )
+nodes/fragment/3/node = SubResource( 10 )
+nodes/fragment/3/position = Vector2( -60, 100 )
+nodes/fragment/4/node = SubResource( 11 )
+nodes/fragment/4/position = Vector2( -240, -40 )
+nodes/fragment/6/node = SubResource( 17 )
+nodes/fragment/6/position = Vector2( -60, 0 )
+nodes/fragment/8/node = SubResource( 18 )
+nodes/fragment/8/position = Vector2( 260, -40 )
+nodes/fragment/9/node = SubResource( 19 )
+nodes/fragment/9/position = Vector2( 320, 80 )
+nodes/fragment/11/node = SubResource( 15 )
+nodes/fragment/11/position = Vector2( 140, 60 )
+nodes/fragment/12/node = SubResource( 16 )
+nodes/fragment/12/position = Vector2( 740, 80 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 3, 0, 4, 0, 6, 0, 8, 0, 9, 0, 9, 0, 2, 0, 8, 0, 9, 1, 6, 0, 11, 0, 11, 0, 8, 0, 3, 0, 0, 4, 2, 0, 12, 1, 3, 0, 12, 0, 12, 0, 0, 0, 3, 0, 0, 3, 3, 0, 0, 2, 3, 1, 0, 1 )
+
+[sub_resource type="ShaderMaterial" id=14]
+shader = SubResource( 13 )
 
 [node name="RigidBody2D" type="RigidBody2D"]
 material = SubResource( 7 )
@@ -105,10 +243,11 @@ details = 10.76
 size = 10.0
 
 [node name="Collision" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 9.49864, 1.78338, 8.49928, 3.32403, 7.81295, 4.87852, 7.23408, 6.63695, 5.32895, 7.11791, 3.97191, 8.02591, 2.66447, 9.37146, 0.836319, 8.98272, -0.917502, 9.81939, -2.51093, 8.76116, -4.01705, 7.98987, -5.84592, 7.67487, -6.87207, 6.21657, -8.10613, 4.9845, -8.617, 3.28292, -9.38094, 1.69068, -9.5734, -0.0651689, -9.80706, -1.89103, -9.03358, -3.55643, -7.50318, -4.69081, -6.62408, -6.11302, -5.70524, -7.67904, -4.14637, -8.46752, -2.60577, -9.3626, -0.775793, -9.14529, 0.938007, -9.5529, 2.55413, -8.71425, 4.47965, -8.78771, 6.03919, -7.81213, 6.96795, -6.21336, 8.31075, -5.01662, 9.2882, -3.48474, 9.63221, -1.67608, 9.54775, 0.107906 )
+polygon = PoolVector2Array( 9.15215, 1.69244, 8.88015, 3.4492, 8.35431, 5.18164, 7.34235, 6.69687, 5.7479, 7.62427, 4.39147, 8.86549, 2.59844, 9.1292, 0.866505, 9.34052, -0.904001, 9.60979, -2.65347, 9.32046, -4.15554, 8.31276, -5.74497, 7.55704, -6.65802, 5.99762, -8.44525, 5.1561, -9.34078, 3.53403, -9.36499, 1.69252, -9.96978, -0.0363498, -8.77481, -1.66897, -8.87969, -3.46041, -7.85142, -4.85873, -6.87143, -6.25859, -5.37369, -7.11602, -3.94898, -7.9426, -2.70973, -9.49758, -0.819931, -8.87802, 0.853813, -9.08064, 2.52481, -8.78245, 4.32421, -8.58178, 5.56213, -7.27088, 7.28537, -6.55183, 8.13621, -4.96253, 8.85004, -3.37001, 9.11522, -1.66655, 9.81696, 0.0597566 )
 
 [node name="SpritePoly" type="Polygon2D" parent="."]
+material = SubResource( 14 )
 antialiased = true
 texture = ExtResource( 3 )
-polygon = PoolVector2Array( 9.49864, 1.78338, 8.49928, 3.32403, 7.81295, 4.87852, 7.23408, 6.63695, 5.32895, 7.11791, 3.97191, 8.02591, 2.66447, 9.37146, 0.836319, 8.98272, -0.917502, 9.81939, -2.51093, 8.76116, -4.01705, 7.98987, -5.84592, 7.67487, -6.87207, 6.21657, -8.10613, 4.9845, -8.617, 3.28292, -9.38094, 1.69068, -9.5734, -0.0651689, -9.80706, -1.89103, -9.03358, -3.55643, -7.50318, -4.69081, -6.62408, -6.11302, -5.70524, -7.67904, -4.14637, -8.46752, -2.60577, -9.3626, -0.775793, -9.14529, 0.938007, -9.5529, 2.55413, -8.71425, 4.47965, -8.78771, 6.03919, -7.81213, 6.96795, -6.21336, 8.31075, -5.01662, 9.2882, -3.48474, 9.63221, -1.67608, 9.54775, 0.107906 )
-uv = PoolVector2Array( 1586.26, 631.945, 1545.05, 727.817, 1478.58, 816.064, 1389.49, 894.168, 1279.45, 960.573, 1154.83, 1011.65, 1018.78, 1046.66, 874.162, 1064.7, 725.574, 1064.69, 579.595, 1046.35, 440.647, 1010.15, 315.249, 957.905, 206.728, 891.4, 118.527, 812.948, 52.4169, 723.436, 12.6842, 628.125, 0.018549, 529.868, 14.4701, 432.489, 55.6101, 338.066, 121.655, 250.688, 212.09, 171.686, 322.897, 105.258, 448.174, 54.3614, 585.499, 19.5347, 732.379, 1.90925, 878.177, 2.5534, 1025.01, 21.5374, 1163.33, 58.1937, 1289.29, 111.416, 1397.09, 178.436, 1484.9, 257.798, 1549.02, 346.097, 1588.16, 442.041, 1599.95, 539.529 )
+polygon = PoolVector2Array( 9.15215, 1.69244, 8.88015, 3.4492, 8.35431, 5.18164, 7.34235, 6.69687, 5.7479, 7.62427, 4.39147, 8.86549, 2.59844, 9.1292, 0.866505, 9.34052, -0.904001, 9.60979, -2.65347, 9.32046, -4.15554, 8.31276, -5.74497, 7.55704, -6.65802, 5.99762, -8.44525, 5.1561, -9.34078, 3.53403, -9.36499, 1.69252, -9.96978, -0.0363498, -8.77481, -1.66897, -8.87969, -3.46041, -7.85142, -4.85873, -6.87143, -6.25859, -5.37369, -7.11602, -3.94898, -7.9426, -2.70973, -9.49758, -0.819931, -8.87802, 0.853813, -9.08064, 2.52481, -8.78245, 4.32421, -8.58178, 5.56213, -7.27088, 7.28537, -6.55183, 8.13621, -4.96253, 8.85004, -3.37001, 9.11522, -1.66655, 9.81696, 0.0597566 )
+uv = PoolVector2Array( 1586.66, 630.511, 1545.72, 726.661, 1479.85, 814.7, 1391.07, 893.017, 1281.59, 959.502, 1155.1, 1011.56, 1019.01, 1046.62, 873.897, 1064.72, 725.074, 1064.66, 580.95, 1046.61, 442.287, 1010.7, 315.847, 958.209, 205.605, 890.57, 117.199, 811.502, 51.7625, 722.286, 12.7535, 628.381, 0.00534058, 531.555, 14.0893, 433.815, 54.6005, 339.785, 119.723, 252.76, 208.555, 174.257, 317.897, 107.756, 443.841, 55.7873, 580.513, 20.4718, 726.429, 2.26079, 874.89, 2.34277, 1021.03, 20.7672, 1159.99, 57.0654, 1286.07, 109.767, 1394.84, 176.758, 1482.98, 255.698, 1547.63, 343.647, 1586.96, 437.55, 1599.99, 536.747 )

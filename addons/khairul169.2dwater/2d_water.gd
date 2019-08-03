@@ -20,12 +20,16 @@ var bubblesContainer;
 func _enter_tree():
 	bubbles = self.find_node( 'bubbles' );
 	bubbles.set_emitting(false);
-	water_area = self.find_node('AffectedArea' );
+	water_area = self.find_node( 'AffectedArea' );
 	bubblesContainer = self.get_node("BubblesContainer");
 	mat.set_shader(shader);
 	set_material(mat);
 	update_water();
 	add_bubbles(bubbles);
+	self.set_process(true);
+	water_area.set_physics_process(true);
+#	water_area.set_contact_monitor(true);
+	water_area.connect("body_entered",self,"on_body_entered");
 
 
 func update_water():
@@ -59,7 +63,18 @@ func refresh_bubbles():
 	for i in bubblesContainer.get_children():
 		bubblesContainer.remove_child(i);
 	self.add_bubbles(self.bubbles);
-
+#--------------------------------------------------------
+func on_body_entered(body):
+	#TODO remove old splashes
+	var splash = $PlaceHolders/WaterSplash.duplicate();
+	self.add_child(splash)
+	splash.position =  body.get_global_transform().origin - self.get_global_transform().origin + Vector2(0,8)
+	splash.position = splash.position / self.scale 
+	splash.scale = Vector2(1,1) / self.scale
+	splash.set_emitting(true)
+	splash.visible = true;
+	
+#--------------------------------------------------------
 func _set_water_color(new):
 	water_color = new
 	update_water();

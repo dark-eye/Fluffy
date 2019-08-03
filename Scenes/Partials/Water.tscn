@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://addons/khairul169.2dwater/2d_water.tres" type="Shader" id=1]
 [ext_resource path="res://Graphics/Environment/rope.jpg" type="Texture" id=2]
@@ -7,8 +7,9 @@
 [ext_resource path="res://addons/khairul169.2dwater/2d_water.gd" type="Script" id=5]
 [ext_resource path="res://addons/khairul169.2dwater/icon.png" type="Texture" id=6]
 [ext_resource path="res://Graphics/Environment/Water/bubble.png" type="Texture" id=7]
+[ext_resource path="res://Graphics/Environment/Water/droplet.png" type="Texture" id=8]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 0.0392157, 0.447059, 0.976471, 0.556863 )
 shader_param/reflectionsEffect = 0.75
@@ -19,6 +20,7 @@ shader_param/displacement = ExtResource( 3 )
 shader_param/backgroundDisplacement = ExtResource( 2 )
 
 [sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8.17416e+06, 2.62885e+06 )
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0.000982959, 0.0688 ), 0.0, 0.0, 0, 0, Vector2( 0.822893, 0.72 ), 1.72379, 1.72379, 0, 0, Vector2( 1, 0.5968 ), 0.0, 0.0, 0, 0 ]
@@ -42,8 +44,12 @@ scale = 0.03
 scale_random = 0.01
 scale_curve = SubResource( 4 )
 
+[sub_resource type="Curve" id=6]
+bake_resolution = 1
+_data = [ Vector2( 0, 0.0237 ), 0.0, 0.0, 0, 0, Vector2( 0.75084, 0.6837 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
 [node name="Water" type="Sprite"]
-material = SubResource( 1 )
+material = SubResource( 7 )
 texture = ExtResource( 4 )
 script = ExtResource( 5 )
 __meta__ = {
@@ -60,19 +66,16 @@ bubbles_randomness = 0.918
 
 [node name="AffectedArea" type="Area2D" parent="."]
 visible = false
-position = Vector2( -3.30811, 11.9956 )
-scale = Vector2( 8.07315, 2.14735 )
+scale = Vector2( 1e-05, 1e-05 )
 input_pickable = false
 space_override = 1
 gravity_distance_scale = 1.0
 gravity_vec = Vector2( 0, -0.2 )
 linear_damp = 3.0
 priority = 1.0
-monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AffectedArea"]
-position = Vector2( -0.0219811, 0.0412436 )
 scale = Vector2( 3.1428, 3.04009 )
 shape = SubResource( 2 )
 
@@ -91,3 +94,28 @@ texture = ExtResource( 7 )
 
 [node name="BubblesContainer" type="Node2D" parent="."]
 z_index = -4
+
+[node name="PlaceHolders" type="Node2D" parent="."]
+
+[node name="WaterSplash" type="CPUParticles2D" parent="PlaceHolders"]
+rotation = -1.5708
+emitting = false
+amount = 64
+lifetime = 1.6
+one_shot = true
+explosiveness = 0.85
+fixed_fps = 20
+local_coords = false
+texture = ExtResource( 8 )
+emission_shape = 2
+emission_rect_extents = Vector2( 0, 10 )
+flag_align_y = true
+spread = 15.0
+flatness = 1.0
+initial_velocity = 78.11
+radial_accel = 4.31
+radial_accel_random = 0.14
+angle_random = 0.17
+scale_amount = 0.04
+scale_amount_random = 0.02
+scale_amount_curve = SubResource( 6 )
