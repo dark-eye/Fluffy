@@ -53,6 +53,9 @@ func getBoundsNode():
 	
 	return bounds;
 
+func getCurrentScene():
+	return self.currentScene;
+
 #---------------------------------------------------------------
 
 func _set_currentLevel(newLevel):

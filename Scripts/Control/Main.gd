@@ -2,13 +2,14 @@ extends Control
 
 export(NodePath) var levelControllerPath = null
 export(NodePath) var playerControllerPath = null
+export(NodePath) var endSectionScreen = null
 
 var endGameTimer = Timer.new();
 var physicsBorders = StaticBody2D.new();
 
 #================================================
 func _ready():
-	endGameTimer.connect("timeout", self, "next_level");
+	endGameTimer.connect("timeout", self, "show_end_level_screen");
 	endGameTimer.stop();
 	self.add_child( endGameTimer );
 	self.reset();
@@ -27,7 +28,7 @@ func next_level():
 
 func reset():
 	get_player_controller().getPlayer().mode=RigidBody2D.MODE_STATIC;
-	endGameTimer.stop();
+
 	var lvlctrl = get_level_controller();
 	get_level_controller().reset();
 	var spawnPoint =lvlctrl.getSpawnPoint();
@@ -47,6 +48,19 @@ func player_at_end_gate():
 		var lvlctrl = get_level_controller();
 		getCamera().endLevelTween(lvlctrl.currentScene.cameraOverviewZoomout);
 		self.find_node("Clock",true).pause();
+
+
+func show_end_level_screen():
+	endGameTimer.stop();
+	self.get_end_screen().visible = true;
+	self.get_end_screen().score = 1000 / self.find_node("Clock",true).timePassed;
+	self.get_end_screen().time = self.find_node("Clock",true).timePassed;
+	self.get_end_screen().update();
+	self.get_end_screen().triggerConfetti()
+
+func next_level_requested():
+	self.get_end_screen().visible = false;
+	self.next_level()
 
 func level_loaded(idx,levelScene):
 	
@@ -89,6 +103,9 @@ func get_level_controller():
 
 func get_player_controller():
 	return get_node(playerControllerPath);
+
+func get_end_screen():
+	return get_node(endSectionScreen);
 	
 func getCamera():
 	return self.find_node('Camera2D');

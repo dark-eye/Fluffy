@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Control/Main.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Environment/Enviroment.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scenes/Partials/UI/UI.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Partials/UI/Timer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Partials/UI/InputControls.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Partials/UI/LevelEndingOverlay.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -28,6 +29,7 @@ __meta__ = {
 }
 levelControllerPath = NodePath("Enviroment/LevelController")
 playerControllerPath = NodePath("Charcter Control")
+endSectionScreen = NodePath("UI/LevelEndingOverlay")
 
 [node name="Enviroment" type="Control" parent="." groups=[
 "Environment",
@@ -40,7 +42,7 @@ script = ExtResource( 2 )
 position = Vector2( 6.54413, -4.54419 )
 script = ExtResource( 3 )
 levels = PoolStringArray( "res://Scenes/Levels/level1.scn", "res://Scenes/Levels/level2.scn", "res://Scenes/Levels/level3.scn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level4.tscn", "res://Scenes/Levels/level5.tscn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level7.tscn", "res://Scenes/Levels/level8.tscn", "res://Scenes/Levels/test_level.scn" )
-currentLevel = 1
+currentLevel = 2
 
 [node name="BundingBox" type="Area2D" parent="Enviroment"]
 position = Vector2( 742.583, 265.242 )
@@ -61,6 +63,8 @@ soundPlayer = NodePath("./SamplePlayer2D")
 
 [node name="Camera2D" parent="Charcter Control/Boing" instance=ExtResource( 6 )]
 position = Vector2( 0.155365, 3.47427 )
+process_mode = 0
+limit_smoothed = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Charcter Control/Boing/Camera2D"]
 environment = SubResource( 1 )
@@ -88,3 +92,6 @@ margin_right = 0.0
 margin_bottom = 0.0
 rect_min_size = Vector2( 512, 150 )
 size_flags_horizontal = 1
+
+[node name="LevelEndingOverlay" parent="UI" instance=ExtResource( 10 )]
+z_index = 10
