@@ -99,9 +99,10 @@ z_index = -4
 
 [node name="WaterSplash" type="CPUParticles2D" parent="PlaceHolders"]
 rotation = -1.5708
+z_index = 5
 emitting = false
 amount = 64
-lifetime = 1.6
+lifetime = 1.5
 one_shot = true
 explosiveness = 0.85
 fixed_fps = 20
@@ -110,9 +111,8 @@ texture = ExtResource( 8 )
 emission_shape = 2
 emission_rect_extents = Vector2( 0, 10 )
 flag_align_y = true
-spread = 15.0
-flatness = 1.0
-initial_velocity = 78.11
+spread = 10.0
+initial_velocity = 120.0
 radial_accel = 4.31
 radial_accel_random = 0.14
 angle_random = 0.17

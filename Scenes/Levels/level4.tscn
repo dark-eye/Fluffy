@@ -87,17 +87,10 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-MovingPlatform = false
 curve = SubResource( 2 )
-BakeInterval = 50.0
 LeftTexture = ExtResource( 4 )
-LeftTextureNormal = null
 MidTexture = ExtResource( 5 )
-MidTextureNormal = null
 RightTexture = ExtResource( 6 )
-RightTextureNormal = null
-LeftOverflow = 0.0
-RightOverflow = 0.0
 Thickness = 60.0
 Position = 0.0
 
@@ -113,15 +106,9 @@ __meta__ = {
 }
 MovingPlatform = true
 curve = SubResource( 3 )
-BakeInterval = 50.0
 LeftTexture = ExtResource( 7 )
-LeftTextureNormal = null
 MidTexture = ExtResource( 8 )
-MidTextureNormal = null
 RightTexture = ExtResource( 9 )
-RightTextureNormal = null
-LeftOverflow = 0.0
-RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
@@ -135,17 +122,10 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-MovingPlatform = false
 curve = SubResource( 4 )
-BakeInterval = 50.0
 LeftTexture = ExtResource( 4 )
-LeftTextureNormal = null
 MidTexture = ExtResource( 5 )
-MidTextureNormal = null
 RightTexture = ExtResource( 6 )
-RightTextureNormal = null
-LeftOverflow = 0.0
-RightOverflow = 0.0
 Thickness = 60.0
 Position = 0.0
 
@@ -159,17 +139,10 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-MovingPlatform = false
 curve = SubResource( 5 )
-BakeInterval = 50.0
 LeftTexture = ExtResource( 7 )
-LeftTextureNormal = null
 MidTexture = ExtResource( 8 )
-MidTextureNormal = null
 RightTexture = ExtResource( 9 )
-RightTextureNormal = null
-LeftOverflow = 0.0
-RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
@@ -183,17 +156,10 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-MovingPlatform = false
 curve = SubResource( 6 )
-BakeInterval = 50.0
 LeftTexture = ExtResource( 7 )
-LeftTextureNormal = null
 MidTexture = ExtResource( 8 )
-MidTextureNormal = null
 RightTexture = ExtResource( 9 )
-RightTextureNormal = null
-LeftOverflow = 0.0
-RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
@@ -208,26 +174,19 @@ script = ExtResource( 10 )
 __meta__ = {
 "_editor_icon": ExtResource( 11 )
 }
-MovingPlatform = false
 Curve = SubResource( 7 )
-BakeInterval = 50.0
 FillTexture = ExtResource( 12 )
 FillSize = 4.0
 TopLeftTexture = ExtResource( 13 )
-TopLeftTextureNormal = null
 TopTexture = ExtResource( 14 )
-TopTextureNormal = null
 TopRightTexture = ExtResource( 15 )
-TopRightTextureNormal = null
 TopThickness = 80.0
 TopPosition = 0.823851
 TopLeftOverflow = 1.0
 TopRightOverflow = 0.968362
 SideTexture = ExtResource( 16 )
-SideTextureNormal = null
 SideThickness = 20.0
 SidePosition = 0.646636
-Angle = 0.5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Platforms/ThickPlatform"]
 visible = false

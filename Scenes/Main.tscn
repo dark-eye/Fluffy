@@ -13,6 +13,7 @@
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
+fog_enabled = true
 auto_exposure_scale = 0.01
 auto_exposure_max_luma = 1.0
 glow_enabled = true
@@ -42,7 +43,7 @@ script = ExtResource( 2 )
 position = Vector2( 6.54413, -4.54419 )
 script = ExtResource( 3 )
 levels = PoolStringArray( "res://Scenes/Levels/level1.scn", "res://Scenes/Levels/level2.scn", "res://Scenes/Levels/level3.scn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level4.tscn", "res://Scenes/Levels/level5.tscn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level7.tscn", "res://Scenes/Levels/level8.tscn", "res://Scenes/Levels/test_level.scn" )
-currentLevel = 2
+currentLevel = 9
 
 [node name="BundingBox" type="Area2D" parent="Enviroment"]
 position = Vector2( 742.583, 265.242 )
@@ -94,4 +95,5 @@ rect_min_size = Vector2( 512, 150 )
 size_flags_horizontal = 1
 
 [node name="LevelEndingOverlay" parent="UI" instance=ExtResource( 10 )]
+visible = false
 z_index = 10

@@ -8,6 +8,7 @@ export(int) var time = 0
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
+	$BackgroundBlur/AnimationPlayer.connect("animation_finished",self,"fire_next_level");
 	self.update();
 
 func update():
@@ -22,3 +23,12 @@ func triggerConfetti():
 	$"Container/Effects/Confetti/Confetti Left".emitting =true;
 	$"Container/Effects/Confetti/Confetti Right".emitting =true;
 
+
+
+func _on_next_pressed():
+	self.get_tree().call_group('Control','next_level_requested');
+	$BackgroundBlur/AnimationPlayer.play("dissipate")
+
+func fire_next_level( anim_name ):
+	if(anim_name == "dissipate"):
+		self.hide();

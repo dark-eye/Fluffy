@@ -59,7 +59,6 @@ func show_end_level_screen():
 	self.get_end_screen().triggerConfetti()
 
 func next_level_requested():
-	self.get_end_screen().visible = false;
 	self.next_level()
 
 func level_loaded(idx,levelScene):

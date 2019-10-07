@@ -70,6 +70,7 @@ func on_body_entered(body):
 	self.add_child(splash)
 	splash.position =  body.get_global_transform().origin - self.get_global_transform().origin + Vector2(0,8)
 	splash.position = splash.position / self.scale 
+	splash.position.y =-self.texture.get_size().y/2
 	splash.scale = Vector2(1,1) / self.scale
 	splash.set_emitting(true)
 	splash.visible = true;

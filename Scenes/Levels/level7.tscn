@@ -57,17 +57,10 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-MovingPlatform = false
 curve = SubResource( 2 )
-BakeInterval = 50.0
 LeftTexture = ExtResource( 4 )
-LeftTextureNormal = null
 MidTexture = ExtResource( 5 )
-MidTextureNormal = null
 RightTexture = ExtResource( 6 )
-RightTextureNormal = null
-LeftOverflow = 0.0
-RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
@@ -80,17 +73,10 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-MovingPlatform = false
 curve = SubResource( 3 )
-BakeInterval = 50.0
 LeftTexture = ExtResource( 7 )
-LeftTextureNormal = null
 MidTexture = ExtResource( 8 )
-MidTextureNormal = null
 RightTexture = ExtResource( 9 )
-RightTextureNormal = null
-LeftOverflow = 0.0
-RightOverflow = 0.0
 Thickness = 60.0
 Position = 0.0
 
@@ -103,17 +89,10 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-MovingPlatform = false
 curve = SubResource( 4 )
-BakeInterval = 50.0
 LeftTexture = ExtResource( 4 )
-LeftTextureNormal = null
 MidTexture = ExtResource( 5 )
-MidTextureNormal = null
 RightTexture = ExtResource( 6 )
-RightTextureNormal = null
-LeftOverflow = 0.0
-RightOverflow = 0.0
 Thickness = 80.0
 Position = 0.0
 
