@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Partials/Environment/Wind.shader" type="Shader" id=1]
-[ext_resource path="res://Graphics/Environment/Water/water.jpg" type="Texture" id=2]
+[ext_resource path="res://Graphics/Environment/wind.png" type="Texture" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "tool
@@ -47,9 +47,11 @@ func set_base_color(value):
 [sub_resource type="ShaderMaterial" id=2]
 render_priority = 2
 shader = ExtResource( 1 )
-shader_param/baseColor = Color( 0.764706, 0.886275, 1, 0.0941176 )
-shader_param/windVector = Vector2( 2, 0 )
+shader_param/gustFactor = 2.0
+shader_param/baseColor = Color( 0.556863, 0.819608, 1, 0.160784 )
+shader_param/windVector = Vector2( 6.69, 0 )
 shader_param/windTex = ExtResource( 2 )
+shader_param/gustTex = ExtResource( 2 )
 
 [node name="Wind" type="Area2D"]
 z_index = 1
@@ -58,7 +60,6 @@ space_override = 1
 gravity_vec = Vector2( 0.5, 0 )
 gravity = 1.0
 script = SubResource( 1 )
-baseColor = Color( 0.054902, 0.270588, 0.458824, 0.286275 )
 
 [node name="Placeholders" type="Node" parent="."]
 

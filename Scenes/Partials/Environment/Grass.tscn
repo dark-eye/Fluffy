@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Graphics/Environment/billboard-grass.png" type="Texture" id=1]
 
@@ -18,11 +18,18 @@ func _ready():
 #	pass
 "
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 30.5615, 1.40514 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 306.316
+
 [node name="Grass" type="Node2D"]
+position = Vector2( 109.337, 132.502 )
 script = SubResource( 1 )
 
 [node name="Polygon" type="Polygon2D" parent="."]
-position = Vector2( -0.502319, -0.500709 )
+position = Vector2( 0.0816501, -52.1829 )
 scale = Vector2( 0.1, 0.1 )
 offset = Vector2( -512, -512 )
 texture = ExtResource( 1 )
@@ -30,27 +37,43 @@ skeleton = NodePath("../Skeleton2D")
 polygon = PoolVector2Array( 195.349, 1024, 176.744, 837.953, 30.2326, 586.791, 16.2791, 230.977, 100, 386.791, 155.814, 584.465, 165.116, 361.209, 230.233, 272.837, 369.767, 230.977, 569.767, 307.721, 611.628, 212.372, 665.116, 217.023, 686.047, 363.535, 795.349, 263.535, 820.93, 419.349, 904.651, 279.814, 1006.98, 310.047, 927.907, 498.419, 990.698, 568.186, 848.837, 747.256, 797.674, 1028.65 )
 uv = PoolVector2Array( 195.349, 1024, 176.744, 837.953, 30.2326, 586.791, 16.2791, 230.977, 100, 386.791, 155.814, 584.465, 165.116, 361.209, 230.233, 272.837, 369.767, 230.977, 569.767, 307.721, 611.628, 212.372, 665.116, 217.023, 686.047, 363.535, 795.349, 263.535, 820.93, 419.349, 904.651, 279.814, 1006.98, 310.047, 927.907, 498.419, 990.698, 568.186, 848.837, 747.256, 797.674, 1028.65 )
 polygons = [ PoolIntArray( 17, 5, 2, 1, 19, 18 ), PoolIntArray( 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 17 ), PoolIntArray( 5, 4, 3, 2 ), PoolIntArray( 1, 0, 20, 19 ) ]
-bones = [ NodePath("Bone2D"), PoolRealArray( 1, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 1 ), NodePath("Bone2D/Bone2D"), PoolRealArray( 0, 0.5, 1, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0.5, 0 ), NodePath("Bone2D/Bone2D/Bone2D"), PoolRealArray( 0, 0, 0.5, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 0, 0, 0 ) ]
-
-[node name="Skeleton2D" type="Skeleton2D" parent="."]
-scale = Vector2( 0.1, 0.1 )
-
-[node name="Bone2D" type="Bone2D" parent="Skeleton2D"]
-position = Vector2( -3.05176e-05, 498.25 )
-rotation = -1.57079
-scale = Vector2( 13.8975, 0.183932 )
-rest = Transform2D( 3.08701e-05, -13.8975, 0.183932, 4.08561e-07, -3.05176e-05, 498.25 )
 __meta__ = {
 "_edit_ik_": true
 }
 
-[node name="Bone2D" type="Bone2D" parent="Skeleton2D/Bone2D"]
-position = Vector2( 12.1896, -9.03174 )
-rest = Transform2D( 1, 0, 0, 1, 12.1896, -9.03174 )
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+position = Vector2( -0.528198, -0.859497 )
+rotation = -7.25536
+scale = Vector2( 0.1, 0.1 )
+__meta__ = {
+"_edit_ik_": true
+}
 
-[node name="Bone2D" type="Bone2D" parent="Skeleton2D/Bone2D/Bone2D"]
-position = Vector2( 21.5988, 66.3341 )
-rest = Transform2D( 1, 0, 0, 1, 17.8064, 9.02673 )
+[node name="StaticBody2D" type="StaticBody2D" parent="Skeleton2D"]
+position = Vector2( 4.73938, -3.20874 )
+rotation = -5.32146
+scale = Vector2( 10, 10 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Skeleton2D/StaticBody2D"]
+shape = SubResource( 3 )
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="Skeleton2D/StaticBody2D"]
+position = Vector2( 1.46765, -32.5708 )
+rotation = -0.00487551
+scale = Vector2( 0.1, 0.1 )
 __meta__ = {
 "_edit_bone_": true
 }
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="Skeleton2D/StaticBody2D/RigidBody2D2"]
+position = Vector2( -5.72791, 5.64807 )
+node_a = NodePath("../../../StaticBody2D")
+node_b = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Skeleton2D/StaticBody2D/RigidBody2D2"]
+position = Vector2( -13.8457, 0.459045 )
+shape = SubResource( 2 )

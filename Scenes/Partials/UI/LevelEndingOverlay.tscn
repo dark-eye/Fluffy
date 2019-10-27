@@ -102,7 +102,7 @@ func dissipate_animation():
 	$AnimationPlayer.play(\"dissipate\");
 "
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=12]
 resource_name = "dissipate"
 tracks/0/type = "value"
 tracks/0/path = NodePath("../BackgroundBlur:blur")
@@ -117,10 +117,9 @@ tracks/0/keys = {
 "values": [ 10, 3 ]
 }
 
-[sub_resource type="Animation" id=12]
-resource_name = "reveal"
+[sub_resource type="Animation" id=13]
 tracks/0/type = "value"
-tracks/0/path = NodePath("../BackgroundBlur:blur")
+tracks/0/path = NodePath(".:blur")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -254,7 +253,7 @@ script = SubResource( 11 )
 blur = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BackgroundBlur"]
-anims/dissipate = SubResource( 13 )
-anims/reveal = SubResource( 12 )
+anims/dissipate = SubResource( 12 )
+anims/reveal = SubResource( 13 )
 [connection signal="visibility_changed" from="." to="BackgroundBlur" method="reveal_animation"]
 [connection signal="pressed" from="Container/MarginContainer/Button" to="." method="_on_next_pressed"]

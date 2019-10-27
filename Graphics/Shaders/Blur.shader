@@ -6,7 +6,7 @@ uniform float blurStrengh = 0.01;
 uniform float blurfragment = 0.005;
 
 void fragment() {
-	vec4 blurred = texture(SCREEN_TEXTURE,SCREEN_UV);
+	vec4 blurred = texture(SCREEN_TEXTURE, SCREEN_UV);
 	for (float x = 0.0; x < radiusX; x++) {
 		for (float y = 0.0; y < radiusY; y++) {
 			vec2 addUV = blurfragment * (vec2(x,y)-(vec2(radiusX,radiusY)/2.0));

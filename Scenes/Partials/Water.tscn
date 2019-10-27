@@ -9,7 +9,7 @@
 [ext_resource path="res://Graphics/Environment/Water/bubble.png" type="Texture" id=7]
 [ext_resource path="res://Graphics/Environment/Water/droplet.png" type="Texture" id=8]
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/albedo = Color( 0.0392157, 0.447059, 0.976471, 0.556863 )
 shader_param/reflectionsEffect = 0.75
@@ -49,7 +49,7 @@ bake_resolution = 1
 _data = [ Vector2( 0, 0.0237 ), 0.0, 0.0, 0, 0, Vector2( 0.75084, 0.6837 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Water" type="Sprite"]
-material = SubResource( 7 )
+material = SubResource( 1 )
 texture = ExtResource( 4 )
 script = ExtResource( 5 )
 __meta__ = {
@@ -101,7 +101,7 @@ z_index = -4
 rotation = -1.5708
 z_index = 5
 emitting = false
-amount = 64
+amount = 32
 lifetime = 1.5
 one_shot = true
 explosiveness = 0.85
