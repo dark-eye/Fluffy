@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Partials/Environment/Wind.shader" type="Shader" id=1]
 [ext_resource path="res://Graphics/Environment/wind.png" type="Texture" id=2]
@@ -44,7 +44,14 @@ func set_base_color(value):
 		self.find_node(\"VisualPoly\").material.set_shader_param('baseColor',baseColor);
 "
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.884793, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=4]
 render_priority = 2
 shader = ExtResource( 1 )
 shader_param/gustFactor = 2.0
@@ -52,6 +59,7 @@ shader_param/baseColor = Color( 0.556863, 0.819608, 1, 0.160784 )
 shader_param/windVector = Vector2( 6.69, 0 )
 shader_param/windTex = ExtResource( 2 )
 shader_param/gustTex = ExtResource( 2 )
+shader_param/gradianetFade = SubResource( 3 )
 
 [node name="Wind" type="Area2D"]
 z_index = 1
@@ -68,6 +76,5 @@ visible = false
 polygon = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
 
 [node name="VisualPoly" type="Polygon2D" parent="."]
-material = SubResource( 2 )
-position = Vector2( 0, -1.43198 )
+material = SubResource( 4 )
 polygon = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )

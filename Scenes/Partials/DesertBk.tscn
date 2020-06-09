@@ -16,4 +16,3 @@ motion_scale = Vector2( 0.1, 0.1 )
 position = Vector2( 505.344, 284.945 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
-

@@ -66,7 +66,7 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -167.387, 445 )
+graph_offset = Vector2( 449, 448 )
 nodes/fragment/0/position = Vector2( 1080, 440 )
 nodes/fragment/4/node = SubResource( 1 )
 nodes/fragment/4/position = Vector2( 520, 600 )
@@ -88,33 +88,33 @@ shader_param/GradientTexture = ExtResource( 1 )
 friction = 0.85
 rough = true
 
-[sub_resource type="VisualShaderNodeVectorOp" id=15]
+[sub_resource type="VisualShaderNodeVectorOp" id=9]
 default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 0.5, 0.5, 0 ) ]
 operator = 1
 
-[sub_resource type="VisualShaderNodeColorOp" id=16]
+[sub_resource type="VisualShaderNodeColorOp" id=10]
 operator = 8
 
-[sub_resource type="VisualShaderNodeTexture" id=9]
+[sub_resource type="VisualShaderNodeTexture" id=11]
 output_port_for_preview = 0
 texture = ExtResource( 4 )
 
-[sub_resource type="VisualShaderNodeTexture" id=10]
+[sub_resource type="VisualShaderNodeTexture" id=12]
 output_port_for_preview = 0
 source = 2
 
-[sub_resource type="VisualShaderNodeInput" id=11]
+[sub_resource type="VisualShaderNodeInput" id=13]
 input_name = "uv"
 
-[sub_resource type="VisualShaderNodeVectorOp" id=17]
+[sub_resource type="VisualShaderNodeVectorOp" id=14]
 default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 1, 1, 1 ) ]
 operator = 2
 
-[sub_resource type="VisualShaderNodeVectorLen" id=18]
+[sub_resource type="VisualShaderNodeVectorLen" id=15]
 
-[sub_resource type="VisualShaderNodeVectorCompose" id=19]
+[sub_resource type="VisualShaderNodeVectorCompose" id=16]
 
-[sub_resource type="VisualShader" id=13]
+[sub_resource type="VisualShader" id=17]
 code = "shader_type canvas_item;
 uniform sampler2D tex_frg_2;
 
@@ -208,30 +208,30 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -284.583, 12.1 )
+graph_offset = Vector2( -624.544, 12.1 )
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2( 940, 140 )
-nodes/fragment/2/node = SubResource( 9 )
-nodes/fragment/2/position = Vector2( 520, -80 )
-nodes/fragment/3/node = SubResource( 10 )
-nodes/fragment/3/position = Vector2( -60, 100 )
-nodes/fragment/4/node = SubResource( 11 )
-nodes/fragment/4/position = Vector2( -240, -40 )
-nodes/fragment/6/node = SubResource( 17 )
-nodes/fragment/6/position = Vector2( -60, 0 )
-nodes/fragment/8/node = SubResource( 18 )
-nodes/fragment/8/position = Vector2( 260, -40 )
-nodes/fragment/9/node = SubResource( 19 )
-nodes/fragment/9/position = Vector2( 320, 80 )
-nodes/fragment/11/node = SubResource( 15 )
-nodes/fragment/11/position = Vector2( 140, 60 )
-nodes/fragment/12/node = SubResource( 16 )
-nodes/fragment/12/position = Vector2( 740, 80 )
-nodes/fragment/connections = PoolIntArray( 4, 0, 3, 0, 4, 0, 6, 0, 8, 0, 9, 0, 9, 0, 2, 0, 8, 0, 9, 1, 6, 0, 11, 0, 11, 0, 8, 0, 3, 0, 0, 4, 2, 0, 12, 1, 3, 0, 12, 0, 12, 0, 0, 0, 3, 0, 0, 3, 3, 0, 0, 2, 3, 1, 0, 1 )
+nodes/fragment/0/position = Vector2( 940, 220 )
+nodes/fragment/2/node = SubResource( 11 )
+nodes/fragment/2/position = Vector2( 540, -40 )
+nodes/fragment/3/node = SubResource( 12 )
+nodes/fragment/3/position = Vector2( -180, 180 )
+nodes/fragment/4/node = SubResource( 13 )
+nodes/fragment/4/position = Vector2( -440, -20 )
+nodes/fragment/6/node = SubResource( 14 )
+nodes/fragment/6/position = Vector2( -200, 20 )
+nodes/fragment/8/node = SubResource( 15 )
+nodes/fragment/8/position = Vector2( 180, 20 )
+nodes/fragment/9/node = SubResource( 16 )
+nodes/fragment/9/position = Vector2( 340, 20 )
+nodes/fragment/11/node = SubResource( 9 )
+nodes/fragment/11/position = Vector2( 0, 20 )
+nodes/fragment/12/node = SubResource( 10 )
+nodes/fragment/12/position = Vector2( 760, 60 )
+nodes/fragment/connections = PoolIntArray( 4, 0, 3, 0, 4, 0, 6, 0, 8, 0, 9, 0, 9, 0, 2, 0, 8, 0, 9, 1, 11, 0, 8, 0, 3, 0, 0, 4, 12, 0, 0, 0, 3, 0, 0, 3, 3, 0, 0, 2, 3, 1, 0, 1, 3, 0, 12, 0, 2, 0, 12, 1, 6, 0, 11, 0 )
 
-[sub_resource type="ShaderMaterial" id=14]
-shader = SubResource( 13 )
+[sub_resource type="ShaderMaterial" id=18]
+shader = SubResource( 17 )
 
 [node name="RigidBody2D" type="RigidBody2D"]
 material = SubResource( 7 )
@@ -246,7 +246,7 @@ size = 10.0
 polygon = PoolVector2Array( 9.15215, 1.69244, 8.88015, 3.4492, 8.35431, 5.18164, 7.34235, 6.69687, 5.7479, 7.62427, 4.39147, 8.86549, 2.59844, 9.1292, 0.866505, 9.34052, -0.904001, 9.60979, -2.65347, 9.32046, -4.15554, 8.31276, -5.74497, 7.55704, -6.65802, 5.99762, -8.44525, 5.1561, -9.34078, 3.53403, -9.36499, 1.69252, -9.96978, -0.0363498, -8.77481, -1.66897, -8.87969, -3.46041, -7.85142, -4.85873, -6.87143, -6.25859, -5.37369, -7.11602, -3.94898, -7.9426, -2.70973, -9.49758, -0.819931, -8.87802, 0.853813, -9.08064, 2.52481, -8.78245, 4.32421, -8.58178, 5.56213, -7.27088, 7.28537, -6.55183, 8.13621, -4.96253, 8.85004, -3.37001, 9.11522, -1.66655, 9.81696, 0.0597566 )
 
 [node name="SpritePoly" type="Polygon2D" parent="."]
-material = SubResource( 14 )
+material = SubResource( 18 )
 antialiased = true
 texture = ExtResource( 3 )
 polygon = PoolVector2Array( 9.15215, 1.69244, 8.88015, 3.4492, 8.35431, 5.18164, 7.34235, 6.69687, 5.7479, 7.62427, 4.39147, 8.86549, 2.59844, 9.1292, 0.866505, 9.34052, -0.904001, 9.60979, -2.65347, 9.32046, -4.15554, 8.31276, -5.74497, 7.55704, -6.65802, 5.99762, -8.44525, 5.1561, -9.34078, 3.53403, -9.36499, 1.69252, -9.96978, -0.0363498, -8.77481, -1.66897, -8.87969, -3.46041, -7.85142, -4.85873, -6.87143, -6.25859, -5.37369, -7.11602, -3.94898, -7.9426, -2.70973, -9.49758, -0.819931, -8.87802, 0.853813, -9.08064, 2.52481, -8.78245, 4.32421, -8.58178, 5.56213, -7.27088, 7.28537, -6.55183, 8.13621, -4.96253, 8.85004, -3.37001, 9.11522, -1.66655, 9.81696, 0.0597566 )

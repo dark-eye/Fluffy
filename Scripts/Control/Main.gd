@@ -34,7 +34,8 @@ func reset():
 	var spawnPoint =lvlctrl.getSpawnPoint();
 	get_player_controller().setSpawnPoint(spawnPoint);
 	get_player_controller().spawn();
-	getCamera().startLevelTween(lvlctrl.currentScene.cameraOverviewZoomout);
+	var zoomFactor = lvlctrl.currentScene.find_node("Bounds").rect_size / getCamera().projectResolution;
+	getCamera().startLevelTween(zoomFactor.y if zoomFactor.x > zoomFactor.y else zoomFactor.x);
 	self.find_node("Clock",true).reset()
 	get_player_controller().getPlayer().mode=RigidBody2D.MODE_CHARACTER;
 
@@ -46,7 +47,8 @@ func player_at_end_gate():
 		endGameTimer.start(); 
 		get_player_controller().getPlayer().find_node('AnimationPlayer').play('going_away');
 		var lvlctrl = get_level_controller();
-		getCamera().endLevelTween(lvlctrl.currentScene.cameraOverviewZoomout);
+		var zoomFactor = (lvlctrl.currentScene.find_node("Bounds").rect_size / getCamera().projectResolution);
+		getCamera().endLevelTween(zoomFactor.y if zoomFactor.x > zoomFactor.y else zoomFactor.x);
 		self.find_node("Clock",true).pause();
 
 

@@ -32,6 +32,8 @@ settings/stdout/print_fps=true
 
 [display]
 
+window/dpi/allow_hidpi=true
+window/stretch/aspect="keep_width"
 driver/name="GLES2"
 
 [display.Android]

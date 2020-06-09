@@ -78,7 +78,8 @@ func _set_lights_ratio(newValue):
 func update_fire():
 	flame = self.find_node( 'Flame' );
 	flameContainer = self.find_node( 'FlamesContainer' );
-	span_fire(flame);"
+	span_fire(flame);
+"
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1

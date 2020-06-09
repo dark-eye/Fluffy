@@ -3,23 +3,18 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Camera2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-# Called when the node enters the scene tree for the first time.
+var adjustedZoom = Vector2(1.0,1.0);
+var projectResolution = Vector2(640,320);
 func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+	projectResolution = Vector2(	ProjectSettings.get_setting(\"display/window/size/width\"),
+									ProjectSettings.get_setting(\"display/window/size/height\"))	
+	adjustedZoom = Vector2(  projectResolution.x / get_viewport().size.x,
+							 projectResolution.y / get_viewport().size.y)
 
 func startLevelTween(zoomoutLevel):
 	$CameraTween.interpolate_property(	self,
 										\"zoom\",
-										Vector2(1,1)*zoomoutLevel,Vector2(1.0,1.0),
+										Vector2(1,1)*zoomoutLevel,adjustedZoom,
 										2.5,Tween.TRANS_SINE,Tween.EASE_OUT);
 										
 	$CameraTween.start();
@@ -29,7 +24,8 @@ func endLevelTween(zoomoutLevel):
 										\"zoom\",
 										self.zoom,Vector2(1,1)*zoomoutLevel,
 										2.5,Tween.TRANS_SINE,Tween.EASE_OUT);
-	$CameraTween.start();"
+	$CameraTween.start();
+"
 
 [sub_resource type="Animation" id=2]
 length = 2.0
