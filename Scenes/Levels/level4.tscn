@@ -68,10 +68,10 @@ script = SubResource( 1 )
 position = Vector2( 93.3763, 85.595 )
 
 [node name="Bounds" type="Container" parent="."]
-margin_left = -95.0
-margin_top = -1.0
-margin_right = 5307.0
-margin_bottom = 1002.0
+margin_left = -152.337
+margin_top = -9.19098
+margin_right = 5247.66
+margin_bottom = 993.809
 __meta__ = {
 "_edit_use_anchors_": false
 }

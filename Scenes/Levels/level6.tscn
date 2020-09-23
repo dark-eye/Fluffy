@@ -17,7 +17,8 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-export(float) var cameraOverviewZoomout = 2;"
+export(float) var cameraOverviewZoomout = 2;
+"
 
 [sub_resource type="Curve2D" id=2]
 bake_interval = 50.0
@@ -39,6 +40,7 @@ _data = {
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 12 )
+shader_param/gustFactor = 2.0
 shader_param/baseColor = Color( 0, 0.0431373, 1, 1 )
 shader_param/windVector = Vector2( 0, 1 )
 shader_param/windTex = ExtResource( 13 )
@@ -53,6 +55,9 @@ position = Vector2( 398.512, 479.623 )
 margin_left = -6.0
 margin_right = 4842.0
 margin_bottom = 3368.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Environment" type="Node2D" parent="."]
 
@@ -105,7 +110,6 @@ polygon = PoolVector2Array( -497.727, -98.5362, -456.948, -127.487, -413.919, -1
 
 [node name="EndGate" parent="Environment" instance=ExtResource( 9 )]
 position = Vector2( 4540.71, 573.162 )
-scale = Vector2( 1, 1 )
 isopen = true
 
 [node name="ParallaxBackground" parent="Environment" instance=ExtResource( 10 )]
@@ -116,6 +120,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, -300 )
 position = Vector2( 270.628, 993.387 )
 gravity_vec = Vector2( 0, 1 )
 windVector = Vector2( 0, 1 )
+baseColor = Color( 0.054902, 0.270588, 0.458824, 0.286275 )
 
 [node name="WindAreaPolygon" type="CollisionPolygon2D" parent="Environment/Wind"]
 material = SubResource( 5 )

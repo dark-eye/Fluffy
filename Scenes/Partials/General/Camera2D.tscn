@@ -11,18 +11,18 @@ func _ready():
 	adjustedZoom = Vector2(  projectResolution.x / get_viewport().size.x,
 							 projectResolution.y / get_viewport().size.y)
 
-func startLevelTween(zoomoutLevel):
+func startLevelTween(zoomInLevel):
 	$CameraTween.interpolate_property(	self,
 										\"zoom\",
-										Vector2(1,1)*zoomoutLevel,adjustedZoom,
+										Vector2(1,1)*zoomInLevel, adjustedZoom,
 										2.5,Tween.TRANS_SINE,Tween.EASE_OUT);
 										
 	$CameraTween.start();
 
-func endLevelTween(zoomoutLevel):
+func endLevelTween(zoomOutLevel):
 	$CameraTween.interpolate_property(	self,
 										\"zoom\",
-										self.zoom,Vector2(1,1)*zoomoutLevel,
+										self.zoom, Vector2(1,1)*zoomOutLevel/2,
 										2.5,Tween.TRANS_SINE,Tween.EASE_OUT);
 	$CameraTween.start();
 "

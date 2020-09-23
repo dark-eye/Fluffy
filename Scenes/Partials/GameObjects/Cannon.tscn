@@ -113,6 +113,9 @@ __meta__ = {
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Berral/KinematicBody2D"]
 visible = false
+position = Vector2( 0.262758, 271.118 )
+rotation = -4.54747e-13
+scale = Vector2( 1, 1 )
 polygon = PoolVector2Array( 69.0424, -48.3123, 83.4121, -26.7577, 83.4121, 3.17913, 75.0298, 25.9311, 63.3757, 43.411, 36.5126, 59.7624, 7.31375, 63.2663, -30.3479, 55.868, -54.2974, 40.3008, -67.4696, 21.1413, -74.6545, -9.99308, -72.2595, -37.535, -62.6797, -60.287, -51.9025, -69.8668, -47.8485, -211.759, -57.1466, -228.418, -61.4083, -241.203, -55.9844, -254.762, -33.9013, -265.61, 0.191956, -270.647, 35.5132, -265.055, 52.2778, -259.068, 64.2526, -248.29, 65.45, -235.118, 59.4626, -221.946 )
 
 [node name="base" type="Sprite" parent="."]
@@ -120,8 +123,7 @@ position = Vector2( 0.735077, -2.94037 )
 texture = ExtResource( 4 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="base"]
-position = Vector2( -82.8222, -2.04312 )
+position = Vector2( -1.40856, 7.40133 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="base/KinematicBody2D"]
-visible = false
 polygon = PoolVector2Array( 138.889, 165.888, 137.943, 194.289, -141.643, 192.974, -141.327, 166.519, -128.738, 165.729, -9.1077, 57.6518, -8.47659, 51.3406, 5.33575, 51.0131, 6.05273, 57.4659, 125.005, 165.257 )

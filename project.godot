@@ -23,7 +23,7 @@ _global_script_class_icons={
 config/name="Fluffy"
 run/main_scene="res://boing.scn"
 run/low_processor_mode=true
-config/icon="res://icon.png"
+config/icon="res://Graphics/icon.png"
 
 [debug]
 

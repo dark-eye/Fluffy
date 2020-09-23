@@ -18,8 +18,8 @@ func update():
 	self.find_node("Clock",true).timePassed = self.time;
 	
 func triggerConfetti():
-	$"Container/Effects/Confetti/Confetti Left".emitting =false;
-	$"Container/Effects/Confetti/Confetti Right".emitting =false;
+	$"Container/Effects/Confetti/Confetti Left".restart();
+	$"Container/Effects/Confetti/Confetti Right".restart();
 	$"Container/Effects/Confetti/Confetti Left".emitting =true;
 	$"Container/Effects/Confetti/Confetti Right".emitting =true;
 

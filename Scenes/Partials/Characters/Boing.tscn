@@ -61,8 +61,9 @@ polygon = PoolVector2Array( -0.0538123, 0.195219, -0.0405843, 0.23595, -0.011618
 [node name="Boing" type="RigidBody2D" groups=[
 "Player",
 ]]
+position = Vector2( 57.5323, 44.7474 )
 input_pickable = true
-mode = 2
+mode = 3
 physics_material_override = SubResource( 1 )
 gravity_scale = 9.8
 continuous_cd = 2

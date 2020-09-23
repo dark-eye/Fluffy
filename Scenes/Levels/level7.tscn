@@ -14,7 +14,8 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-export(float) var cameraOverviewZoomout = 2.5;"
+export(float) var cameraOverviewZoomout = 2.5;
+"
 
 [sub_resource type="Curve2D" id=2]
 bake_interval = 50.0
@@ -43,6 +44,9 @@ position = Vector2( 226.077, 196.724 )
 [node name="Bounds" type="Container" parent="."]
 margin_right = 1530.0
 margin_bottom = 1195.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Environment" type="Node2D" parent="."]
 

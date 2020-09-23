@@ -43,7 +43,8 @@ script = ExtResource( 2 )
 [node name="LevelController" type="Node2D" parent="Enviroment"]
 position = Vector2( 6.54413, -4.54419 )
 script = ExtResource( 3 )
-levels = PoolStringArray( "res://Scenes/Levels/level1.scn", "res://Scenes/Levels/level2.scn", "res://Scenes/Levels/level3.scn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level4.tscn", "res://Scenes/Levels/level5.tscn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level7.tscn", "res://Scenes/Levels/level8.tscn" )
+levels = PoolStringArray( "res://Scenes/Levels/level1.scn", "res://Scenes/Levels/level2.scn", "res://Scenes/Levels/level3.scn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level4.tscn", "res://Scenes/Levels/level5.tscn", "res://Scenes/Levels/level6.tscn", "res://Scenes/Levels/level7.tscn", "res://Scenes/Levels/level8.tscn", "res://Scenes/Levels/test_level.scn" )
+currentLevel = 9
 
 [node name="BundingBox" type="Area2D" parent="Enviroment"]
 position = Vector2( 742.583, 265.242 )

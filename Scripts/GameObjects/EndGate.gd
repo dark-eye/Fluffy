@@ -17,7 +17,8 @@ func on_enter( body ):
 		self.get_tree().call_group('Control','player_at_end_gate');
 
 func _set_open(value):
-	isopen = value
+	isopen = value;
+	$PullArea.space_override = SPACE_OVERRIDE_COMBINE if isopen else SPACE_OVERRIDE_DISABLED;
 	self._update_visual();
 
 func _get_open():
